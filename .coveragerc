@@ -1,0 +1,9 @@
+[run]
+branch = True
+omit =
+    */typio/__main__.py
+    */typio/__init__.py
+[report]
+# Regexes for lines to exclude from consideration
+exclude_lines =
+    pragma: no cover
