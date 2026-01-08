@@ -9,11 +9,7 @@ from enum import Enum
 from functools import wraps
 from io import TextIOBase
 from typing import Optional
-
-
-class TypioError(Exception):
-    """Raised when invalid input or configuration is provided."""
-    pass
+from .errors import TypioError
 
 
 class TypeMode(str, Enum):
