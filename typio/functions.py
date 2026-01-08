@@ -5,10 +5,12 @@ import sys
 import time
 import random
 import re
-
 from functools import wraps
 from io import TextIOBase
 from typing import Optional
+from .params import TypeMode
+from .params import INVALID_TEXT_ERROR, INVALID_BYTE_ERROR, INVALID_DELAY_ERROR
+from .params import INVALID_JITTER_ERROR, INVALID_MODE_ERROR, INVALID_FILE_ERROR
 from .errors import TypioError
 
 
@@ -23,25 +25,25 @@ def _validate(
     file,
 ):
     if not isinstance(text, (str, bytes)):
-        raise TypioError("text must be str or bytes")
+        raise TypioError(INVALID_TEXT_ERROR)
 
     if isinstance(text, bytes):
         try:
             text = text.decode()
         except Exception:
-            raise TypioError("bytes text must be UTF-8 decodable")
+            raise TypioError(INVALID_BYTE_ERROR)
 
     if not isinstance(delay, (int, float)) or delay < 0:
-        raise TypioError("delay must be a non-negative number")
+        raise TypioError(INVALID_DELAY_ERROR)
 
     if not isinstance(jitter, (int, float)) or jitter < 0:
-        raise TypioError("jitter must be a non-negative number")
+        raise TypioError(INVALID_JITTER_ERROR)
 
     if not isinstance(mode, TypeMode):
-        raise TypioError("mode must be a TypeMode enum value")
+        raise TypioError(INVALID_MODE_ERROR)
 
     if file is not None and not hasattr(file, "write"):
-        raise TypioError("file must be a file-like object")
+        raise TypioError(INVALID_FILE_ERROR)
 
     return text
 

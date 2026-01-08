@@ -12,3 +12,11 @@ class TypeMode(Enum):
     SENTENCE = "sentence"
     TYPEWRITER = "typewriter"
     ADAPTIVE = "adaptive"
+
+
+INVALID_TEXT_ERROR = "`text` must be str or bytes."
+INVALID_BYTE_ERROR = "bytes text must be UTF-8 decodable."
+INVALID_DELAY_ERROR = "`delay` must be a non-negative number."
+INVALID_JITTER_ERROR = "`jitter` must be a non-negative number."
+INVALID_MODE_ERROR = "`mode` must be a TypeMode enum value."
+INVALID_FILE_ERROR = "`file` must be a file-like object."
