@@ -7,7 +7,7 @@ import random
 import re
 from functools import wraps
 from io import TextIOBase
-from typing import Optional
+from typing import Any, Callable, Optional
 from .params import TypeMode
 from .params import INVALID_TEXT_ERROR, INVALID_BYTE_ERROR, INVALID_DELAY_ERROR
 from .params import INVALID_JITTER_ERROR, INVALID_MODE_ERROR, INVALID_FILE_ERROR
@@ -15,12 +15,12 @@ from .errors import TypioError
 
 
 def _validate(
-    text,
-    delay,
-    jitter,
-    mode,
-    file,
-):
+    text: Any,
+    delay: Any,
+    jitter: Any,
+    mode: Any,
+    file: Any,
+) -> str:
     """
     Validate and normalize inputs for typing operations.
 
@@ -54,7 +54,7 @@ def _validate(
     return text
 
 
-def _sleep(delay, jitter):
+def _sleep(delay: float, jitter: float) -> None:
     """
     Sleep for a given delay with optional random jitter.
 
@@ -73,7 +73,7 @@ class _TypioPrinter:
     """
     File-like object that emits text with typing effects.
     """
-    def __init__(self, *, delay, jitter, mode, out):
+    def __init__(self, *, delay: float, jitter: float, mode: TypeMode, out: TextIOBase) -> None:
         """
         Initialize the typing printer.
 
@@ -87,7 +87,7 @@ class _TypioPrinter:
         self.mode = mode
         self.out = out
 
-    def write(self, text):
+    def write(self, text: str) -> None:
         """
         Write text using the configured typing mode.
 
@@ -96,13 +96,13 @@ class _TypioPrinter:
         handler = getattr(self, "_mode_{mode}".format(mode=self.mode.value))
         handler(text)
 
-    def flush(self):
+    def flush(self) -> None:
         """
         Flush the underlying output stream.
         """
         self.out.flush()
 
-    def _emit(self, part, delay=None):
+    def _emit(self, part: str, delay:  Optional[float] = None) -> None:
         """
         Emit a text fragment and apply delay.
 
@@ -113,7 +113,7 @@ class _TypioPrinter:
         self.out.flush()
         _sleep(delay if delay is not None else self.delay, self.jitter)
 
-    def _mode_char(self, text):
+    def _mode_char(self, text: str) -> None:
         """
         Emit text character by character.
 
@@ -122,7 +122,7 @@ class _TypioPrinter:
         for c in text:
             self._emit(c)
 
-    def _mode_word(self, text):
+    def _mode_word(self, text: str) -> None:
         """
         Emit text word by word, preserving whitespace.
 
@@ -131,7 +131,7 @@ class _TypioPrinter:
         for w in re.findall(r"\S+|\s+", text):
             self._emit(w)
 
-    def _mode_line(self, text):
+    def _mode_line(self, text:str) -> None:
         """
         Emit text line by line.
 
@@ -140,7 +140,7 @@ class _TypioPrinter:
         for line in text.splitlines(True):
             self._emit(line)
 
-    def _mode_sentence(self, text):
+    def _mode_sentence(self, text:str) -> None:
         """
         Emit text character by character with longer pauses
         after sentence-ending punctuation.
@@ -152,7 +152,7 @@ class _TypioPrinter:
             if c in ".!?":
                 _sleep(self.delay * 4, self.jitter)
 
-    def _mode_typewriter(self, text):
+    def _mode_typewriter(self, text: str) -> None:
         """
         Emit text character by character with longer pauses
         after newlines.
@@ -164,7 +164,7 @@ class _TypioPrinter:
             if c == "\n":
                 _sleep(self.delay * 5, self.jitter)
 
-    def _mode_adaptive(self, text):
+    def _mode_adaptive(self, text: str) -> None:
         """
         Emit text with adaptive delays based on character type.
 
@@ -180,10 +180,10 @@ class _TypioPrinter:
 
 
 def type_print(
-    text,
+    text: str,
     *,
     delay: float = 0.04,
-    jitter: float = 0.0,
+    jitter: float = 0,
     mode: TypeMode = TypeMode.CHAR,
     file: Optional[TextIOBase] = None):
     """
@@ -211,8 +211,8 @@ def type_print(
 def typestyle(
     *,
     delay: float = 0.04,
-    jitter: float = 0.0,
-    mode: TypeMode = TypeMode.CHAR):
+    jitter: float = 0,
+    mode: TypeMode = TypeMode.CHAR) -> Callable:
     """
     Decorator that applies typing effects to all print()
     calls inside the decorated function.
@@ -223,9 +223,9 @@ def typestyle(
     """
     _validate("", delay, jitter, mode, sys.stdout)
 
-    def decorator(func):
+    def decorator(func: Callable) -> Callable:
         @wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args: list, **kwargs: dict) -> Any:
             old_stdout = sys.stdout
             try:
                 sys.stdout = _TypioPrinter(
