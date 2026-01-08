@@ -14,9 +14,6 @@ from .params import INVALID_JITTER_ERROR, INVALID_MODE_ERROR, INVALID_FILE_ERROR
 from .errors import TypioError
 
 
-
-
-
 def _validate(
     text,
     delay,
@@ -24,6 +21,15 @@ def _validate(
     mode,
     file,
 ):
+    """
+    Validate and normalize inputs for typing operations.
+
+    :param text: text to be printed
+    :param delay: base delay (in seconds) between emitted units
+    :param jitter: random jitter added/subtracted from delay
+    :param mode: typing mode controlling emission granularity
+    :param file: output stream supporting a write() method
+    """
     if not isinstance(text, (str, bytes)):
         raise TypioError(INVALID_TEXT_ERROR)
 
@@ -49,6 +55,12 @@ def _validate(
 
 
 def _sleep(delay, jitter):
+    """
+    Sleep for a given delay with optional random jitter.
+
+    :param delay: base delay (in seconds) between emitted units
+    :param jitter: random jitter added/subtracted from delay
+    """
     if delay <= 0:
         return
     if jitter:
@@ -58,49 +70,106 @@ def _sleep(delay, jitter):
 
 
 class _TypioPrinter:
+    """
+    File-like object that emits text with typing effects.
+    """
     def __init__(self, *, delay, jitter, mode, out):
+        """
+        Initialize the typing printer.
+
+        :param delay: base delay (in seconds) between emitted units
+        :param jitter: random jitter added/subtracted from delay
+        :param mode: typing mode controlling emission granularity
+        :param out: underlying output stream
+        """
         self.delay = delay
         self.jitter = jitter
         self.mode = mode
         self.out = out
 
     def write(self, text):
+        """
+        Write text using the configured typing mode.
+
+        :param text: text to be written
+        """
         handler = getattr(self, "_mode_{mode}".format(mode=self.mode.value))
         handler(text)
 
     def flush(self):
+        """
+        Flush the underlying output stream.
+        """
         self.out.flush()
 
     def _emit(self, part, delay=None):
+        """
+        Emit a text fragment and apply delay.
+
+        :param part: text fragment to write
+        :param delay: optional override delay for this fragment
+        """
         self.out.write(part)
         self.out.flush()
         _sleep(delay if delay is not None else self.delay, self.jitter)
 
     def _mode_char(self, text):
+        """
+        Emit text character by character.
+
+        :param text: text to emit
+        """
         for c in text:
             self._emit(c)
 
     def _mode_word(self, text):
+        """
+        Emit text word by word, preserving whitespace.
+
+        :param text: text to emit
+        """
         for w in re.findall(r"\S+|\s+", text):
             self._emit(w)
 
     def _mode_line(self, text):
+        """
+        Emit text line by line.
+
+        :param text: text to emit
+        """
         for line in text.splitlines(True):
             self._emit(line)
 
     def _mode_sentence(self, text):
+        """
+        Emit text character by character with longer pauses
+        after sentence-ending punctuation.
+
+        :param text: text to emit
+        """
         for c in text:
             self._emit(c)
             if c in ".!?":
                 _sleep(self.delay * 4, self.jitter)
 
     def _mode_typewriter(self, text):
+        """
+        Emit text character by character with longer pauses
+        after newlines.
+
+        :param text: text to emit
+        """
         for c in text:
             self._emit(c)
             if c == "\n":
                 _sleep(self.delay * 5, self.jitter)
 
     def _mode_adaptive(self, text):
+        """
+        Emit text with adaptive delays based on character type.
+
+        :param text: text to emit
+        """
         for c in text:
             d = self.delay * (
                 0.3 if c.isspace()
@@ -119,6 +188,12 @@ def type_print(
     file: Optional[TextIOBase] = None):
     """
     Print text with typing effects.
+
+    :param text: text to be printed
+    :param delay: base delay (in seconds) between emitted units
+    :param jitter: random jitter added/subtracted from delay
+    :param mode: typing mode controlling emission granularity
+    :param file: output stream supporting a write() method
     """
     text = _validate(text, delay, jitter, mode, file)
     out = file or sys.stdout
@@ -139,8 +214,12 @@ def typestyle(
     jitter: float = 0.0,
     mode: TypeMode = TypeMode.CHAR):
     """
-    Decorator that applies typing style to all print() calls
-    inside the decorated function.
+    Decorator that applies typing effects to all print()
+    calls inside the decorated function.
+
+    :param delay: base delay (in seconds) between emitted units
+    :param jitter: random jitter added/subtracted from delay
+    :param mode: typing mode controlling emission granularity
     """
     _validate("", delay, jitter, mode, sys.stdout)
 
