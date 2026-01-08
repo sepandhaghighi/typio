@@ -73,6 +73,7 @@ class _TypioPrinter:
     """
     File-like object that emits text with typing effects.
     """
+
     def __init__(self, *, delay: float, jitter: float, mode: TypeMode, out: TextIOBase) -> None:
         """
         Initialize the typing printer.
@@ -102,7 +103,7 @@ class _TypioPrinter:
         """
         self.out.flush()
 
-    def _emit(self, part: str, delay:  Optional[float] = None) -> None:
+    def _emit(self, part: str, delay: Optional[float] = None) -> None:
         """
         Emit a text fragment and apply delay.
 
@@ -131,7 +132,7 @@ class _TypioPrinter:
         for w in re.findall(r"\S+|\s+", text):
             self._emit(w)
 
-    def _mode_line(self, text:str) -> None:
+    def _mode_line(self, text: str) -> None:
         """
         Emit text line by line.
 
@@ -140,7 +141,7 @@ class _TypioPrinter:
         for line in text.splitlines(True):
             self._emit(line)
 
-    def _mode_sentence(self, text:str) -> None:
+    def _mode_sentence(self, text: str) -> None:
         """
         Emit text character by character with longer pauses
         after sentence-ending punctuation.
@@ -180,12 +181,12 @@ class _TypioPrinter:
 
 
 def type_print(
-    text: str,
-    *,
-    delay: float = 0.04,
-    jitter: float = 0,
-    mode: TypeMode = TypeMode.CHAR,
-    file: Optional[TextIOBase] = None):
+        text: str,
+        *,
+        delay: float = 0.04,
+        jitter: float = 0,
+        mode: TypeMode = TypeMode.CHAR,
+        file: Optional[TextIOBase] = None):
     """
     Print text with typing effects.
 
@@ -212,7 +213,7 @@ def typestyle(
     *,
     delay: float = 0.04,
     jitter: float = 0,
-    mode: TypeMode = TypeMode.CHAR) -> Callable:
+        mode: TypeMode = TypeMode.CHAR) -> Callable:
     """
     Decorator that applies typing effects to all print()
     calls inside the decorated function.
