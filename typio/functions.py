@@ -5,20 +5,14 @@ import sys
 import time
 import random
 import re
-from enum import Enum
+
 from functools import wraps
 from io import TextIOBase
 from typing import Optional
 from .errors import TypioError
 
 
-class TypeMode(str, Enum):
-    CHAR = "char"
-    WORD = "word"
-    LINE = "line"
-    SENTENCE = "sentence"
-    TYPEWRITER = "typewriter"
-    ADAPTIVE = "adaptive"
+
 
 
 def _validate(
