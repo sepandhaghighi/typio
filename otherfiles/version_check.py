@@ -21,7 +21,7 @@ CHANGELOG_ITEMS = [
     "[{0}]:"]
 
 PARAMS_ITEMS = ['TYPIO_VERSION = "{0}"']
-ISSUE_TEMPLATE_ITEMS = ["- TypIO {0}"]
+ISSUE_TEMPLATE_ITEMS = ["- Typio {0}"]
 SECURITY_ITEMS = ["| {0}           | :white_check_mark: |", "| < {0}         | :x:                |"]
 
 FILES = {
