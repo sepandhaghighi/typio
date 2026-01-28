@@ -24,14 +24,18 @@ def read_description() -> str:
             description += c.read()
         return description
     except Exception:
-        return '''TODO'''
+        return '''Typio is a lightweight Python library that prints text to the terminal as if it were being typed by a human.
+        It supports multiple typing modes (character, word, line, sentence, typewriter, and adaptive),
+        configurable delays and jitter for natural variation, and seamless integration with existing code
+        via a simple function or a decorator. Typio is designed to be minimal, extensible, and safe,
+        making it ideal for demos, CLIs, tutorials, and storytelling in the terminal.'''
 
 
 setup(
     name='typio',
     packages=['typio'],
     version='0.1',
-    description='typio: TODO',
+    description='Typio: Make Your Terminal Type Like a Human',
     long_description=read_description(),
     long_description_content_type='text/markdown',
     include_package_data=True,
@@ -39,7 +43,7 @@ setup(
     author_email='me@sepand.tech',
     url='https://github.com/sepandhaghighi/typio',
     download_url='https://github.com/sepandhaghighi/typio/tarball/v0.1',
-    keywords="TODO",
+    keywords="terminal cli typing typewriter typing-effect console stdout ux",
     project_urls={
         'Source': 'https://github.com/sepandhaghighi/typio'
     },
@@ -59,10 +63,11 @@ setup(
         'Programming Language :: Python :: 3.14',
         'Intended Audience :: Developers',
         'Intended Audience :: Education',
-        'Intended Audience :: End Users/Desktop',
-        'Intended Audience :: Other Audience',
         'Topic :: Software Development :: Libraries',
+        'Topic :: Software Development :: User Interfaces',
+        'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Utilities',
+        'Topic :: Terminals',
     ],
     license='MIT',
 )
