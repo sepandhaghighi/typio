@@ -70,7 +70,7 @@ def _sleep(delay: float, jitter: float) -> None:
 
 
 class _TypioPrinter:
-    "File-like object that emits text with typing effects."
+    """File-like object that emits text with typing effects."""
 
     def __init__(self, *, delay: float, jitter: float, mode: TypeMode, out: TextIOBase) -> None:
         """
@@ -96,7 +96,7 @@ class _TypioPrinter:
         handler(text)
 
     def flush(self) -> None:
-        "Flush the underlying output stream."
+        """Flush the underlying output stream."""
         self.out.flush()
 
     def _emit(self, part: str, delay: Optional[float] = None) -> None:
@@ -209,7 +209,7 @@ def typestyle(
     jitter: float = 0,
         mode: TypeMode = TypeMode.CHAR) -> Callable:
     """
-    Applies typing effects to all print() calls inside the decorated function.
+    Apply typing effects to all print() calls inside the decorated function.
 
     :param delay: base delay (in seconds) between emitted units
     :param jitter: random jitter added/subtracted from delay
