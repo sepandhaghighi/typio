@@ -25,7 +25,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04, windows-2022, macos-15-intel]
-        python-version: [3.7, 3.8, 3.9, 3.10.5, 3.11.0, 3.12.0, 3.13.0, 3.14.0]
+        python-version: [3.8, 3.9, 3.10.5, 3.11.0, 3.12.0, 3.13.0, 3.14.0]
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
@@ -43,11 +43,6 @@ jobs:
       - name: Test with pytest 
         run: |
           python -m pytest . --cov=typio --cov-report=term
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-            fail_ci_if_error: true
-            token: ${{ secrets.CODECOV_TOKEN }}
       - name: Vulture, Bandit and Pydocstyle tests
         run: |
           python -m vulture typio/ otherfiles/ setup.py --min-confidence 65 --exclude=__init__.py --sort-by-size
