@@ -6,6 +6,8 @@ TYPIO_VERSION = "0.1"
 
 
 class TypeMode(Enum):
+    "Type mode enum."
+    
     CHAR = "char"
     WORD = "word"
     LINE = "line"
