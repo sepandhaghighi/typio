@@ -81,10 +81,10 @@ body:
   - type: dropdown
     id: typio-version
     attributes:
-      label: TypIO version
-      description: Which version of TypIO are you using?
+      label: Typio version
+      description: Which version of Typio are you using?
       options:
-        - TypIO 0.1
+        - Typio 0.1
       default: 0
     validations:
       required: true

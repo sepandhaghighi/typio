@@ -1,5 +1,5 @@
 <div align="center">
-<h1>TypIO: TODO</h1>
+<h1>Typio: Make Your Terminal Type Like a Human</h1>
 <br/>
 <a href="https://www.python.org/"><img src="https://img.shields.io/badge/built%20with-Python3-green.svg" alt="built with Python3"></a>
 <a href="https://github.com/sepandhaghighi/typio"><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/sepandhaghighi/typio"></a>
@@ -9,7 +9,7 @@
 ## Overview	
 
 <p align="justify">
-TODO
+Typio is a lightweight Python library that prints text to the terminal as if it were being typed by a human. It supports multiple typing modes (character, word, line, sentence, typewriter, and adaptive), configurable delays and jitter for natural variation, and seamless integration with existing code via a simple function or a decorator. Typio is designed to be minimal, extensible, and safe, making it ideal for demos, CLIs, tutorials, and storytelling in the terminal.
 </p>
 
 <table>
@@ -52,7 +52,46 @@ TODO
 
 ## Usage
 
-TODO
+### Function
+
+Use `type_print` function to print text with human-like typing effects. You can control the typing speed, randomness, mode, and output stream.
+
+```python
+from typio import type_print
+from typio import TypeMode
+
+type_print("Hello, world!")
+
+type_print(
+    "Typing with style and personality.",
+    delay=0.06,
+    jitter=0.02,
+    mode=TypeMode.ADAPTIVE,
+)
+```
+
+You can also redirect the output to any file-like object:
+
+```python
+with open("output.txt", "w") as file:
+    type_print("Saved with typing effects.", file=file)
+```
+
+### Decorator
+
+Use the `@typestyle` decorator to apply typing effects to all `print()` calls inside a function, without changing the function's implementation.
+
+```python
+from typio import typestyle
+from typio import TypeMode
+
+@typestyle(delay=0.05, mode=TypeMode.TYPEWRITER)
+def intro():
+    print("Welcome to Typio.")
+    print("Every print is typed.")
+
+intro()
+```
 
 ## Issues & Bug Reports			
 
