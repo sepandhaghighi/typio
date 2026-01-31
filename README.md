@@ -80,7 +80,7 @@ with open("output.txt", "w") as file:
 
 ### Decorator
 
-Use the `@typestyle` decorator to apply typing effects to all `print()` calls inside a function, without changing the function's implementation.
+Use the `@typestyle` decorator to apply typing effects to all `print` calls inside a function, without changing the function's implementation.
 
 ```python
 from typio import typestyle
