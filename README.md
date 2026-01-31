@@ -1,4 +1,5 @@
 <div align="center">
+<img src="https://github.com/sepandhaghighi/typio/raw/main/otherfiles/logo.png" width="320">
 <h1>Typio: Make Your Terminal Type Like a Human</h1>
 <br/>
 <a href="https://www.python.org/"><img src="https://img.shields.io/badge/built%20with-Python3-green.svg" alt="built with Python3"></a>
