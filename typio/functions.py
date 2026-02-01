@@ -19,6 +19,7 @@ def _validate(
     delay: Any,
     jitter: Any,
     mode: Any,
+    end: Any,
     file: Any,
 ) -> str:
     """
@@ -28,6 +29,7 @@ def _validate(
     :param delay: base delay (in seconds) between emitted units
     :param jitter: random jitter added/subtracted from delay
     :param mode: typing mode controlling emission granularity
+    :param end: end character(s)
     :param file: output stream supporting a write() method
     """
     if not isinstance(text, (str, bytes)):
@@ -47,10 +49,13 @@ def _validate(
 
     if not isinstance(mode, TypeMode):
         raise TypioError(INVALID_MODE_ERROR)
+    
+    if not isinstance(end, str):
+        raise TypioError(INVALID_END_ERROR)
 
     if file is not None and not hasattr(file, "write"):
         raise TypioError(INVALID_FILE_ERROR)
-
+    text = f"{text}{end}"
     return text
 
 
@@ -179,6 +184,7 @@ def type_print(
         *,
         delay: float = 0.04,
         jitter: float = 0,
+        end: str ="\n",
         mode: TypeMode = TypeMode.CHAR,
         file: Optional[TextIOBase] = None):
     """
@@ -187,10 +193,11 @@ def type_print(
     :param text: text to be printed
     :param delay: base delay (in seconds) between emitted units
     :param jitter: random jitter added/subtracted from delay
+    :param end: end character(s)
     :param mode: typing mode controlling emission granularity
     :param file: output stream supporting a write() method
     """
-    text = _validate(text, delay, jitter, mode, file)
+    text = _validate(text, delay, jitter, mode, end, file)
     out = file or sys.stdout
 
     printer = _TypioPrinter(
@@ -215,7 +222,7 @@ def typestyle(
     :param jitter: random jitter added/subtracted from delay
     :param mode: typing mode controlling emission granularity
     """
-    _validate("", delay, jitter, mode, sys.stdout)
+    _validate("", delay, jitter, mode, "", sys.stdout)
 
     def decorator(func: Callable) -> Callable:
         @wraps(func)
