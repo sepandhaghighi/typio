@@ -185,7 +185,7 @@ def type_print(
         *,
         delay: float = 0.04,
         jitter: float = 0,
-        end: str ="\n",
+        end: str = "\n",
         mode: TypeMode = TypeMode.CHAR,
         file: Optional[TextIOBase] = None):
     """
@@ -215,7 +215,7 @@ def typestyle(
     *,
     delay: float = 0.04,
     jitter: float = 0,
-        mode: TypeMode = TypeMode.CHAR) -> Callable:
+    mode: TypeMode = TypeMode.CHAR) -> Callable:
     """
     Apply typing effects to all print() calls inside the decorated function.
 
