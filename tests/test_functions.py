@@ -3,8 +3,6 @@ import io
 import sys
 import unittest
 
-import pytest
-
 from typio import type_print, typestyle
 from typio import TypeMode
 
