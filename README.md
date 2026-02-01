@@ -76,7 +76,7 @@ type_print(
     "Typing with style and personality.",
     delay=0.06,
     jitter=0.02,
-	end="\n\n",
+	end="\n",
     mode=TypeMode.ADAPTIVE,
 )
 ```
