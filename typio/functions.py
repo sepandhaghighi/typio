@@ -11,6 +11,7 @@ from typing import Any, Callable, Optional
 from .params import TypeMode
 from .params import INVALID_TEXT_ERROR, INVALID_BYTE_ERROR, INVALID_DELAY_ERROR
 from .params import INVALID_JITTER_ERROR, INVALID_MODE_ERROR, INVALID_FILE_ERROR
+from .params import INVALID_END_ERROR
 from .errors import TypioError
 
 
