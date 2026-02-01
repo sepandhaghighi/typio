@@ -187,7 +187,7 @@ def type_print(
         jitter: float = 0,
         end: str = "\n",
         mode: TypeMode = TypeMode.CHAR,
-        file: Optional[TextIOBase] = None):
+        file: Optional[TextIOBase] = None) -> None:
     """
     Print text with typing effects.
 
