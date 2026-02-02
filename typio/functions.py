@@ -50,7 +50,7 @@ def _validate(
 
     if not isinstance(mode, TypeMode):
         raise TypioError(INVALID_MODE_ERROR)
-    
+
     if not isinstance(end, str):
         raise TypioError(INVALID_END_ERROR)
 
@@ -215,7 +215,7 @@ def typestyle(
     *,
     delay: float = 0.04,
     jitter: float = 0,
-    mode: TypeMode = TypeMode.CHAR) -> Callable:
+        mode: TypeMode = TypeMode.CHAR) -> Callable:
     """
     Apply typing effects to all print() calls inside the decorated function.
 

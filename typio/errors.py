@@ -4,5 +4,5 @@
 
 class TypioError(Exception):
     """Base class for errors in Typio."""
-    
+
     pass
