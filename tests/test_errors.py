@@ -40,6 +40,11 @@ def test_invalid_mode():
         type_print("test", mode="char")
 
 
+def test_invalid_end():
+    with pytest.raises(TypioError, match=r"`end` must be a str."):
+        type_print("test", end=1)
+
+
 def test_invalid_file():
     with pytest.raises(TypioError, match=r"`file` must be a file-like object."):
         type_print("test", file=123)

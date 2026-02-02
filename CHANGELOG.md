@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - `README.md` updated
+- `end` parameter added to `type_print` function
+- Test system modified
 ## [0.1] - 2026-01-31
 ### Added
 - `type_print` function
