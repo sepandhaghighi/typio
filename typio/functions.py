@@ -212,9 +212,9 @@ def type_print(
 
 
 def typestyle(
-    *,
-    delay: float = 0.04,
-    jitter: float = 0,
+        *,
+        delay: float = 0.04,
+        jitter: float = 0,
         mode: TypeMode = TypeMode.CHAR) -> Callable:
     """
     Apply typing effects to all print() calls inside the decorated function.
