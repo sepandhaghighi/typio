@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.2] - 2026-02-04
 ### Changed
 - `README.md` updated
 - `end` parameter added to `type_print` function
@@ -20,7 +21,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `TYPEWRITER` mode
 - `ADAPTIVE` mode
 
-[Unreleased]: https://github.com/sepandhaghighi/typio/compare/v0.1...dev
+[Unreleased]: https://github.com/sepandhaghighi/typio/compare/v0.2...dev
+[0.2]: https://github.com/sepandhaghighi/typio/compare/v0.1...v0.2
 [0.1]: https://github.com/sepandhaghighi/typio/compare/750c00e...v0.1
 
 
