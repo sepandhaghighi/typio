@@ -34,7 +34,7 @@ def read_description() -> str:
 setup(
     name='typio',
     packages=['typio'],
-    version='0.1',
+    version='0.2',
     description='Typio: Make Your Terminal Type Like a Human',
     long_description=read_description(),
     long_description_content_type='text/markdown',
@@ -42,7 +42,7 @@ setup(
     author='Sepand Haghighi',
     author_email='me@sepand.tech',
     url='https://github.com/sepandhaghighi/typio',
-    download_url='https://github.com/sepandhaghighi/typio/tarball/v0.1',
+    download_url='https://github.com/sepandhaghighi/typio/tarball/v0.2',
     keywords="terminal cli typing typewriter typing-effect console stdout ux",
     project_urls={
         'Source': 'https://github.com/sepandhaghighi/typio'
