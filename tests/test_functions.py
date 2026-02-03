@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import io
 import sys
-import unittest
 
 from typio import type_print, typestyle
 from typio import TypeMode
@@ -10,53 +9,53 @@ from typio import TypeMode
 def test_basic_print():
     buffer = io.StringIO()
     type_print("hello", file=buffer, delay=0)
-    unittest.TestCase().assertEqual(buffer.getvalue(), "hello\n")
+    assert buffer.getvalue() == "hello\n"
 
 
 def test_end():
     buffer = io.StringIO()
     type_print("hello", file=buffer, delay=0, end="\nqw")
-    unittest.TestCase().assertEqual(buffer.getvalue(), "hello\nqw")
+    assert buffer.getvalue() == "hello\nqw"
 
 
 def test_bytes_input():
     buffer = io.StringIO()
     type_print(b"hello", file=buffer, delay=0)
-    unittest.TestCase().assertEqual(buffer.getvalue(), "hello\n")
+    assert buffer.getvalue() == "hello\n"
 
 
 def test_word_mode():
     buffer = io.StringIO()
     type_print("hello world", file=buffer, delay=0, mode=TypeMode.WORD)
-    unittest.TestCase().assertEqual(buffer.getvalue(), "hello world\n")
+    assert buffer.getvalue() == "hello world\n"
 
 
 def test_line_mode():
     buffer = io.StringIO()
     text = "a\nb\nc\n"
     type_print(text, file=buffer, delay=0, mode=TypeMode.LINE)
-    unittest.TestCase().assertEqual(buffer.getvalue(), text + "\n")
+    assert buffer.getvalue() == text + "\n"
 
 
 def test_sentence_mode():
     buffer = io.StringIO()
     text = "Hello! How are you?"
     type_print(text, file=buffer, delay=0, mode=TypeMode.SENTENCE)
-    unittest.TestCase().assertEqual(buffer.getvalue(), text + "\n")
+    assert buffer.getvalue() == text + "\n"
 
 
 def test_typewriter_mode():
     buffer = io.StringIO()
     text = "Hello\nWorld\n"
     type_print(text, file=buffer, delay=0, mode=TypeMode.TYPEWRITER)
-    unittest.TestCase().assertEqual(buffer.getvalue(), text + "\n")
+    assert buffer.getvalue() == text + "\n"
 
 
 def test_adaptive_mode():
     buffer = io.StringIO()
     text = "Hello, world!"
     type_print(text, file=buffer, delay=0, mode=TypeMode.ADAPTIVE)
-    unittest.TestCase().assertEqual(buffer.getvalue(), text + "\n")
+    assert buffer.getvalue() == text + "\n"
 
 
 def test_default_stdout_capture(capsys):
