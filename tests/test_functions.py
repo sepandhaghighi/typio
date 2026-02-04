@@ -40,7 +40,7 @@ def test_line_mode():
 def test_sentence_mode():
     buffer = io.StringIO()
     text = "Hello! How are you?"
-    type_print(text, file=buffer, delay=0, mode=TypeMode.SENTENCE)
+    type_print(text, file=buffer, delay=1, jitter=0, mode=TypeMode.SENTENCE)
     assert buffer.getvalue() == text + "\n"
 
 
