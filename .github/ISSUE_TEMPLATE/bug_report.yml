@@ -84,6 +84,7 @@ body:
       label: Typio version
       description: Which version of Typio are you using?
       options:
+        - Typio 0.2
         - Typio 0.1
       default: 0
     validations:
