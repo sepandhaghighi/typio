@@ -47,7 +47,7 @@ def test_sentence_mode():
 def test_typewriter_mode():
     buffer = io.StringIO()
     text = "Hello\nWorld\n"
-    type_print(text, file=buffer, delay=0, mode=TypeMode.TYPEWRITER)
+    type_print(text, file=buffer, delay=0, jitter=0.05, mode=TypeMode.TYPEWRITER)
     assert buffer.getvalue() == text + "\n"
 
 
