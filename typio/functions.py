@@ -91,20 +91,20 @@ class _TypioPrinter:
         self.out.flush()
 
     def _sleep(self, delay: Optional[float] = None, jitter: Optional[float] = None) -> None:
-    """
-    Sleep for a given delay with optional random jitter.
+        """
+        Sleep for a given delay with optional random jitter.
 
-    :param delay: base delay (in seconds) between emitted units
-    :param jitter: random jitter added/subtracted from delay
-    """
-    delay_ = delay or self.delay
-    jitter_ = jitter or self.jitter
-    if delay_ <= 0:
-        return
-    if jitter_:
-        delay_ += random.uniform(-jitter_, jitter_)
-        delay_ = max(0, delay_)
-    time.sleep(delay_)
+        :param delay: base delay (in seconds) between emitted units
+        :param jitter: random jitter added/subtracted from delay
+        """
+        delay_ = delay or self.delay
+        jitter_ = jitter or self.jitter
+        if delay_ <= 0:
+            return
+        if jitter_:
+            delay_ += random.uniform(-jitter_, jitter_)
+            delay_ = max(0, delay_)
+        time.sleep(delay_)
 
     def _emit(self, part: str) -> None:
         """
