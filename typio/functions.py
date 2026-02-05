@@ -106,16 +106,14 @@ class _TypioPrinter:
         delay_ = max(0, delay_)
     time.sleep(delay_)
 
-    def _emit(self, part: str, delay: Optional[float] = None) -> None:
+    def _emit(self, part: str) -> None:
         """
-        Emit a text fragment and apply delay.
+        Emit a text fragment.
 
         :param part: text fragment to write
-        :param delay: optional override delay for this fragment
         """
         self.out.write(part)
         self.out.flush()
-        _sleep(delay if delay is not None else self.delay, self.jitter)
 
     def _mode_char(self, text: str) -> None:
         """
