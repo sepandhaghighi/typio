@@ -89,7 +89,7 @@ class _TypioPrinter:
     def flush(self) -> None:
         """Flush the underlying output stream."""
         self.out.flush()
-    
+
     def _sleep(self, delay: Optional[float] = None, jitter: Optional[float] = None) -> None:
     """
     Sleep for a given delay with optional random jitter.
