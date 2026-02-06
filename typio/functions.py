@@ -73,7 +73,7 @@ class _TypioPrinter:
         :param out: underlying output stream
         """
         self._delay = delay
-        self.jitter = jitter
+        self._jitter = jitter
         self.mode = mode
         self.out = out
 
@@ -98,7 +98,7 @@ class _TypioPrinter:
         :param jitter: random jitter added/subtracted from delay
         """
         delay_ = delay or self._delay
-        jitter_ = jitter or self.jitter
+        jitter_ = jitter or self._jitter
         if delay_ <= 0:
             return
         if jitter_:
@@ -155,7 +155,7 @@ class _TypioPrinter:
             self._emit(c)
             self._sleep()
             if c in ".!?":
-                self._sleep(self._delay * 4, self.jitter)
+                self._sleep(self._delay * 4, self._jitter)
 
     def _mode_typewriter(self, text: str) -> None:
         """
@@ -167,7 +167,7 @@ class _TypioPrinter:
             self._emit(c)
             self._sleep()
             if c == "\n":
-                self._sleep(self._delay * 5, self.jitter)
+                self._sleep(self._delay * 5, self._jitter)
 
     def _mode_adaptive(self, text: str) -> None:
         """
