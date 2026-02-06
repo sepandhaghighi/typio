@@ -86,7 +86,7 @@ class _TypioPrinter:
         handler = getattr(self, "_mode_{mode}".format(mode=self._mode.value))
         handler(text)
 
-    def flush(self) -> None:
+    def _flush(self) -> None:
         """Flush the underlying output stream."""
         self._out.flush()
 
@@ -213,7 +213,7 @@ def type_print(
         out=out,
     )
     printer._write(text)
-    printer.flush()
+    printer._flush()
 
 
 def typestyle(
