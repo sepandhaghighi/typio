@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - Test system modified
+- `_TypioPrinter` class all methods and attributes changed to private
 - `_emit` method modified
 - `_sleep` function modified
 ## [0.2] - 2026-02-04
