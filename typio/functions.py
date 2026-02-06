@@ -75,7 +75,7 @@ class _TypioPrinter:
         self._delay = delay
         self._jitter = jitter
         self._mode = mode
-        self.out = out
+        self._out = out
 
     def write(self, text: str) -> None:
         """
@@ -88,7 +88,7 @@ class _TypioPrinter:
 
     def flush(self) -> None:
         """Flush the underlying output stream."""
-        self.out.flush()
+        self._out.flush()
 
     def _sleep(self, delay: Optional[float] = None, jitter: Optional[float] = None) -> None:
         """
@@ -112,8 +112,8 @@ class _TypioPrinter:
 
         :param part: text fragment to write
         """
-        self.out.write(part)
-        self.out.flush()
+        self._out.write(part)
+        self._out.flush()
 
     def _mode_char(self, text: str) -> None:
         """
