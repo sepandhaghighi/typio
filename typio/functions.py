@@ -60,21 +60,6 @@ def _validate(
     return text
 
 
-def _sleep(delay: float, jitter: float) -> None:
-    """
-    Sleep for a given delay with optional random jitter.
-
-    :param delay: base delay (in seconds) between emitted units
-    :param jitter: random jitter added/subtracted from delay
-    """
-    if delay <= 0:
-        return
-    if jitter:
-        delay += random.uniform(-jitter, jitter)
-        delay = max(0, delay)
-    time.sleep(delay)
-
-
 class _TypioPrinter:
     """File-like object that emits text with typing effects."""
 
@@ -105,16 +90,30 @@ class _TypioPrinter:
         """Flush the underlying output stream."""
         self.out.flush()
 
-    def _emit(self, part: str, delay: Optional[float] = None) -> None:
+    def _sleep(self, delay: Optional[float] = None, jitter: Optional[float] = None) -> None:
         """
-        Emit a text fragment and apply delay.
+        Sleep for a given delay with optional random jitter.
+
+        :param delay: base delay (in seconds) between emitted units
+        :param jitter: random jitter added/subtracted from delay
+        """
+        delay_ = delay or self.delay
+        jitter_ = jitter or self.jitter
+        if delay_ <= 0:
+            return
+        if jitter_:
+            delay_ += random.uniform(-jitter_, jitter_)
+            delay_ = max(0, delay_)
+        time.sleep(delay_)
+
+    def _emit(self, part: str) -> None:
+        """
+        Emit a text fragment.
 
         :param part: text fragment to write
-        :param delay: optional override delay for this fragment
         """
         self.out.write(part)
         self.out.flush()
-        _sleep(delay if delay is not None else self.delay, self.jitter)
 
     def _mode_char(self, text: str) -> None:
         """
@@ -124,6 +123,7 @@ class _TypioPrinter:
         """
         for c in text:
             self._emit(c)
+            self._sleep()
 
     def _mode_word(self, text: str) -> None:
         """
@@ -133,6 +133,7 @@ class _TypioPrinter:
         """
         for w in re.findall(r"\S+|\s+", text):
             self._emit(w)
+            self._sleep()
 
     def _mode_line(self, text: str) -> None:
         """
@@ -142,6 +143,7 @@ class _TypioPrinter:
         """
         for line in text.splitlines(True):
             self._emit(line)
+            self._sleep()
 
     def _mode_sentence(self, text: str) -> None:
         """
@@ -151,8 +153,9 @@ class _TypioPrinter:
         """
         for c in text:
             self._emit(c)
+            self._sleep()
             if c in ".!?":
-                _sleep(self.delay * 4, self.jitter)
+                self._sleep(self.delay * 4, self.jitter)
 
     def _mode_typewriter(self, text: str) -> None:
         """
@@ -162,8 +165,9 @@ class _TypioPrinter:
         """
         for c in text:
             self._emit(c)
+            self._sleep()
             if c == "\n":
-                _sleep(self.delay * 5, self.jitter)
+                self._sleep(self.delay * 5, self.jitter)
 
     def _mode_adaptive(self, text: str) -> None:
         """
@@ -177,7 +181,8 @@ class _TypioPrinter:
                 else 1.5 if not c.isalnum()
                 else 1
             )
-            self._emit(c, d)
+            self._emit(c)
+            self._sleep(delay=d)
 
 
 def type_print(
