@@ -74,7 +74,7 @@ class _TypioPrinter:
         """
         self._delay = delay
         self._jitter = jitter
-        self.mode = mode
+        self._mode = mode
         self.out = out
 
     def write(self, text: str) -> None:
@@ -83,7 +83,7 @@ class _TypioPrinter:
 
         :param text: text to be written
         """
-        handler = getattr(self, "_mode_{mode}".format(mode=self.mode.value))
+        handler = getattr(self, "_mode_{mode}".format(mode=self._mode.value))
         handler(text)
 
     def flush(self) -> None:
