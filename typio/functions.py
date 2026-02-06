@@ -77,7 +77,7 @@ class _TypioPrinter:
         self._mode = mode
         self._out = out
 
-    def write(self, text: str) -> None:
+    def _write(self, text: str) -> None:
         """
         Write text using the configured typing mode.
 
@@ -212,7 +212,7 @@ def type_print(
         mode=mode,
         out=out,
     )
-    printer.write(text)
+    printer._write(text)
     printer.flush()
 
 
