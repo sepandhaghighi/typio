@@ -192,7 +192,7 @@ class _TypioPrinter:
 class TypioContext:
     """Read-only typing context passed to custom typing modes."""
 
-    def __init__(self, printer: "_TypioPrinter"):
+    def __init__(self, printer: "_TypioPrinter") -> None:
         """
         Initialize the typing context.
 
@@ -200,7 +200,7 @@ class TypioContext:
         """
         self._printer = printer
 
-    def emit(self, text: str):
+    def emit(self, text: str) -> None:
         """
         Emit a text fragment.
 
@@ -230,12 +230,12 @@ class TypioContext:
         self._printer._sleep(delay=delay, jitter=jitter)
 
     @property
-    def delay(self):
+    def delay(self) -> float:
         """Delay property."""
         return self._printer._delay
 
     @property
-    def jitter(self):
+    def jitter(self) -> float:
         """Jitter property."""
         return self._printer._jitter
 
