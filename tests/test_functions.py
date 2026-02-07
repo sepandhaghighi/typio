@@ -95,6 +95,7 @@ def test_typiocontext_flush():
 
     def custom(ctx: TypioContext, text: str):
         ctx.emit("hello")
+        ctx.sleep()
         ctx.flush()
     type_print("ignored", file=buffer, delay=0, mode=custom)
     assert buffer.getvalue() == "hello"
