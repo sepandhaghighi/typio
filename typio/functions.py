@@ -221,11 +221,11 @@ class TypioContext:
         """
         if delay is not None:
             if not isinstance(delay, (int, float)) or delay < 0:
-                raise ValueError(INVALID_DELAY_ERROR)
+                raise TypioError(INVALID_DELAY_ERROR)
 
         if jitter is not None:
             if not isinstance(jitter, (int, float)) or jitter < 0:
-                raise ValueError(INVALID_JITTER_ERROR)
+                raise TypioError(INVALID_JITTER_ERROR)
 
         self._printer._sleep(delay=delay, jitter=jitter)
 
