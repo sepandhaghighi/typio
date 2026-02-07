@@ -67,7 +67,7 @@ def test_default_stdout_capture(capsys):
 def test_typiocontext_emit():
     buffer = io.StringIO()
 
-    def custom(ctx: TypioContext, text: str):
+    def custom(ctx, text):
         ctx.emit(text)
     type_print("hello", file=buffer, delay=0, mode=custom)
     assert buffer.getvalue() == "hello\n"
@@ -76,7 +76,7 @@ def test_typiocontext_emit():
 def test_typiocontext_delay_and_jitter_access():
     buffer = io.StringIO()
 
-    def custom(ctx: TypioContext, text: str):
+    def custom(ctx, text):
         assert ctx.delay == 0.1
         assert ctx.jitter == 0.2
         ctx.emit(text)
@@ -93,7 +93,7 @@ def test_typiocontext_delay_and_jitter_access():
 def test_typiocontext_flush():
     buffer = io.StringIO()
 
-    def custom(ctx: TypioContext, text: str):
+    def custom(ctx, text):
         ctx.emit("hello")
         ctx.sleep()
         ctx.flush()
@@ -104,7 +104,7 @@ def test_typiocontext_flush():
 def test_typiocontext_sleep_override():
     buffer = io.StringIO()
 
-    def custom(ctx: TypioContext, text: str):
+    def custom(ctx, text):
         ctx.emit("A")
         ctx.sleep(delay=0.05, jitter=0.02)
         ctx.emit("B")
@@ -140,7 +140,7 @@ def test_typestyle_return_value():
 
 
 def test_typiocontext_with_typestyle(capsys):
-    def custom(ctx: TypioContext, text: str):
+    def custom(ctx, text):
         ctx.emit(text.upper())
 
     @typestyle(delay=0, mode=custom)
