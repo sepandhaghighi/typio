@@ -185,6 +185,57 @@ class _TypioPrinter:
             self._sleep(delay=d)
 
 
+class TypioContext:
+    """Read-only typing context passed to custom typing modes."""
+
+    def __init__(self, printer: "_TypioPrinter"):
+        """
+        Initialize the typing context.
+
+        :param printer: printer
+        """
+        self._printer = printer
+
+    def emit(self, text: str):
+        """
+        Emit a text fragment.
+
+        :param text: text fragment to write
+        """
+        self._printer._emit(text)
+
+    def flush(self) -> None:
+        """Flush the underlying output stream."""
+        self._printer.flush()
+    
+    def sleep(self, delay: Optional[float] = None, jitter: Optional[float] = None) -> None:
+        """
+        Sleep for a given delay with optional random jitter.
+
+        :param delay: base delay (in seconds) between emitted units
+        :param jitter: random jitter added/subtracted from delay
+        """
+        if delay is not None:
+            if not isinstance(delay, (int, float)) or delay < 0:
+                raise ValueError(INVALID_DELAY_ERROR)
+
+        if jitter is not None:
+            if not isinstance(jitter, (int, float)) or jitter < 0:
+                raise ValueError(INVALID_JITTER_ERROR)
+        
+        self._printer._sleep(delay=delay, jitter=jitter)
+    
+    @property
+    def delay(self):
+        """Delay property."""
+        return self._printer._delay
+
+    @property
+    def jitter(self):
+        """Jitter property."""
+        return self._printer._jitter
+
+
 def type_print(
         text: str,
         *,
