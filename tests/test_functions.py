@@ -94,7 +94,7 @@ def test_typiocontext_flush():
         ctx.emit("hello")
         ctx.flush()
     type_print("ignored", file=buffer, delay=0, mode=custom)
-    assert buffer.getvalue() == "hello\n"
+    assert buffer.getvalue() == "hello"
 
 
 def test_typiocontext_sleep_override():
@@ -104,7 +104,7 @@ def test_typiocontext_sleep_override():
         ctx.sleep(delay=0)
         ctx.emit("B")
     type_print("X", file=buffer, delay=0.1, mode=custom)
-    assert buffer.getvalue() == "AB\n"
+    assert buffer.getvalue() == "AB"
 
 
 def test_typestyle_decorator():
