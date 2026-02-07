@@ -36,7 +36,7 @@ def test_invalid_jitter_type():
 
 
 def test_invalid_mode():
-    with pytest.raises(TypioError, match=r"`mode` must be a TypeMode enum value."):
+    with pytest.raises(TypioError, match=r"`mode` must be a TypeMode enum value or a callable custom mode."):
         type_print("test", mode="char")
 
 
@@ -51,7 +51,7 @@ def test_invalid_file():
 
 
 def test_typestyle_invalid_mode():
-    with pytest.raises(TypioError, match=r"`mode` must be a TypeMode enum value."):
+    with pytest.raises(TypioError, match=r"`mode` must be a TypeMode enum value or a callable custom mode."):
         typestyle(mode="char")
 
 
