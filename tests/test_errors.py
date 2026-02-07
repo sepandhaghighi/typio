@@ -77,5 +77,3 @@ def test_typiocontext_sleep_invalid_jitter():
         ctx.sleep(jitter=-0.5)
     with pytest.raises(TypioError, match=r"`jitter` must be a non-negative number."):
         type_print("x", delay=0, mode=custom)
-
-

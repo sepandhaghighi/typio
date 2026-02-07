@@ -211,7 +211,7 @@ class TypioContext:
     def flush(self) -> None:
         """Flush the underlying output stream."""
         self._printer.flush()
-    
+
     def sleep(self, delay: Optional[float] = None, jitter: Optional[float] = None) -> None:
         """
         Sleep for a given delay with optional random jitter.
@@ -226,9 +226,9 @@ class TypioContext:
         if jitter is not None:
             if not isinstance(jitter, (int, float)) or jitter < 0:
                 raise ValueError(INVALID_JITTER_ERROR)
-        
+
         self._printer._sleep(delay=delay, jitter=jitter)
-    
+
     @property
     def delay(self):
         """Delay property."""

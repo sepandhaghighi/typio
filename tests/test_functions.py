@@ -66,6 +66,7 @@ def test_default_stdout_capture(capsys):
 
 def test_typiocontext_emit():
     buffer = io.StringIO()
+
     def custom(ctx: TypioContext, text: str):
         ctx.emit(text)
     type_print("hello", file=buffer, delay=0, mode=custom)
@@ -74,6 +75,7 @@ def test_typiocontext_emit():
 
 def test_typiocontext_delay_and_jitter_access():
     buffer = io.StringIO()
+
     def custom(ctx: TypioContext, text: str):
         assert ctx.delay == 0.1
         assert ctx.jitter == 0.2
@@ -90,6 +92,7 @@ def test_typiocontext_delay_and_jitter_access():
 
 def test_typiocontext_flush():
     buffer = io.StringIO()
+
     def custom(ctx: TypioContext, text: str):
         ctx.emit("hello")
         ctx.flush()
@@ -99,6 +102,7 @@ def test_typiocontext_flush():
 
 def test_typiocontext_sleep_override():
     buffer = io.StringIO()
+
     def custom(ctx: TypioContext, text: str):
         ctx.emit("A")
         ctx.sleep(delay=0)
@@ -146,5 +150,3 @@ def test_typiocontext_with_typestyle(capsys):
     demo()
     captured = capsys.readouterr()
     assert captured.out == "HELLO\nWORLD\n"
-
-
