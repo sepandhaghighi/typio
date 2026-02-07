@@ -105,7 +105,7 @@ def test_typiocontext_sleep_override():
 
     def custom(ctx: TypioContext, text: str):
         ctx.emit("A")
-        ctx.sleep(delay=0)
+        ctx.sleep(delay=0.05, jitter=0.02)
         ctx.emit("B")
     type_print("X", file=buffer, delay=0.1, mode=custom)
     assert buffer.getvalue() == "AB"
