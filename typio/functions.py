@@ -7,7 +7,7 @@ import random
 import re
 from functools import wraps
 from io import TextIOBase
-from typing import Any, Callable, Optional
+from typing import Any, Callable, Optional, Union
 from .params import TypeMode
 from .params import INVALID_TEXT_ERROR, INVALID_BYTE_ERROR, INVALID_DELAY_ERROR
 from .params import INVALID_JITTER_ERROR, INVALID_MODE_ERROR, INVALID_FILE_ERROR
@@ -63,7 +63,7 @@ def _validate(
 class _TypioPrinter:
     """File-like object that emits text with typing effects."""
 
-    def __init__(self, *, delay: float, jitter: float, mode: TypeMode, out: TextIOBase) -> None:
+    def __init__(self, *, delay: float, jitter: float, mode: Union[TypeMode, Callable], out: TextIOBase) -> None:
         """
         Initialize the typing printer.
 
@@ -83,8 +83,12 @@ class _TypioPrinter:
 
         :param text: text to be written
         """
-        handler = getattr(self, "_mode_{mode}".format(mode=self._mode.value))
-        handler(text)
+        if callable(self._mode):
+            ctx = TypioContext(self)
+            self._mode(ctx, text)
+        else:
+            handler = getattr(self, "_mode_{mode}".format(mode=self._mode.value))
+            handler(text)
 
     def flush(self) -> None:
         """Flush the underlying output stream."""
@@ -242,7 +246,7 @@ def type_print(
         delay: float = 0.04,
         jitter: float = 0,
         end: str = "\n",
-        mode: TypeMode = TypeMode.CHAR,
+        mode: Union[TypeMode, Callable] = TypeMode.CHAR,
         file: Optional[TextIOBase] = None) -> None:
     """
     Print text with typing effects.
@@ -271,7 +275,7 @@ def typestyle(
         *,
         delay: float = 0.04,
         jitter: float = 0,
-        mode: TypeMode = TypeMode.CHAR) -> Callable:
+        mode: Union[TypeMode, Callable] = TypeMode.CHAR) -> Callable:
     """
     Apply typing effects to all print() calls inside the decorated function.
 
