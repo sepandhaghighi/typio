@@ -63,3 +63,21 @@ def test_typestyle_invalid_delay():
 def test_typestyle_invalid_jitter():
     with pytest.raises(TypioError, match=r"`jitter` must be a non-negative number."):
         typestyle(jitter=-0.5)
+
+
+def test_typiocontext_sleep_invalid_delay():
+    buffer = io.StringIO()
+    def custom(ctx: TypioContext, text: str):
+        ctx.sleep(delay=-1)
+    with pytest.raises(TypioError, match=r"`delay` must be a non-negative number."):
+        type_print("x", file=buffer, delay=0, mode=custom)
+
+
+def test_typiocontext_sleep_invalid_jitter():
+    buffer = io.StringIO()
+    def custom(ctx: TypioContext, text: str):
+        ctx.sleep(jitter=-0.5)
+    with pytest.raises(TypioError, match=r"`jitter` must be a non-negative number."):
+        type_print("x", file=buffer, delay=0, mode=custom)
+
+

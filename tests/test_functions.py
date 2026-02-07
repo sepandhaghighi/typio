@@ -3,7 +3,7 @@ import io
 import sys
 
 from typio import type_print, typestyle
-from typio import TypeMode
+from typio import TypeMode, TypioContext
 
 
 def test_basic_print():
@@ -64,6 +64,49 @@ def test_default_stdout_capture(capsys):
     assert captured.out == "hello\n"
 
 
+def test_typiocontext_emit():
+    buffer = io.StringIO()
+    def custom(ctx: TypioContext, text: str):
+        ctx.emit(text)
+    type_print("hello", file=buffer, delay=0, mode=custom)
+    assert buffer.getvalue() == "hello\n"
+
+
+def test_typiocontext_delay_and_jitter_access():
+    buffer = io.StringIO()
+    def custom(ctx: TypioContext, text: str):
+        assert ctx.delay == 0.1
+        assert ctx.jitter == 0.2
+        ctx.emit(text)
+    type_print(
+        "hello",
+        file=buffer,
+        delay=0.1,
+        jitter=0.2,
+        mode=custom,
+    )
+    assert buffer.getvalue() == "hello\n"
+
+
+def test_typiocontext_flush():
+    buffer = io.StringIO()
+    def custom(ctx: TypioContext, text: str):
+        ctx.emit("hello")
+        ctx.flush()
+    type_print("ignored", file=buffer, delay=0, mode=custom)
+    assert buffer.getvalue() == "hello\n"
+
+
+def test_typiocontext_sleep_override():
+    buffer = io.StringIO()
+    def custom(ctx: TypioContext, text: str):
+        ctx.emit("A")
+        ctx.sleep(delay=0)
+        ctx.emit("B")
+    type_print("X", file=buffer, delay=0.1, mode=custom)
+    assert buffer.getvalue() == "AB\n"
+
+
 def test_typestyle_decorator():
     buffer = io.StringIO()
     old_stdout = sys.stdout
@@ -89,3 +132,19 @@ def test_typestyle_return_value():
         return 42
 
     assert func() == 42
+
+
+def test_typiocontext_with_typestyle(capsys):
+    def custom(ctx: TypioContext, text: str):
+        ctx.emit(text.upper())
+
+    @typestyle(delay=0, mode=custom)
+    def demo():
+        print("hello")
+        print("world")
+
+    demo()
+    captured = capsys.readouterr()
+    assert captured.out == "HELLO\nWORLD\n"
+
+
