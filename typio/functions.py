@@ -72,10 +72,10 @@ class _TypioPrinter:
         :param mode: typing mode controlling emission granularity
         :param out: underlying output stream
         """
-        self.delay = delay
-        self.jitter = jitter
-        self.mode = mode
-        self.out = out
+        self._delay = delay
+        self._jitter = jitter
+        self._mode = mode
+        self._out = out
 
     def write(self, text: str) -> None:
         """
@@ -83,12 +83,12 @@ class _TypioPrinter:
 
         :param text: text to be written
         """
-        handler = getattr(self, "_mode_{mode}".format(mode=self.mode.value))
+        handler = getattr(self, "_mode_{mode}".format(mode=self._mode.value))
         handler(text)
 
     def flush(self) -> None:
         """Flush the underlying output stream."""
-        self.out.flush()
+        self._out.flush()
 
     def _sleep(self, delay: Optional[float] = None, jitter: Optional[float] = None) -> None:
         """
@@ -97,8 +97,8 @@ class _TypioPrinter:
         :param delay: base delay (in seconds) between emitted units
         :param jitter: random jitter added/subtracted from delay
         """
-        delay_ = delay or self.delay
-        jitter_ = jitter or self.jitter
+        delay_ = delay or self._delay
+        jitter_ = jitter or self._jitter
         if delay_ <= 0:
             return
         if jitter_:
@@ -112,8 +112,8 @@ class _TypioPrinter:
 
         :param part: text fragment to write
         """
-        self.out.write(part)
-        self.out.flush()
+        self._out.write(part)
+        self._out.flush()
 
     def _mode_char(self, text: str) -> None:
         """
@@ -155,7 +155,7 @@ class _TypioPrinter:
             self._emit(c)
             self._sleep()
             if c in ".!?":
-                self._sleep(self.delay * 4, self.jitter)
+                self._sleep(self._delay * 4, self._jitter)
 
     def _mode_typewriter(self, text: str) -> None:
         """
@@ -167,7 +167,7 @@ class _TypioPrinter:
             self._emit(c)
             self._sleep()
             if c == "\n":
-                self._sleep(self.delay * 5, self.jitter)
+                self._sleep(self._delay * 5, self._jitter)
 
     def _mode_adaptive(self, text: str) -> None:
         """
@@ -176,7 +176,7 @@ class _TypioPrinter:
         :param text: text to emit
         """
         for c in text:
-            d = self.delay * (
+            d = self._delay * (
                 0.3 if c.isspace()
                 else 1.5 if not c.isalnum()
                 else 1
