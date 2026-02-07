@@ -48,7 +48,7 @@ def _validate(
     if not isinstance(jitter, (int, float)) or jitter < 0:
         raise TypioError(INVALID_JITTER_ERROR)
 
-    if not isinstance(mode, TypeMode):
+    if not isinstance(mode, TypeMode) and not callable(mode):
         raise TypioError(INVALID_MODE_ERROR)
 
     if not isinstance(end, str):
