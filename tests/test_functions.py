@@ -3,7 +3,7 @@ import io
 import sys
 
 from typio import type_print, typestyle
-from typio import TypeMode, TypioContext
+from typio import TypeMode
 
 
 def test_basic_print():
