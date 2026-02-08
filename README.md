@@ -104,6 +104,45 @@ def intro():
 intro()
 ```
 
+### Custom Mode
+
+Typio also allows defining custom typing modes.
+
+A custom mode is a callable that receives a typing context and the text being printed.
+
+```python
+from typio import TypioContext
+
+def dramatic(ctx: TypioContext, text: str):
+    for ch in text:
+        ctx.emit(ch)
+        if ch in ".!?":
+            ctx.sleep(delay=ctx.delay * 6)
+```
+
+Usage with `type_print`:
+
+```python
+type_print(
+    "Wait... what?!",
+    mode=dramatic,
+    delay=0.05,
+    jitter=0.02,
+)
+```
+
+Usage with `@typestyle`:
+
+```python
+@typestyle(delay=0.06, mode=dramatic)
+def demo():
+    print("This is serious.")
+    print("Very serious!")
+
+demo()
+```
+
+
 ## Issues & Bug Reports			
 
 Just fill an issue and describe it. We'll check it ASAP!
