@@ -142,6 +142,17 @@ def demo():
 demo()
 ```
 
+#### TypioContext API
+
+| Name | Type | Description |
+|------|------|-------------|
+| `emit(text)` | `method` | Emit a text fragment using typing effects |
+| `sleep(delay=None, jitter=None)` | `method` | Pause execution with optional delay and jitter override |
+| `flush()` | `method` | Flush the underlying output stream |
+| `delay` | `property` | Base delay in seconds |
+| `jitter` | `property` | Jitter value in seconds |
+
+
 
 ## Issues & Bug Reports			
 
