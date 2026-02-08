@@ -66,6 +66,19 @@ Typio is a lightweight Python library that prints text to the terminal as if it 
 
 Use `type_print` function to print text with human-like typing effects. You can control the typing speed, randomness, mode, and output stream.
 
+#### Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| `text` | `str` | Text to be printed |
+| `delay` | `float` | Base delay (seconds) between emitted units |
+| `jitter` | `float` | Random delay variation (seconds) |
+| `mode` | `TypeMode \| Callable` | Typing mode (built-in or custom) |
+| `file` | `TextIOBase \| None` | Output stream (defaults to `sys.stdout`) |
+
+
+#### Example
+
 ```python
 from typio import type_print
 from typio import TypeMode
@@ -92,6 +105,16 @@ with open("output.txt", "w") as file:
 
 Use the `@typestyle` decorator to apply typing effects to all `print` calls inside a function, without changing the function's implementation.
 
+#### Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| `delay` | `float` | Base delay (seconds) between emitted units |
+| `jitter` | `float` | Random delay variation (seconds) |
+| `mode` | `TypeMode \| Callable` | Typing mode (built-in or custom) |
+
+#### Example
+
 ```python
 from typio import typestyle
 from typio import TypeMode
@@ -110,6 +133,19 @@ Typio also allows defining custom typing modes.
 
 A custom mode is a callable that receives a typing context and the text being printed.
 
+#### Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| `emit(text)` | `method` | Emit a text fragment using typing effects |
+| `sleep(delay=None, jitter=None)` | `method` | Pause execution with optional delay and jitter override |
+| `flush()` | `method` | Flush the underlying output stream |
+| `delay` | `property` | Base delay in seconds |
+| `jitter` | `property` | Jitter value in seconds |
+
+
+#### Example
+
 ```python
 from typio import TypioContext
 
@@ -120,7 +156,7 @@ def dramatic(ctx: TypioContext, text: str):
             ctx.sleep(delay=ctx.delay * 6)
 ```
 
-Usage with `type_print`:
+Usage with `type_print` function:
 
 ```python
 type_print(
@@ -131,7 +167,7 @@ type_print(
 )
 ```
 
-Usage with `@typestyle`:
+Usage with `@typestyle` decorator:
 
 ```python
 @typestyle(delay=0.06, mode=dramatic)
@@ -141,17 +177,6 @@ def demo():
 
 demo()
 ```
-
-#### TypioContext API
-
-| Name | Type | Description |
-|------|------|-------------|
-| `emit(text)` | `method` | Emit a text fragment using typing effects |
-| `sleep(delay=None, jitter=None)` | `method` | Pause execution with optional delay and jitter override |
-| `flush()` | `method` | Flush the underlying output stream |
-| `delay` | `property` | Base delay in seconds |
-| `jitter` | `property` | Jitter value in seconds |
-
 
 
 ## Issues & Bug Reports			
