@@ -36,7 +36,7 @@ def test_invalid_jitter_type():
 
 
 def test_invalid_mode():
-    with pytest.raises(TypioError, match=r"`mode` must be a TypeMode enum value."):
+    with pytest.raises(TypioError, match=r"`mode` must be a TypeMode enum value or a callable custom mode."):
         type_print("test", mode="char")
 
 
@@ -51,7 +51,7 @@ def test_invalid_file():
 
 
 def test_typestyle_invalid_mode():
-    with pytest.raises(TypioError, match=r"`mode` must be a TypeMode enum value."):
+    with pytest.raises(TypioError, match=r"`mode` must be a TypeMode enum value or a callable custom mode."):
         typestyle(mode="char")
 
 
@@ -63,3 +63,17 @@ def test_typestyle_invalid_delay():
 def test_typestyle_invalid_jitter():
     with pytest.raises(TypioError, match=r"`jitter` must be a non-negative number."):
         typestyle(jitter=-0.5)
+
+
+def test_typiocontext_sleep_invalid_delay():
+    def custom(ctx, text):
+        ctx.sleep(delay=-1)
+    with pytest.raises(TypioError, match=r"`delay` must be a non-negative number."):
+        type_print("x", mode=custom)
+
+
+def test_typiocontext_sleep_invalid_jitter():
+    def custom(ctx, text):
+        ctx.sleep(jitter=-0.5)
+    with pytest.raises(TypioError, match=r"`jitter` must be a non-negative number."):
+        type_print("x", mode=custom)
