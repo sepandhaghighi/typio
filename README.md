@@ -66,17 +66,6 @@ Typio is a lightweight Python library that prints text to the terminal as if it 
 
 Use `type_print` function to print text with human-like typing effects. You can control the typing speed, randomness, mode, and output stream.
 
-#### Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| `text` | `str` | Text to be printed |
-| `delay` | `float` | Base delay (seconds) between emitted units |
-| `jitter` | `float` | Random delay variation (seconds) |
-| `mode` | `TypeMode \| Callable` | Typing mode (built-in or custom) |
-| `file` | `TextIOBase \| None` | Output stream (defaults to `sys.stdout`) |
-
-
 #### Example
 
 ```python
@@ -101,17 +90,32 @@ with open("output.txt", "w") as file:
     type_print("Saved with typing effects.", file=file)
 ```
 
-### Decorator
-
-Use the `@typestyle` decorator to apply typing effects to all `print` calls inside a function, without changing the function's implementation.
-
 #### Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
+| `text` | `str` | Text to be printed |
 | `delay` | `float` | Base delay (seconds) between emitted units |
 | `jitter` | `float` | Random delay variation (seconds) |
 | `mode` | `TypeMode \| Callable` | Typing mode (built-in or custom) |
+| `file` | `TextIOBase \| None` | Output stream (defaults to `sys.stdout`) |
+
+
+#### Built-in Modes
+
+| Mode | Description |
+|------|-------------|
+| `TypeMode.CHAR` | Emit text **character by character** |
+| `TypeMode.WORD` | Emit text **word by word**, preserving whitespace |
+| `TypeMode.LINE` | Emit text **line by line** |
+| `TypeMode.SENTENCE` | Emit text character by character with **longer pauses after `.`, `!`, `?`** |
+| `TypeMode.TYPEWRITER` | Emit text character by character with **longer pauses after newlines** |
+| `TypeMode.ADAPTIVE` | Emit text with **adaptive delays** based on character type (spaces, punctuation, alphanumeric) |
+
+
+### Decorator
+
+Use the `@typestyle` decorator to apply typing effects to all `print` calls inside a function, without changing the function's implementation.
 
 #### Example
 
@@ -127,22 +131,19 @@ def intro():
 intro()
 ```
 
+#### Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| `delay` | `float` | Base delay (seconds) between emitted units |
+| `jitter` | `float` | Random delay variation (seconds) |
+| `mode` | `TypeMode \| Callable` | Typing mode (built-in or custom) |
+
 ### Custom Mode
 
 Typio also allows defining custom typing modes.
 
 A custom mode is a callable that receives a typing context and the text being printed.
-
-#### Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| `emit(text)` | `method` | Emit a text fragment using typing effects |
-| `sleep(delay=None, jitter=None)` | `method` | Pause execution with optional delay and jitter override |
-| `flush()` | `method` | Flush the underlying output stream |
-| `delay` | `property` | Base delay in seconds |
-| `jitter` | `property` | Jitter value in seconds |
-
 
 #### Example
 
@@ -177,6 +178,16 @@ def demo():
 
 demo()
 ```
+
+#### Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| `emit(text)` | `method` | Emit a text fragment using typing effects |
+| `sleep(delay=None, jitter=None)` | `method` | Pause execution with optional delay and jitter override |
+| `flush()` | `method` | Flush the underlying output stream |
+| `delay` | `property` | Base delay in seconds |
+| `jitter` | `property` | Jitter value in seconds |
 
 
 ## Issues & Bug Reports			
