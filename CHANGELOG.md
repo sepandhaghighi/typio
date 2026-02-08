@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `TypioContext` class
 ### Changed
 - Test system modified
+- `README.md` updated
 - `_TypioPrinter` class all attributes changed to private
 - `_emit` method modified
 - `_sleep` function modified
