@@ -147,6 +147,8 @@ A custom mode is a callable that receives a typing context and the text being pr
 
 #### Example
 
+This custom mode, named `dramatic`, adds exaggerated pauses after punctuation to create a dramatic typing effect.
+
 ```python
 from typio import TypioContext
 
