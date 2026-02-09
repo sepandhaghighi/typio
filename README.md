@@ -183,6 +183,8 @@ demo()
 
 #### Parameters
 
+This table describes the `TypioContext` API, which is the interface exposed to custom typing modes for emitting text, controlling timing, and accessing delay settings.
+
 | Name | Type | Description |
 |------|------|-------------|
 | `emit(text)` | `method` | Emit a text fragment using typing effects |
