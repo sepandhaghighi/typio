@@ -2,7 +2,7 @@
 """typio params."""
 from enum import Enum
 
-TYPIO_VERSION = "0.2"
+TYPIO_VERSION = "0.3"
 
 
 class TypeMode(Enum):
