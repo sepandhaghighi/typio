@@ -13,6 +13,7 @@ Typio is designed to be minimal, extensible, and safe, making it ideal for demos
 GitHub Repo: https://github.com/sepandhaghighi/typio
 '''
 
+
 class TypeMode(Enum):
     """Type mode enum."""
 
