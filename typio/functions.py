@@ -110,13 +110,13 @@ class _TypioPrinter:
             delay_ = max(0, delay_)
         time.sleep(delay_)
 
-    def _emit(self, part: str) -> None:
+    def _emit(self, text: str) -> None:
         """
         Emit a text fragment.
 
-        :param part: text fragment to write
+        :param text: text fragment to write
         """
-        self._out.write(part)
+        self._out.write(text)
         self._out.flush()
 
     def _mode_char(self, text: str) -> None:
