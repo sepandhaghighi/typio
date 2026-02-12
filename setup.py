@@ -70,4 +70,9 @@ setup(
         'Topic :: Terminals',
     ],
     license='MIT',
+    entry_points={
+            'console_scripts': [
+                'typio = typio.cli:main',
+            ]
+    }
 )
