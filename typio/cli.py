@@ -4,7 +4,8 @@
 import argparse
 import sys
 from typing import Optional, Any
-from .params import TypeMode, TYPIO_OVERVIEW
+from .params import TypeMode, TYPIO_OVERVIEW, TYPIO_VERSION
+from .params import INVALID_NON_NEGATIVE_NUMBER_ERROR
 from .functions import type_print
 
 
@@ -17,10 +18,10 @@ def _validate_non_negative_number(value: Any) -> float:
     try:
         number = float(value)
     except ValueError:
-        raise argparse.ArgumentTypeError(f"invalid non-negative number: '{value}'")
+        raise argparse.ArgumentTypeError(INVALID_NON_NEGATIVE_NUMBER_ERROR.format(value=value))
 
     if number < 0:
-        raise argparse.ArgumentTypeError(f"invalid non-negative number: '{value}'")
+        raise argparse.ArgumentTypeError(INVALID_NON_NEGATIVE_NUMBER_ERROR.format(value=value))
     return number
 
 
