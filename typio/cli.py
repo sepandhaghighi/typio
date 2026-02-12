@@ -4,7 +4,7 @@
 import argparse
 import sys
 from typing import Optional, Any
-from .params import TypeMode
+from .params import TypeMode, TYPIO_OVERVIEW
 from .functions import type_print
 
 
@@ -40,7 +40,7 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--text",
         type=str,
-        default=DEFAULT_TEXT,
+        default=TYPIO_OVERVIEW,
         help="Text to be printed",
     )
 

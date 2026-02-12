@@ -4,6 +4,14 @@ from enum import Enum
 
 TYPIO_VERSION = "0.3"
 
+TYPIO_OVERVIEW = '''
+Typio is a lightweight Python library that prints text to the terminal as if it were being typed by a human.
+It supports multiple typing modes (character, word, line, sentence, typewriter, and adaptive), configurable delays
+and jitter for natural variation, and seamless integration with existing code via a simple function or a decorator.
+Typio is designed to be minimal, extensible, and safe, making it ideal for demos, CLIs, tutorials, and storytelling in the terminal.
+
+GitHub Repo: https://github.com/sepandhaghighi/typio
+'''
 
 class TypeMode(Enum):
     """Type mode enum."""
