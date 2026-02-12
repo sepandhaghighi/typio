@@ -2,8 +2,7 @@
 """typio cli."""
 
 import argparse
-import sys
-from typing import Optional, Any
+from typing import Any
 from .params import TypeMode, TYPIO_OVERVIEW, TYPIO_VERSION
 from .params import INVALID_NON_NEGATIVE_NUMBER_ERROR
 from .functions import type_print
