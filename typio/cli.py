@@ -62,7 +62,7 @@ def _build_parser() -> argparse.ArgumentParser:
         "--end",
         type=str,
         default="\n",
-        help="End character(s)",
+        help="Ending character(s)",
     )
 
     parser.add_argument(
