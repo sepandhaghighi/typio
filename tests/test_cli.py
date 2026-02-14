@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import sys
 import pytest
 from unittest.mock import patch
 from typio import TypeMode
@@ -17,7 +16,7 @@ def test_version_flag(capsys):
 
 def test_default_execution():
     with patch("sys.argv", ["typio"]):
-        with patch("typio.functions.type_print") as mock_type_print:
+        with patch("typio.cli.type_print") as mock_type_print:
             main()
             mock_type_print.assert_called_once_with(
                 text=TYPIO_OVERVIEW,
@@ -40,7 +39,7 @@ def test_custom_arguments():
             "--mode", "word",
         ],
     ):
-        with patch("typio.functions.type_print") as mock_type_print:
+        with patch("typio.cli.type_print") as mock_type_print:
             main()
             mock_type_print.assert_called_once_with(
                 text="Hello",
