@@ -1,7 +1,6 @@
 [run]
 branch = True
 omit =
-    */typio/cli.py
     */typio/__main__.py
     */typio/__init__.py
 [report]
