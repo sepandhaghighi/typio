@@ -59,6 +59,15 @@ def test_negative_delay(capsys):
     assert INVALID_NON_NEGATIVE_NUMBER_ERROR.format(value="-1") in err
 
 
+def test_wrong_delay(capsys):
+    with patch("sys.argv", ["typio", "--delay", "abc"]):
+        with pytest.raises(SystemExit):
+            main()
+
+    _, err = capsys.readouterr()
+    assert INVALID_NON_NEGATIVE_NUMBER_ERROR.format(value="abc") in err
+
+
 def test_negative_jitter(capsys):
     with patch("sys.argv", ["typio", "--jitter", "-1"]):
         with pytest.raises(SystemExit):
@@ -66,6 +75,15 @@ def test_negative_jitter(capsys):
 
     _, err = capsys.readouterr()
     assert INVALID_NON_NEGATIVE_NUMBER_ERROR.format(value="-1") in err
+
+
+def test_wrong_jitter(capsys):
+    with patch("sys.argv", ["typio", "--jitter", "abc"]):
+        with pytest.raises(SystemExit):
+            main()
+
+    _, err = capsys.readouterr()
+    assert INVALID_NON_NEGATIVE_NUMBER_ERROR.format(value="abc") in err
 
 
 def test_invalid_mode(capsys):
