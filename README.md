@@ -194,6 +194,17 @@ This table describes the `TypioContext` API, which is the interface exposed to c
 | `jitter` | `property` | Jitter value in seconds |
 
 
+### CLI
+
+Typio provides a simple command line interface for printing text with typing effects.
+
+#### Example
+
+```console
+> typio --text="Hello world!" --mode=typewriter --delay=0.03
+```
+
+
 ## Issues & Bug Reports			
 
 Just fill an issue and describe it. We'll check it ASAP!
