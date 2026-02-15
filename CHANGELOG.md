@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - `_emit` method modified
 - `README.md` updated
+- Test system modified
 ## [0.3] - 2026-02-11
 ### Added
 - `TypioContext` class
