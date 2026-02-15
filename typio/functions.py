@@ -30,7 +30,7 @@ def _validate(
     :param delay: base delay (in seconds) between emitted units
     :param jitter: random jitter added/subtracted from delay
     :param mode: typing mode controlling emission granularity
-    :param end: end character(s)
+    :param end: ending character(s)
     :param file: output stream supporting a write() method
     """
     if not isinstance(text, (str, bytes)):
@@ -254,7 +254,7 @@ def type_print(
     :param text: text to be printed
     :param delay: base delay (in seconds) between emitted units
     :param jitter: random jitter added/subtracted from delay
-    :param end: end character(s)
+    :param end: ending character(s)
     :param mode: typing mode controlling emission granularity
     :param file: output stream supporting a write() method
     """
