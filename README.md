@@ -92,13 +92,14 @@ with open("output.txt", "w") as file:
 
 #### Parameters
 
-| Name | Type | Description |
-|------|------|-------------|
-| `text` | `str` | Text to be printed |
-| `delay` | `float` | Base delay (seconds) between emitted units |
-| `jitter` | `float` | Random delay variation (seconds) |
-| `mode` | `TypeMode \| Callable` | Typing mode (built-in or custom) |
-| `file` | `TextIOBase \| None` | Output stream (defaults to `sys.stdout`) |
+| Name | Type | Description | Default |
+|------|------|-------------|---------|
+| `text` | `str` | Text to be printed | -- |
+| `delay` | `float` | Base delay (seconds) between emitted units | `0.04` |
+| `jitter` | `float` | Random delay variation (seconds) | `0` |
+| `end` | `str` | Ending character(s) | `\n` |
+| `mode` | `TypeMode \| Callable` | Typing mode (built-in or custom) | `TypeMode.CHAR` |
+| `file` | `TextIOBase \| None` | Output stream | `sys.stdout` |
 
 
 #### Built-in Modes
@@ -133,11 +134,11 @@ intro()
 
 #### Parameters
 
-| Name | Type | Description |
-|------|------|-------------|
-| `delay` | `float` | Base delay (seconds) between emitted units |
-| `jitter` | `float` | Random delay variation (seconds) |
-| `mode` | `TypeMode \| Callable` | Typing mode (built-in or custom) |
+| Name | Type | Description | Default |
+|------|------|-------------|---------|
+| `delay` | `float` | Base delay (seconds) between emitted units | `0.04` |
+| `jitter` | `float` | Random delay variation (seconds) | `0` |
+| `mode` | `TypeMode \| Callable` | Typing mode (built-in or custom) | `TypeMode.CHAR` |
 
 ### Custom Mode
 
