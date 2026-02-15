@@ -99,7 +99,7 @@ with open("output.txt", "w") as file:
 | `jitter` | `float` | Random delay variation (seconds) | `0` |
 | `end` | `str` | Ending character(s) | `\n` |
 | `mode` | `TypeMode \| Callable` | Typing mode (built-in or custom) | `TypeMode.CHAR` |
-| `file` | `TextIOBase \| None` | Output stream | `sys.stdout` |
+| `file` | `TextIOBase` | Output stream | `sys.stdout` |
 
 
 #### Built-in Modes
