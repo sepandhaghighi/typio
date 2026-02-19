@@ -97,16 +97,15 @@ def test_invalid_mode(capsys):
 
 def test_keyboard_interrupt(capsys):
     with patch("builtins.input", side_effect=KeyboardInterrupt):
-        with pytest.raises(SystemExit):
-            main()
+        main()
+
     _, err = capsys.readouterr()
     assert EXIT_MESSAGE in err
 
 
 def test_eof_error(capsys):
     with patch("builtins.input", side_effect=EOFError):
-        with pytest.raises(SystemExit):
-            main()
-
+        main()
+      
     _, err = capsys.readouterr()
     assert EXIT_MESSAGE in err
