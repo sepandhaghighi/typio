@@ -4,7 +4,7 @@
 import argparse
 from typing import Any
 from .params import TypeMode, TYPIO_OVERVIEW, TYPIO_VERSION
-from .params import INVALID_NON_NEGATIVE_NUMBER_ERROR
+from .params import INVALID_NON_NEGATIVE_NUMBER_ERROR, EXIT_MESSAGE
 from .functions import type_print
 
 
@@ -98,7 +98,10 @@ def _run(args: argparse.Namespace) -> None:
 
 def main() -> None:
     """CLI main function."""
-    args = _parse_args() 
-    _run(args)
+    try:
+        args = _parse_args() 
+        _run(args)
+    except (KeyboardInterrupt, EOFError):
+        print(EXIT_MESSAGE)
 
     
