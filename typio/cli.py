@@ -99,9 +99,7 @@ def _run(args: argparse.Namespace) -> None:
 def main() -> None:
     """CLI main function."""
     try:
-        args = _parse_args() 
+        args = _parse_args()
         _run(args)
     except (KeyboardInterrupt, EOFError):
         print(EXIT_MESSAGE)
-
-    
