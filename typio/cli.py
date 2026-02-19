@@ -76,11 +76,12 @@ def _build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main() -> None:
-    """CLI main function."""
-    parser = _build_parser()
-    args = parser.parse_args()
+def _run(args: argparse.Namespace) -> None:
+    """
+    Run typio CLI.
 
+    :param args: arguments
+    """
     if args.version:
         print(TYPIO_VERSION)
         return
@@ -92,3 +93,12 @@ def main() -> None:
         end=args.end,
         mode=TypeMode(args.mode),
     )
+
+
+def main() -> None:
+    """CLI main function."""
+    parser = _build_parser()
+    args = parser.parse_args()
+    _run(args)
+
+    
