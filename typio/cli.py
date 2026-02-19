@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """typio cli."""
 
+import sys
 import argparse
 from typing import Any
 from .params import TypeMode, TYPIO_OVERVIEW, TYPIO_VERSION
@@ -103,3 +104,4 @@ def main() -> None:
         _run(args)
     except (KeyboardInterrupt, EOFError):
         print(EXIT_MESSAGE)
+        sys.exit(1)

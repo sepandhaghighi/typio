@@ -4,7 +4,7 @@ from unittest.mock import patch
 from typio import TypeMode
 from typio.cli import main
 from typio.params import TYPIO_VERSION, TYPIO_OVERVIEW
-from typio.params import INVALID_NON_NEGATIVE_NUMBER_ERROR
+from typio.params import INVALID_NON_NEGATIVE_NUMBER_ERROR, EXIT_MESSAGE
 
 
 def test_version_flag(capsys):
@@ -93,3 +93,23 @@ def test_invalid_mode(capsys):
 
     _, err = capsys.readouterr()
     assert "invalid choice" in err.lower()
+
+
+def test_keyboard_interrupt(capsys):
+    with patch("builtins.input", side_effect=KeyboardInterrupt):
+        with pytest.raises(SystemExit) as exc:
+            main()
+
+    assert exc.value.code == 1
+    _, err = capsys.readouterr()
+    assert EXIT_MESSAGE in err
+
+
+def test_eof_error(capsys):
+    with patch("builtins.input", side_effect=EOFError):
+        with pytest.raises(SystemExit) as exc:
+            main()
+
+    assert exc.value.code == 1
+    _, err = capsys.readouterr()
+    assert EXIT_MESSAGE in err
