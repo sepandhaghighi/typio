@@ -24,8 +24,8 @@ def _validate_non_negative_number(value: Any) -> float:
     return number
 
 
-def _build_parser() -> argparse.ArgumentParser:
-    """Build argument parser."""
+def _parse_args() -> argparse.Namespace:
+    """Parse arguments."""
     parser = argparse.ArgumentParser(
         prog="typio",
         description="Typio: Make Your Terminal Type Like a Human"
@@ -73,7 +73,8 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Typing mode",
     )
 
-    return parser
+    args = parser.parse_args()
+    return args
 
 
 def _run(args: argparse.Namespace) -> None:
@@ -97,8 +98,7 @@ def _run(args: argparse.Namespace) -> None:
 
 def main() -> None:
     """CLI main function."""
-    parser = _build_parser()
-    args = parser.parse_args()
+    args = _parse_args() 
     _run(args)
 
     
