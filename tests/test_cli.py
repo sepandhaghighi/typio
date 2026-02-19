@@ -96,16 +96,18 @@ def test_invalid_mode(capsys):
 
 
 def test_keyboard_interrupt(capsys):
-    with patch("builtins.input", side_effect=KeyboardInterrupt):
-        main()
+    with patch("typio.cli._parse_args", side_effect=KeyboardInterrupt):
+        with pytest.raises(SystemExit):
+            main()
 
-    _, err = capsys.readouterr()
-    assert EXIT_MESSAGE in err
+    out, _ = capsys.readouterr()
+    assert EXIT_MESSAGE in out
 
 
 def test_eof_error(capsys):
-    with patch("builtins.input", side_effect=EOFError):
-        main()
-      
-    _, err = capsys.readouterr()
-    assert EXIT_MESSAGE in err
+    with patch("typio.cli._parse_args", side_effect=EOFError):
+        with pytest.raises(SystemExit):
+            main()
+
+    out, _ = capsys.readouterr()
+    assert EXIT_MESSAGE in out
