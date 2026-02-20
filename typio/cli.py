@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """typio cli."""
 
+import sys
 import argparse
 from typing import Any
 from .params import TypeMode, TYPIO_OVERVIEW, TYPIO_VERSION
-from .params import INVALID_NON_NEGATIVE_NUMBER_ERROR
+from .params import INVALID_NON_NEGATIVE_NUMBER_ERROR, EXIT_MESSAGE
 from .functions import type_print
 
 
@@ -24,8 +25,8 @@ def _validate_non_negative_number(value: Any) -> float:
     return number
 
 
-def _build_parser() -> argparse.ArgumentParser:
-    """Build argument parser."""
+def _parse_args() -> argparse.Namespace:
+    """Parse arguments."""
     parser = argparse.ArgumentParser(
         prog="typio",
         description="Typio: Make Your Terminal Type Like a Human"
@@ -73,14 +74,16 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Typing mode",
     )
 
-    return parser
-
-
-def main() -> None:
-    """CLI main function."""
-    parser = _build_parser()
     args = parser.parse_args()
+    return args
 
+
+def _run(args: argparse.Namespace) -> None:
+    """
+    Run typio CLI.
+
+    :param args: arguments
+    """
     if args.version:
         print(TYPIO_VERSION)
         return
@@ -92,3 +95,13 @@ def main() -> None:
         end=args.end,
         mode=TypeMode(args.mode),
     )
+
+
+def main() -> None:
+    """CLI main function."""
+    try:
+        args = _parse_args()
+        _run(args)
+    except (KeyboardInterrupt, EOFError):
+        print(EXIT_MESSAGE)
+        sys.exit(1)

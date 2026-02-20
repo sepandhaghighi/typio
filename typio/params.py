@@ -23,6 +23,7 @@ class TypeMode(Enum):
     ADAPTIVE = "adaptive"
 
 
+EXIT_MESSAGE = "See you. Bye!"
 INVALID_TEXT_ERROR = "`text` must be str or bytes."
 INVALID_BYTE_ERROR = "bytes text must be UTF-8 decodable."
 INVALID_DELAY_ERROR = "`delay` must be a non-negative number."
