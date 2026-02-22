@@ -187,7 +187,7 @@ class _TypioPrinter:
             )
             self._emit(c)
             self._sleep(delay=d)
-    
+
     def _mode_accelerate(self, text: str) -> None:
         """
         Emit text character by character with progressively decreasing delay.
