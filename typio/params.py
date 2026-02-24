@@ -22,6 +22,7 @@ class TypeMode(Enum):
     TYPEWRITER = "typewriter"
     ADAPTIVE = "adaptive"
     ACCELERATE = "accelerate"
+    DECELERATE = "decelerate"
 
 
 EXIT_MESSAGE = "See you. Bye!"

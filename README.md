@@ -113,6 +113,7 @@ with open("output.txt", "w") as file:
 | `TypeMode.TYPEWRITER` | Emit text character by character with **longer pauses after newlines** |
 | `TypeMode.ADAPTIVE` | Emit text with **adaptive delays** based on character type (spaces, punctuation, alphanumeric) |
 | `TypeMode.ACCELERATE` | Emit text character by character with **progressively decreasing delay** (gradually speeds up over time) |
+| `TypeMode.DECELERATE` | Emit text character by character with **progressively increasing delay** (gradually slows down over time) |
 
 
 ### Decorator

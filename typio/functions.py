@@ -199,6 +199,19 @@ class _TypioPrinter:
             self._emit(c)
             factor = max(0.2, 1 - (i / total))
             self._sleep(delay=self._delay * factor)
+    
+
+    def _mode_decelerate(self, text: str) -> None:
+        """
+        Emit text character by character with progressively increasing delay.
+
+        :param text: text to emit
+        """
+        total = len(text)
+        for i, c in enumerate(text):
+            self._emit(c)
+            factor = max(0.2, i / total)
+            self._sleep(delay=self._delay * factor)
 
 
 class TypioContext:
