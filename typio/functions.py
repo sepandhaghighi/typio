@@ -159,7 +159,7 @@ class _TypioPrinter:
             self._emit(c)
             self._sleep()
             if c in ".!?":
-                self._sleep(self._delay * 4, self._jitter)
+                self._sleep(self._delay * 4)
 
     def _mode_typewriter(self, text: str) -> None:
         """
