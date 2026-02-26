@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - `ACCELERATE` mode
 - `DECELERATE` mode
+- Screen record video
 ### Changed
 - CLI messages updated
 - CLI modified
