@@ -207,6 +207,13 @@ Typio provides a simple command line interface for printing text with typing eff
 > typio --text="Hello world!" --mode=typewriter --delay=0.03
 ```
 
+## Screen Record
+
+<div align="center">
+
+<img src="https://github.com/sepandhaghighi/typio/raw/main/otherfiles/help.gif">
+
+</div>
 
 ## Issues & Bug Reports			
 
