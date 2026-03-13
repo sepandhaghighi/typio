@@ -199,7 +199,6 @@ class _TypioPrinter:
             self._emit(c)
             factor = max(0.2, 1 - (i / total))
             self._sleep(delay=self._delay * factor)
-    
 
     def _mode_decelerate(self, text: str) -> None:
         """
@@ -212,7 +211,6 @@ class _TypioPrinter:
             self._emit(c)
             factor = max(0.2, i / total)
             self._sleep(delay=self._delay * factor)
-    
 
     def _mode_burst(self, text: str) -> None:
         """
