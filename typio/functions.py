@@ -212,6 +212,26 @@ class _TypioPrinter:
             self._emit(c)
             factor = max(0.2, i / total)
             self._sleep(delay=self._delay * factor)
+    
+
+    def _mode_burst(self, text: str) -> None:
+        """
+        Emit text in bursts of characters followed by short pauses.
+
+        :param text: text to emit
+        """
+        buffer = []
+        burst_size = random.randint(3, 8)
+        for c in text:
+            buffer.append(c)
+            if len(buffer) >= burst_size:
+                self._emit("".join(buffer))
+                buffer.clear()
+                self._sleep(delay=self._delay * 4)
+                burst_size = random.randint(3, 8)
+        if buffer:
+            self._emit("".join(buffer))
+            self._sleep()
 
 
 class TypioContext:
