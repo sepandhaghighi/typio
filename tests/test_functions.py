@@ -72,6 +72,13 @@ def test_decelerate_mode():
     assert buffer.getvalue() == text + "\n"
 
 
+def test_burst_mode():
+    buffer = io.StringIO()
+    text = "Hello, world!" * 100
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.BURST)
+    assert buffer.getvalue() == text + "\n"
+
+
 def test_default_stdout_capture(capsys):
     type_print("hello", delay=0)
     captured = capsys.readouterr()
