@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import io
 import sys
-
+from unittest.mock import patch
 from typio import type_print, typestyle
 from typio import TypeMode
 
