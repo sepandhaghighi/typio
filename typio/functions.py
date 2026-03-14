@@ -225,7 +225,7 @@ class _TypioPrinter:
             if len(buffer) >= burst_size:
                 self._emit("".join(buffer))
                 buffer.clear()
-                self._sleep(delay=self._delay * 4)
+                self._sleep()
                 burst_size = random.randint(3, 8)
         if buffer:
             self._emit("".join(buffer))
