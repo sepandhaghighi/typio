@@ -23,6 +23,7 @@ class TypeMode(Enum):
     ADAPTIVE = "adaptive"
     ACCELERATE = "accelerate"
     DECELERATE = "decelerate"
+    BURST = "burst"
 
 
 EXIT_MESSAGE = "See you. Bye!"

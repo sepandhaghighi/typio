@@ -114,6 +114,8 @@ with open("output.txt", "w") as file:
 | `TypeMode.ADAPTIVE` | Emit text with **adaptive delays** based on character type (spaces, punctuation, alphanumeric) |
 | `TypeMode.ACCELERATE` | Emit text character by character with **progressively decreasing delay** (gradually speeds up over time) |
 | `TypeMode.DECELERATE` | Emit text character by character with **progressively increasing delay** (gradually slows down over time) |
+| `TypeMode.BURST` | Emit text in bursts of characters followed by short pauses |
+
 
 
 ### Decorator
