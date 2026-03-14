@@ -82,7 +82,7 @@ def test_burst_mode1():
 
 def test_burst_mode2():
     buffer = io.StringIO()
-    text = "Hello, world!" * 100
+    text = "Hello, world!" * 100 + "X"
     with patch("random.randint", return_value=7):
         type_print(text, file=buffer, delay=0.01, mode=TypeMode.BURST)
     assert buffer.getvalue() == text + "\n"
