@@ -233,7 +233,7 @@ class _TypioPrinter:
 
     def _mode_fat_finger(self, text: str) -> None:
         """
-        Emit text mimicking human typos and corrections
+        Emit text mimicking human typos and corrections.
 
         :param text: text to emit
         """
