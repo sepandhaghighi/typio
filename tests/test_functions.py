@@ -4,6 +4,7 @@ import sys
 from unittest.mock import patch
 from typio import type_print, typestyle
 from typio import TypeMode
+import random
 
 
 def test_basic_print():
@@ -86,6 +87,14 @@ def test_burst_mode2():
     with patch("random.randint", return_value=7):
         type_print(text, file=buffer, delay=0.01, mode=TypeMode.BURST)
     assert buffer.getvalue() == text + "\n"
+
+
+def test_fat_finger_mode():
+    random.seed(1)
+    buffer = io.StringIO()
+    text = "Hello, world!"
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.FAT_FINGER)
+    assert buffer.getvalue() == 'Hello, wo4l\x08 \x08\x08 \x084l\x08 \x08\x08 \x08rld~\n\x08 \x08\x08 \x08!\n'
 
 
 def test_default_stdout_capture(capsys):
