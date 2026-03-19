@@ -243,7 +243,7 @@ class _TypioPrinter:
             if char in KEY_NEIGHBORS and random.random() < 0.03:
                 wrong_char = random.choice(KEY_NEIGHBORS[char])
                 self._emit(wrong_char)
-                self._sleep(0.05)
+                self._sleep(self._delay * 1.25)
                 
                 # Type another wrong character with decaying probability
                 extra_chars = []
@@ -253,16 +253,16 @@ class _TypioPrinter:
                     next_char = text[current_j]
                     self._emit(next_char)
                     extra_chars.append(next_char)
-                    self._sleep(0.06)
+                    self._sleep(self._delay * 1.5)
                     current_j += 1
 
-                self._sleep(0.3)
+                self._sleep(self._delay * 4)
                 total_to_delete = len(extra_chars) + 1
                 for _ in range(total_to_delete):
                     self._emit("\b \b")
-                    self._sleep(0.03)
+                    self._sleep(self._delay * 0.75)
 
-                self._sleep(0.2)
+                self._sleep(self._delay * 3)
                 continue
 
             self._emit(char)
