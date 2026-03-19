@@ -87,7 +87,7 @@ class _TypioPrinter:
             ctx = TypioContext(self)
             self._mode(ctx, text)
         else:
-            handler = getattr(self, "_mode_{mode}".format(mode=self._mode.value))
+            handler = getattr(self, "_mode_{mode}".format(mode=self._mode.value.replace('-', '_')))
             handler(text)
 
     def flush(self) -> None:
