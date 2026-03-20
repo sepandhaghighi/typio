@@ -115,7 +115,7 @@ with open("output.txt", "w") as file:
 | `TypeMode.ACCELERATE` | Emit text character by character with **progressively decreasing delay** (gradually speeds up over time) |
 | `TypeMode.DECELERATE` | Emit text character by character with **progressively increasing delay** (gradually slows down over time) |
 | `TypeMode.BURST` | Emit text in bursts of characters followed by short pauses |
-| `TYPEMODE.FAT_FINGER` | Emit text mimicking human typos and corrections |
+| `TypeMode.FAT_FINGER` | Emit text mimicking human typos and corrections |
 
 
 
