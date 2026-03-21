@@ -8,7 +8,7 @@ import re
 from functools import wraps
 from io import TextIOBase
 from typing import Any, Callable, Optional, Union
-from .params import TypeMode
+from .params import TypeMode, KEY_NEIGHBORS
 from .params import INVALID_TEXT_ERROR, INVALID_BYTE_ERROR, INVALID_DELAY_ERROR
 from .params import INVALID_JITTER_ERROR, INVALID_MODE_ERROR, INVALID_FILE_ERROR
 from .params import INVALID_END_ERROR
@@ -87,7 +87,7 @@ class _TypioPrinter:
             ctx = TypioContext(self)
             self._mode(ctx, text)
         else:
-            handler = getattr(self, "_mode_{mode}".format(mode=self._mode.value))
+            handler = getattr(self, "_mode_{mode}".format(mode=self._mode.value.replace('-', '_')))
             handler(text)
 
     def flush(self) -> None:
@@ -230,6 +230,44 @@ class _TypioPrinter:
         if buffer:
             self._emit("".join(buffer))
             self._sleep()
+
+    def _mode_fat_finger(self, text: str) -> None:
+        """
+        Emit text mimicking human typos and corrections.
+
+        :param text: text to emit
+        """
+        i = 0
+        while i < len(text):
+            char = text[i]
+            if char in KEY_NEIGHBORS and random.random() < 0.03:
+                wrong_char = random.choice(KEY_NEIGHBORS[char])
+                self._emit(wrong_char)
+                self._sleep(self._delay * 1.25)
+                
+                # Type another wrong character with decaying probability
+                extra_chars = []
+                decay_rate = 0.6
+                current_j = i + 1
+                while current_j < len(text) and random.random() < (decay_rate ** (len(extra_chars) + 1)):
+                    next_char = text[current_j]
+                    self._emit(next_char)
+                    extra_chars.append(next_char)
+                    self._sleep(self._delay * 1.5)
+                    current_j += 1
+
+                self._sleep(self._delay * 4)
+                total_to_delete = len(extra_chars) + 1
+                for _ in range(total_to_delete):
+                    self._emit("\b \b")
+                    self._sleep(self._delay * 0.75)
+
+                self._sleep(self._delay * 3)
+                continue
+
+            self._emit(char)
+            self._sleep()
+            i += 1
 
 
 class TypioContext:
