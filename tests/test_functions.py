@@ -100,7 +100,7 @@ def test_fat_finger_mode():
 def test_thoughtful_mode():
     buffer = io.StringIO()
     text = "Hello, myworld! How are you?"
-    type_print(text, file=buffer, delay=0.01, mode=TypeMode.BURST)
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.THOUGHTFUL)
     assert buffer.getvalue() == text + "\n"
 
 
