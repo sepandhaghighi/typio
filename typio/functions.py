@@ -269,6 +269,18 @@ class _TypioPrinter:
             self._sleep()
             i += 1
 
+    def _mode_thoughtful(self, text: str) -> None:
+        """
+        Emit text while pause slightly before long words to simulate thinking.
+
+        :param text: text to emit
+        """
+        for token in re.findall(r"\S+|\s+", text):
+            if token.strip() and len(token.strip()) > 6:
+                self._sleep(delay=self._delay * 3) # longer pause before longer words
+            self._emit(token)
+            self._sleep()
+
 
 class TypioContext:
     """Read-only typing context passed to custom typing modes."""
