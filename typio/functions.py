@@ -278,8 +278,9 @@ class _TypioPrinter:
         for token in re.findall(r"\S+|\s+", text):
             if token.strip() and len(token.strip()) > 6:
                 self._sleep(delay=self._delay * 3) # longer pause before longer words
-            self._emit(token)
-            self._sleep()
+            for c in token:
+                self._emit(c)
+                self._sleep()
 
 
 class TypioContext:
