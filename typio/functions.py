@@ -243,7 +243,7 @@ class _TypioPrinter:
             if char in KEY_NEIGHBORS and random.random() < 0.03:
                 wrong_char = random.choice(KEY_NEIGHBORS[char])
                 self._emit(wrong_char)
-                self._sleep(self._delay * 1.25)
+                self._sleep(delay=self._delay * 1.25)
                 
                 # Type another wrong character with decaying probability
                 extra_chars = []
@@ -253,21 +253,34 @@ class _TypioPrinter:
                     next_char = text[current_j]
                     self._emit(next_char)
                     extra_chars.append(next_char)
-                    self._sleep(self._delay * 1.5)
+                    self._sleep(delay=self._delay * 1.5)
                     current_j += 1
 
-                self._sleep(self._delay * 4)
+                self._sleep(delay=self._delay * 4)
                 total_to_delete = len(extra_chars) + 1
                 for _ in range(total_to_delete):
                     self._emit("\b \b")
-                    self._sleep(self._delay * 0.75)
+                    self._sleep(delay=self._delay * 0.75)
 
-                self._sleep(self._delay * 3)
+                self._sleep(delay=self._delay * 3)
                 continue
 
             self._emit(char)
             self._sleep()
             i += 1
+
+    def _mode_thoughtful(self, text: str) -> None:
+        """
+        Emit text while pause slightly before long words to simulate thinking.
+
+        :param text: text to emit
+        """
+        for token in re.findall(r"\S+|\s+", text):
+            if token.strip() and len(token.strip()) > 6:
+                self._sleep(delay=self._delay * 3) # longer pause before longer words
+            for c in token:
+                self._emit(c)
+                self._sleep()
 
 
 class TypioContext:

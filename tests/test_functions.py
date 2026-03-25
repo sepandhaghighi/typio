@@ -97,6 +97,13 @@ def test_fat_finger_mode():
     assert buffer.getvalue() == 'Hello, wo4l\x08 \x08\x08 \x084l\x08 \x08\x08 \x08rld~\n\x08 \x08\x08 \x08!\n'
 
 
+def test_thoughtful_mode():
+    buffer = io.StringIO()
+    text = "Hello, myworld! How are you?"
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.THOUGHTFUL)
+    assert buffer.getvalue() == text + "\n"
+
+
 def test_default_stdout_capture(capsys):
     type_print("hello", delay=0)
     captured = capsys.readouterr()
