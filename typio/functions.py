@@ -281,6 +281,22 @@ class _TypioPrinter:
             for c in token:
                 self._emit(c)
                 self._sleep()
+    
+
+    def _mode_heartbeat(self, text: str) -> None:
+        """
+        Emit text with alternating short and long pauses to simulate a heartbeat-like rhythm.
+
+        :param text: text to emit
+        """
+        toggle = True
+        for c in text:
+            self._emit(c)
+            if toggle:
+                self._sleep(self._delay * 0.5)
+            else:
+                self._sleep(self._delay * 1.8)
+            toggle = not toggle
 
 
 class TypioContext:
