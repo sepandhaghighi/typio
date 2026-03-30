@@ -244,7 +244,7 @@ class _TypioPrinter:
                 wrong_char = random.choice(KEY_NEIGHBORS[char])
                 self._emit(wrong_char)
                 self._sleep(delay=self._delay * 1.25)
-                
+
                 # Type another wrong character with decaying probability
                 extra_chars = []
                 decay_rate = 0.6
@@ -277,11 +277,10 @@ class _TypioPrinter:
         """
         for token in re.findall(r"\S+|\s+", text):
             if token.strip() and len(token.strip()) > 6:
-                self._sleep(delay=self._delay * 3) # longer pause before longer words
+                self._sleep(delay=self._delay * 3)  # longer pause before longer words
             for c in token:
                 self._emit(c)
                 self._sleep()
-    
 
     def _mode_heartbeat(self, text: str) -> None:
         """
