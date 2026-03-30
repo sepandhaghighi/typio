@@ -26,6 +26,7 @@ class TypeMode(Enum):
     BURST = "burst"
     FAT_FINGER = "fat-finger"
     THOUGHTFUL = "thoughtful"
+    HEARTBEAT = "heartbeat"
 
 
 EXIT_MESSAGE = "See you. Bye!"
