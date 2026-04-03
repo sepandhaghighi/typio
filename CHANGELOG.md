@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - `HEARTBEAT` mode
+- `REWIND` mode
 ## [0.6] - 2026-03-27
 ### Added
 - `THOUGHTFUL` mode
