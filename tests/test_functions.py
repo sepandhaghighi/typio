@@ -112,10 +112,11 @@ def test_heartbeat_mode():
 
 
 def test_rewind_mode():
+    random.seed(1)
     buffer = io.StringIO()
-    text = "Hello, world!" * 100
+    text = "Hello, world!" * 8
     type_print(text, file=buffer, delay=0.01, mode=TypeMode.REWIND)
-    assert buffer.getvalue() == text + "\n"
+    assert buffer.getvalue() == 'Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!\x08 \x08\x08 \x08\x08 \x08\x08 \x08\x08 \x08\x08 \x08world!\n'
 
 
 def test_default_stdout_capture(capsys):
