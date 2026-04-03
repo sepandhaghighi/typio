@@ -117,6 +117,7 @@ with open("output.txt", "w") as file:
 | `TypeMode.BURST` | Emit text in bursts of characters followed by short pauses |
 | `TypeMode.FAT_FINGER` | Emit text mimicking human typos and corrections |
 | `TypeMode.THOUGHTFUL` | Emit text while pause slightly before long words to simulate thinking |
+| `TypeMode.HEARTBEAT` | Emit text with alternating short and long pauses to simulate a heartbeat-like rhythm |
 
 
 
