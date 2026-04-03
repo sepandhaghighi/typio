@@ -306,10 +306,11 @@ class _TypioPrinter:
         """
         words = re.findall(r"\S+|\s+", text)
         for word in words:
-            self._emit(word)
-            self._sleep()
+            for c in word:
+                self._emit(c)
+                self._sleep()
             if word.strip() and random.random() < 0.1:
-                self._sleep(self._delay * 2)
+                self._sleep(self._delay * 3)
                 for _ in word:
                     self._emit("\b \b")
                     self._sleep(self._delay * 0.5)
