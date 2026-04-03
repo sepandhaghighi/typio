@@ -296,7 +296,6 @@ class _TypioPrinter:
             else:
                 self._sleep(self._delay * 1.8)
             toggle = not toggle
-    
 
     def _mode_rewind(self, text: str) -> None:
         """
