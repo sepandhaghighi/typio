@@ -317,6 +317,23 @@ class _TypioPrinter:
                 for c in word:
                     self._emit(c)
                     self._sleep()
+    
+
+    def _mode_glitch(self, text: str) -> None:
+        """
+        Emit text with occasional random glitches that are quickly corrected.
+
+        :param text: text to emit
+        """
+        glitch_chars = ["#", "@", "%", "&"]
+        for c in text:
+            self._emit(c)
+            self._sleep()
+            if random.random() < 0.05:
+                glitch = random.choice(glitch_chars)
+                self._emit(glitch)
+                self._sleep(self._delay * 0.5)
+                self._emit("\b \b")
 
 
 class TypioContext:
