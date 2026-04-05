@@ -297,6 +297,27 @@ class _TypioPrinter:
                 self._sleep(self._delay * 1.8)
             toggle = not toggle
 
+    def _mode_rewind(self, text: str) -> None:
+        """
+        Emit text while occasionally deleting and retyping words to simulate reconsideration.
+
+        :param text: text to emit
+        """
+        words = re.findall(r"\S+|\s+", text)
+        for word in words:
+            for c in word:
+                self._emit(c)
+                self._sleep()
+            if word.strip() and random.random() < 0.1:
+                self._sleep(self._delay * 3)
+                for _ in word:
+                    self._emit("\b \b")
+                    self._sleep(self._delay * 0.5)
+                self._sleep()
+                for c in word:
+                    self._emit(c)
+                    self._sleep()
+
 
 class TypioContext:
     """Read-only typing context passed to custom typing modes."""
