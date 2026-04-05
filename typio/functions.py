@@ -317,7 +317,6 @@ class _TypioPrinter:
                 for c in word:
                     self._emit(c)
                     self._sleep()
-    
 
     def _mode_glitch(self, text: str) -> None:
         """
