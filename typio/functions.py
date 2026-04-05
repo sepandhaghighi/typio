@@ -330,8 +330,9 @@ class _TypioPrinter:
             if random.random() < 0.05:
                 glitch = random.choice(GLITCH_CHARS)
                 self._emit(glitch)
-                self._sleep(self._delay * 0.5)
+                self._sleep(self._delay * 2)
                 self._emit("\b \b")
+                self._sleep()
 
 
 class TypioContext:
