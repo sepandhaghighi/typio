@@ -64,3 +64,5 @@ KEY_NEIGHBORS = {
     ' ': 'cvbnm,./',
     '\n': 'lp;\'[]\\'
 }
+
+GLITCH_CHARS = ["#", "@", "%", "&"]
