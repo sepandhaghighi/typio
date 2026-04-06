@@ -28,6 +28,7 @@ class TypeMode(Enum):
     THOUGHTFUL = "thoughtful"
     HEARTBEAT = "heartbeat"
     REWIND = "rewind"
+    GLITCH = "glitch"
 
 
 EXIT_MESSAGE = "See you. Bye!"
@@ -63,3 +64,5 @@ KEY_NEIGHBORS = {
     ' ': 'cvbnm,./',
     '\n': 'lp;\'[]\\'
 }
+
+GLITCH_CHARS = ["#", "@", "%", "&"]

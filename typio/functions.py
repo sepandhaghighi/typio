@@ -8,7 +8,7 @@ import re
 from functools import wraps
 from io import TextIOBase
 from typing import Any, Callable, Optional, Union
-from .params import TypeMode, KEY_NEIGHBORS
+from .params import TypeMode, KEY_NEIGHBORS, GLITCH_CHARS
 from .params import INVALID_TEXT_ERROR, INVALID_BYTE_ERROR, INVALID_DELAY_ERROR
 from .params import INVALID_JITTER_ERROR, INVALID_MODE_ERROR, INVALID_FILE_ERROR
 from .params import INVALID_END_ERROR
@@ -317,6 +317,22 @@ class _TypioPrinter:
                 for c in word:
                     self._emit(c)
                     self._sleep()
+
+    def _mode_glitch(self, text: str) -> None:
+        """
+        Emit text with occasional random glitches that are quickly corrected.
+
+        :param text: text to emit
+        """
+        for c in text:
+            self._emit(c)
+            self._sleep()
+            if random.random() < 0.05:
+                glitch = random.choice(GLITCH_CHARS)
+                self._emit(glitch)
+                self._sleep(self._delay * 2)
+                self._emit("\b \b")
+                self._sleep()
 
 
 class TypioContext:

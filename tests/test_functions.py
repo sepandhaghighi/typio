@@ -119,6 +119,14 @@ def test_rewind_mode():
     assert buffer.getvalue() == 'Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!\x08 \x08\x08 \x08\x08 \x08\x08 \x08\x08 \x08\x08 \x08world!\n'
 
 
+def test_glitch_mode():
+    random.seed(1)
+    buffer = io.StringIO()
+    text = "Hello, world!" * 2
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.GLITCH)
+    assert buffer.getvalue() == 'Hello, wor&\x08 \x08ld!&\x08 \x08Hello,#\x08 \x08 worl@\x08 \x08d!\n'
+
+
 def test_default_stdout_capture(capsys):
     type_print("hello", delay=0)
     captured = capsys.readouterr()

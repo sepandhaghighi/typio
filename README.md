@@ -119,6 +119,7 @@ with open("output.txt", "w") as file:
 | `TypeMode.THOUGHTFUL` | Emit text while pause slightly before long words to simulate thinking |
 | `TypeMode.HEARTBEAT` | Emit text with alternating short and long pauses to simulate a heartbeat-like rhythm |
 | `TypeMode.REWIND` | Emit text while occasionally deleting and retyping words to simulate reconsideration |
+| `TypeMode.GLITCH` | Emit text with occasional random glitches that are quickly corrected |
 
 
 
