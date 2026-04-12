@@ -333,7 +333,6 @@ class _TypioPrinter:
                 self._sleep(self._delay * 2)
                 self._emit("\b \b")
                 self._sleep()
-    
 
     def _mode_random_case(self, text: str) -> None:
         """
