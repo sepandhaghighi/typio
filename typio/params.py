@@ -29,6 +29,7 @@ class TypeMode(Enum):
     HEARTBEAT = "heartbeat"
     REWIND = "rewind"
     GLITCH = "glitch"
+    RANDOM_CASE = "random-case"
 
 
 EXIT_MESSAGE = "See you. Bye!"
