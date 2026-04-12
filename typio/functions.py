@@ -333,6 +333,19 @@ class _TypioPrinter:
                 self._sleep(self._delay * 2)
                 self._emit("\b \b")
                 self._sleep()
+    
+
+    def _mode_random_case(self, text: str) -> None:
+        """
+        Emit text with randomly varying character casing.
+
+        :param text: text to emit
+        """
+        for c in text:
+            if c.isalpha():
+                c = c.upper() if random.random() < 0.5 else c.lower()
+            self._emit(c)
+            self._sleep()
 
 
 class TypioContext:
