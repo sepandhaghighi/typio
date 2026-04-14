@@ -122,6 +122,7 @@ with open("output.txt", "w") as file:
 | `TypeMode.GLITCH` | Emit text with occasional random glitches that are quickly corrected |
 | `TypeMode.RANDOM_CASE` | Emit text with randomly varying character casing |
 | `TypeMode.WAVE` | Emit text with sinusoidal delay variation |
+| `TypeMode.STUTTER` | Emit text with stuttering effect on some characters |
 
 
 
