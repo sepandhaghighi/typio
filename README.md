@@ -121,6 +121,7 @@ with open("output.txt", "w") as file:
 | `TypeMode.REWIND` | Emit text while occasionally deleting and retyping words to simulate reconsideration |
 | `TypeMode.GLITCH` | Emit text with occasional random glitches that are quickly corrected |
 | `TypeMode.RANDOM_CASE` | Emit text with randomly varying character casing |
+| `TypeMode.WAVE` | Emit text with sinusoidal delay variation |
 
 
 

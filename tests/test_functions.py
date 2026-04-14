@@ -135,6 +135,13 @@ def test_random_case_mode():
     assert buffer.getvalue() == 'HelLO, WorLD!\n'
 
 
+def test_wave_mode():
+    buffer = io.StringIO()
+    text = "Hello, world!"
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.WAVE)
+    assert buffer.getvalue() == 'Hello, world!\n'
+
+
 def test_default_stdout_capture(capsys):
     type_print("hello", delay=0)
     captured = capsys.readouterr()

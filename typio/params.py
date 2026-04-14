@@ -30,6 +30,7 @@ class TypeMode(Enum):
     REWIND = "rewind"
     GLITCH = "glitch"
     RANDOM_CASE = "random-case"
+    WAVE = "wave"
 
 
 EXIT_MESSAGE = "See you. Bye!"
