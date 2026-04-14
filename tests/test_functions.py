@@ -136,7 +136,6 @@ def test_random_case_mode():
 
 
 def test_wave_mode():
-    random.seed(1)
     buffer = io.StringIO()
     text = "Hello, world!"
     type_print(text, file=buffer, delay=0.01, mode=TypeMode.WAVE)
