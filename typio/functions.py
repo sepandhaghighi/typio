@@ -346,11 +346,11 @@ class _TypioPrinter:
                 c = c.upper() if random.random() < 0.5 else c.lower()
             self._emit(c)
             self._sleep()
-    
+
     def _mode_wave(self, text: str) -> None:
         """
         Emit text with sinusoidal delay variation.
-        
+
         :param text: text to emit
         """
         wave_2pif, wave_len, wave_bias = 0.3, 0.5, 0.4
@@ -358,7 +358,6 @@ class _TypioPrinter:
             factor = wave_bias + wave_len * (1 + math.sin(i * wave_2pif))
             self._emit(c)
             self._sleep(self._delay * factor)
-    
 
     def _mode_stutter(self, text: str) -> None:
         """
