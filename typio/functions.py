@@ -358,6 +358,22 @@ class _TypioPrinter:
             factor = wave_bias + wave_len * (1 + math.sin(i * wave_2pif))
             self._emit(c)
             self._sleep(self._delay * factor)
+    
+
+    def _mode_stutter(self, text: str) -> None:
+        """
+        Emit text with stuttering effect on some characters.
+
+        :param text: text to emit
+        """
+        for c in text:
+            if c.isalpha() and random.random() < 0.07:
+                repeat = random.randint(1, 2)
+                for _ in range(repeat):
+                    self._emit(c + "-")
+                    self._sleep(self._delay * 0.8)
+            self._emit(c)
+            self._sleep()
 
 
 class TypioContext:
