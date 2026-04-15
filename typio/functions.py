@@ -368,7 +368,7 @@ class _TypioPrinter:
         words = re.findall(r"\S+|\s+", text)
         for word in words:
             for i, c in enumerate(word):
-                if word.strip() and c.isalpha() and i==0 and random.random() < 0.1:
+                if c.isalpha() and i==0 and random.random() < 0.1:
                     repeat = random.randint(1, 2)
                     for _ in range(repeat):
                         self._emit(c + "-")
