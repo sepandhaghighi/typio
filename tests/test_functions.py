@@ -145,9 +145,9 @@ def test_wave_mode():
 def test_stutter_mode():
     random.seed(1)
     buffer = io.StringIO()
-    text = "Hello, world!"
+    text = "Hello, world!" * 8
     type_print(text, file=buffer, delay=0.01, mode=TypeMode.STUTTER)
-    assert buffer.getvalue() == 'Hello, world-d-d!\n'
+    assert buffer.getvalue() == 'Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, w-world!\n'
 
 
 def test_default_stdout_capture(capsys):
