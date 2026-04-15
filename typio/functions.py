@@ -361,18 +361,20 @@ class _TypioPrinter:
 
     def _mode_stutter(self, text: str) -> None:
         """
-        Emit text with stuttering effect on some characters.
+        Emit text with stuttering effect on some words.
 
         :param text: text to emit
         """
-        for c in text:
-            if c.isalpha() and random.random() < 0.07:
-                repeat = random.randint(1, 2)
-                for _ in range(repeat):
-                    self._emit(c + "-")
-                    self._sleep(self._delay * 0.8)
-            self._emit(c)
-            self._sleep()
+        words = re.findall(r"\S+|\s+", text)
+        for word in words:
+            for i, c in enumerate(word):
+                if word.strip() and c.isalpha() and i==0 and random.random() < 0.1:
+                    repeat = random.randint(1, 2)
+                    for _ in range(repeat):
+                        self._emit(c + "-")
+                        self._sleep(self._delay * 0.8)
+                self._emit(c)
+                self._sleep()
 
 
 class TypioContext:
