@@ -31,6 +31,7 @@ class TypeMode(Enum):
     GLITCH = "glitch"
     RANDOM_CASE = "random-case"
     WAVE = "wave"
+    STUTTER = "stutter"
 
 
 EXIT_MESSAGE = "See you. Bye!"
