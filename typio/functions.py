@@ -372,7 +372,7 @@ class _TypioPrinter:
                     repeat = random.randint(1, 2)
                     for _ in range(repeat):
                         self._emit(c + "-")
-                        self._sleep(self._delay * 0.8)
+                        self._sleep(self._delay * 1.2)
                 self._emit(c)
                 self._sleep()
 
