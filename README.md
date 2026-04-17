@@ -123,6 +123,7 @@ with open("output.txt", "w") as file:
 | `TypeMode.RANDOM_CASE` | Emit text with randomly varying character casing |
 | `TypeMode.WAVE` | Emit text with sinusoidal delay variation |
 | `TypeMode.STUTTER` | Emit text with stuttering effect on some words |
+| `TypeMode.NERVOUS` | Emit text erratically typing with inconsistent pauses |
 
 
 

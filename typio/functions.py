@@ -375,7 +375,17 @@ class _TypioPrinter:
                         self._sleep(self._delay * 1.2)
                 self._emit(c)
                 self._sleep()
+    
+    def _mode_nervous(self, text: str) -> None:
+        """
+        Emit text erratically typing with inconsistent pauses.
 
+        :param text: text to emit
+        """
+        for c in text:
+            self._emit(c)
+            factor = 2 ** random.uniform(-2, 2)
+            self._sleep(self._delay * factor)
 
 class TypioContext:
     """Read-only typing context passed to custom typing modes."""

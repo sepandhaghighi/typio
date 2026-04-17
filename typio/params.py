@@ -32,6 +32,7 @@ class TypeMode(Enum):
     RANDOM_CASE = "random-case"
     WAVE = "wave"
     STUTTER = "stutter"
+    NERVOUS = "nervous"
 
 
 EXIT_MESSAGE = "See you. Bye!"
