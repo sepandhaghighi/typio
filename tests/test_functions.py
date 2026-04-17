@@ -150,6 +150,13 @@ def test_stutter_mode():
     assert buffer.getvalue() == 'Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, w-world!\n'
 
 
+def test_nervous_mode():
+    buffer = io.StringIO()
+    text = "Hello, world!"
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.NERVOUS)
+    assert buffer.getvalue() == 'Hello, world!\n'
+
+
 def test_default_stdout_capture(capsys):
     type_print("hello", delay=0)
     captured = capsys.readouterr()
