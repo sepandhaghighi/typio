@@ -51,13 +51,13 @@ Typio is a lightweight Python library that prints text to the terminal as if it 
 ## Installation		
 
 ### Source Code
-- Download [Version 0.7](https://github.com/sepandhaghighi/typio/archive/v0.7.zip) or [Latest Source](https://github.com/sepandhaghighi/typio/archive/dev.zip)
+- Download [Version 0.8](https://github.com/sepandhaghighi/typio/archive/v0.8.zip) or [Latest Source](https://github.com/sepandhaghighi/typio/archive/dev.zip)
 - `pip install .`				
 
 ### PyPI
 
 - Check [Python Packaging User Guide](https://packaging.python.org/installing/)     
-- `pip install typio==0.7`						
+- `pip install typio==0.8`						
 
 
 ## Usage
