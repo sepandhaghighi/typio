@@ -158,10 +158,11 @@ def test_nervous_mode():
 
 
 def test_hesitation_mode():
+    random.seed(1)
     buffer = io.StringIO()
-    text = "Hello, world!"
+    text = "Hello, world!" * 8
     type_print(text, file=buffer, delay=0.01, mode=TypeMode.HESITATION)
-    assert buffer.getvalue() == 'Hello, world!\n'
+    assert buffer.getvalue() == text + "\n"
 
 
 def test_default_stdout_capture(capsys):
