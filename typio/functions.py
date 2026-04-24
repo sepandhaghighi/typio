@@ -403,6 +403,28 @@ class _TypioPrinter:
                 else:
                     self._sleep()
 
+    def _mode_overthink(self, text: str) -> None:
+        """
+        Emit text while occasionally deleting and retyping a chunk of text to simulate overthinking.
+
+        :param text: text to emit
+        """
+        words = re.findall(r"\S+|\s+", text)
+        for word in words:
+            typed = ""
+            for c in word:
+                typed += c
+                self._emit(c)
+                self._sleep()
+
+                if len(typed) > 3 and random.random() < 0.15:
+                    delete_count = random.randint(1, len(typed)//2)
+                    for _ in range(delete_count):
+                        self._emit("\b \b")
+                        self._sleep(self._delay * 0.6)
+                    typed = typed[:-delete_count]
+                    self._sleep(self._delay * 2)
+
 
 class TypioContext:
     """Read-only typing context passed to custom typing modes."""
