@@ -368,14 +368,14 @@ class _TypioPrinter:
         words = re.findall(r"\S+|\s+", text)
         for word in words:
             for i, c in enumerate(word):
-                if c.isalpha() and i==0 and random.random() < 0.1:
+                if c.isalpha() and i == 0 and random.random() < 0.1:
                     repeat = random.randint(1, 2)
                     for _ in range(repeat):
                         self._emit(c + "-")
                         self._sleep(self._delay * 1.2)
                 self._emit(c)
                 self._sleep()
-    
+
     def _mode_nervous(self, text: str) -> None:
         """
         Emit text erratically typing with inconsistent pauses.
@@ -386,6 +386,23 @@ class _TypioPrinter:
             self._emit(c)
             factor = 2 ** random.uniform(-2, 2)
             self._sleep(self._delay * factor)
+
+    def _mode_hesitation(self, text: str) -> None:
+        """
+        Emit text with occasional pauses within words to simulate human hesitation.
+
+        :param text: text to emit
+        """
+        words = re.findall(r"\S+|\s+", text)
+        for word in words:
+            for c in word:
+                self._emit(c)
+                if c.isalpha() and random.random() < 0.08:
+                    factor = random.uniform(2, 5)
+                    self._sleep(self._delay * factor)
+                else:
+                    self._sleep()
+
 
 class TypioContext:
     """Read-only typing context passed to custom typing modes."""

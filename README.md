@@ -124,6 +124,7 @@ with open("output.txt", "w") as file:
 | `TypeMode.WAVE` | Emit text with sinusoidal delay variation |
 | `TypeMode.STUTTER` | Emit text with stuttering effect on some words |
 | `TypeMode.NERVOUS` | Emit text erratically typing with inconsistent pauses |
+| `TypeMode.HESITATION` | Emit text with occasional pauses within words to simulate human hesitation |
 
 
 

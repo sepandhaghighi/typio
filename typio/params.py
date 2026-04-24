@@ -33,6 +33,7 @@ class TypeMode(Enum):
     WAVE = "wave"
     STUTTER = "stutter"
     NERVOUS = "nervous"
+    HESITATION = "hesitation"
 
 
 EXIT_MESSAGE = "See you. Bye!"
