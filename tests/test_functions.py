@@ -166,11 +166,11 @@ def test_hesitation_mode():
 
 
 def test_overthink_mode():
-    random.seed(1)
+    random.seed(2)
     buffer = io.StringIO()
     text = "Hello, world!"
     type_print(text, file=buffer, delay=0.01, mode=TypeMode.OVERTHINK)
-    assert buffer.getvalue() == text + "\n"
+    assert buffer.getvalue() == 'Hello,\x08 \x08, world!\n'
 
 
 def test_default_stdout_capture(capsys):
