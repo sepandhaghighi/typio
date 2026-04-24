@@ -411,19 +411,20 @@ class _TypioPrinter:
         """
         words = re.findall(r"\S+|\s+", text)
         for word in words:
-            typed = ""
-            for c in word:
-                typed += c
+            i = 0
+            while i < len(word):
+                c = word[i]
                 self._emit(c)
                 self._sleep()
 
-                if len(typed) > 3 and random.random() < 0.15:
-                    delete_count = random.randint(1, len(typed)//2)
+                if i > 2 and random.random() < 0.15:
+                    delete_count = random.randint(1, i//2)
                     for _ in range(delete_count):
                         self._emit("\b \b")
                         self._sleep(self._delay * 0.6)
-                    typed = typed[:-delete_count]
+                    i -= delete_count
                     self._sleep(self._delay * 2)
+                i += 1
 
 
 class TypioContext:
