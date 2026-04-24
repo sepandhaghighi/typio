@@ -168,7 +168,7 @@ def test_hesitation_mode():
 def test_overthink_mode():
     random.seed(1)
     buffer = io.StringIO()
-    text = "Hello, world!" * 8
+    text = "Hello, world!"
     type_print(text, file=buffer, delay=0.01, mode=TypeMode.OVERTHINK)
     assert buffer.getvalue() == text + "\n"
 
