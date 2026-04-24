@@ -34,6 +34,7 @@ class TypeMode(Enum):
     STUTTER = "stutter"
     NERVOUS = "nervous"
     HESITATION = "hesitation"
+    OVERTHINK = "overthink"
 
 
 EXIT_MESSAGE = "See you. Bye!"

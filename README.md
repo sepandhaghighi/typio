@@ -125,6 +125,7 @@ with open("output.txt", "w") as file:
 | `TypeMode.STUTTER` | Emit text with stuttering effect on some words |
 | `TypeMode.NERVOUS` | Emit text erratically typing with inconsistent pauses |
 | `TypeMode.HESITATION` | Emit text with occasional pauses within words to simulate human hesitation |
+| `TypeMode.OVERTHINK` | Emit text while occasionally deleting and retyping a chunk of text to simulate overthinking |
 
 
 
