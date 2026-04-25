@@ -127,6 +127,7 @@ with open("output.txt", "w") as file:
 | `TypeMode.HESITATION` | Emit text with occasional pauses within words to simulate human hesitation |
 | `TypeMode.OVERTHINK` | Emit text while occasionally deleting and retyping a chunk of text to simulate overthinking |
 | `TypeMode.CONFIDENT` | Emit text quickly with brief pauses, adding longer delays after punctuation to simulate confident typing |
+| `TypeMode.ECHO` | Emit text with occasional repetition of characters faintly, like a glitchy terminal echo. |
 
 
 
