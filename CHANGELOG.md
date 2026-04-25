@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `HESITATION` mode
 - `OVERTHINK` mode
 - `CONFIDENT` mode
+- `ECHO` mode
 ### Changed
 - Test system modified
 - `README.md` updated
