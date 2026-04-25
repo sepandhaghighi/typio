@@ -425,6 +425,22 @@ class _TypioPrinter:
                     i -= delete_count
                     self._sleep(self._delay * 2)
                 i += 1
+    
+
+    def _mode_confident(self, text: str) -> None:
+        """
+        Emit text quickly with brief pauses, adding longer delays after punctuation to simulate confident typing.
+
+        :param text: text to emit
+        """
+        for c in text:
+            self._emit(c)
+            if c in ".!?":
+                self._sleep(self._delay * 5)
+            elif c in ",;:":
+                self._sleep(self._delay * 2)
+            else:
+                self._sleep()
 
 
 class TypioContext:
