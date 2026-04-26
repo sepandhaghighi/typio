@@ -36,6 +36,7 @@ class TypeMode(Enum):
     HESITATION = "hesitation"
     OVERTHINK = "overthink"
     CONFIDENT = "confident"
+    ECHO = "echo"
 
 
 EXIT_MESSAGE = "See you. Bye!"

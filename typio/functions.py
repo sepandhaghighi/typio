@@ -425,7 +425,7 @@ class _TypioPrinter:
                     i -= delete_count
                     self._sleep(self._delay * 2)
                 i += 1
-    
+
 
     def _mode_confident(self, text: str) -> None:
         """
@@ -441,6 +441,20 @@ class _TypioPrinter:
                 self._sleep(self._delay * 2)
             else:
                 self._sleep()
+
+
+    def _mode_echo(self, text: str) -> None:
+        """
+        Emit text with occasional repetition of characters faintly, like a glitchy terminal echo.
+
+        :param text: text to emit
+        """
+        for c in text:
+            self._emit(c)
+            self._sleep()
+            if random.random() < 0.1 and c.strip():
+                self._emit(c)
+                self._sleep(self._delay * 0.1)
 
 
 class TypioContext:
