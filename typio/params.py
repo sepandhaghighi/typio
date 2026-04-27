@@ -2,7 +2,7 @@
 """typio params."""
 from enum import Enum
 
-TYPIO_VERSION = "0.8"
+TYPIO_VERSION = "0.9"
 
 TYPIO_OVERVIEW = '''Typio is a lightweight Python library that prints text to the terminal as if it were being typed by a human.
 It supports multiple typing modes (character, word, line, sentence, typewriter, and adaptive), configurable delays
