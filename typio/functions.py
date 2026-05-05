@@ -455,6 +455,32 @@ class _TypioPrinter:
             if random.random() < 0.1 and c.strip():
                 self._emit(c)
                 self._sleep(self._delay * 0.1)
+    
+
+    def _mode_drunk(self, text: str) -> None:
+        """
+        Emit text with erratic timing and occasional character duplication or skipping.
+
+        :param text: text to emit
+        """
+        i = 0
+        while i < len(text):
+            c = text[i]
+
+            if random.random() < 0.02:
+                i += 1
+                continue
+
+            self._emit(c)
+
+            if c.isalpha() and random.random() < 0.08:
+                self._emit(c)
+                self._sleep(self._delay * 0.5)
+
+            factor = random.uniform(0.3, 2.5)
+            self._sleep(self._delay * factor)
+
+            i += 1
 
 
 class TypioContext:
