@@ -38,6 +38,7 @@ class TypeMode(Enum):
     CONFIDENT = "confident"
     ECHO = "echo"
     DRUNK = "drunk"
+    GLIDE = "glide"
 
 
 EXIT_MESSAGE = "See you. Bye!"
