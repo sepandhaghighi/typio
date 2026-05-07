@@ -37,6 +37,7 @@ class TypeMode(Enum):
     OVERTHINK = "overthink"
     CONFIDENT = "confident"
     ECHO = "echo"
+    DRUNK = "drunk"
 
 
 EXIT_MESSAGE = "See you. Bye!"

@@ -418,14 +418,13 @@ class _TypioPrinter:
                 self._sleep()
 
                 if i > 2 and random.random() < 0.15:
-                    delete_count = random.randint(1, i//2)
+                    delete_count = random.randint(1, i // 2)
                     for _ in range(delete_count):
                         self._emit("\b \b")
                         self._sleep(self._delay * 0.6)
                     i -= delete_count
                     self._sleep(self._delay * 2)
                 i += 1
-
 
     def _mode_confident(self, text: str) -> None:
         """
@@ -442,7 +441,6 @@ class _TypioPrinter:
             else:
                 self._sleep()
 
-
     def _mode_echo(self, text: str) -> None:
         """
         Emit text with occasional repetition of characters faintly, like a glitchy terminal echo.
@@ -455,6 +453,31 @@ class _TypioPrinter:
             if random.random() < 0.1 and c.strip():
                 self._emit(c)
                 self._sleep(self._delay * 0.1)
+
+    def _mode_drunk(self, text: str) -> None:
+        """
+        Emit text with erratic timing and occasional character duplication or skipping.
+
+        :param text: text to emit
+        """
+        i = 0
+        while i < len(text):
+            c = text[i]
+
+            if random.random() < 0.02:
+                i += 1
+                continue
+
+            self._emit(c)
+
+            if c.isalpha() and random.random() < 0.08:
+                self._emit(c)
+                self._sleep(self._delay * 0.5)
+
+            factor = random.uniform(0.3, 2.5)
+            self._sleep(self._delay * factor)
+
+            i += 1
 
 
 class TypioContext:
