@@ -196,6 +196,13 @@ def test_drunk_mode():
     assert buffer.getvalue() == "Helloo, wworrld!Hello, wworld!Hello, orld!\n"
 
 
+def test_glide_mode():
+    buffer = io.StringIO()
+    text = "Hello, world!" * 3
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.GLIDE)
+    assert buffer.getvalue() == text + "\n"
+
+
 def test_default_stdout_capture(capsys):
     type_print("hello", delay=0)
     captured = capsys.readouterr()
