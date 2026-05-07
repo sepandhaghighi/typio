@@ -479,6 +479,21 @@ class _TypioPrinter:
 
             i += 1
 
+    def _mode_glide(self, text: str) -> None:
+        """
+        Emit text with smooth deceleration then acceleration.
+
+        :param text: text to emit
+        """
+        total = len(text)
+
+        for i, c in enumerate(text):
+            self._emit(c)
+            x = i / max(1, total - 1)
+            t = 2 * (4 * x * (1 - x)) - 1
+            factor = 2 ** t
+            self._sleep(self._delay * factor)
+
 
 class TypioContext:
     """Read-only typing context passed to custom typing modes."""
