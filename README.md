@@ -129,6 +129,7 @@ with open("output.txt", "w") as file:
 | `TypeMode.CONFIDENT` | Emit text quickly with brief pauses, adding longer delays after punctuation to simulate confident typing |
 | `TypeMode.ECHO` | Emit text with occasional repetition of characters faintly, like a glitchy terminal echo |
 | `TypeMode.DRUNK` | Emit text with erratic timing and occasional character duplication or skipping |
+| `TypeMode.GLIDE` | Emit text with smooth acceleration then deceleration |
 
 
 
