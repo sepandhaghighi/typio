@@ -493,7 +493,6 @@ class _TypioPrinter:
             t = 2 * (4 * x * (1 - x)) - 1
             factor = 2 ** t
             self._sleep(self._delay * factor)
-    
 
     def _mode_focus_drift(self, text: str) -> None:
         """
