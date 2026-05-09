@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - `DRUNK` mode
 - `GLIDE` mode
+- `FOCUS_DRIFT` mode
+### Changed
+- Test system modified
+- `README.md` updated
 ## [0.9] - 2026-04-28
 ### Added
 - `HESITATION` mode
