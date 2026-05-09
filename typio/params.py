@@ -39,6 +39,7 @@ class TypeMode(Enum):
     ECHO = "echo"
     DRUNK = "drunk"
     GLIDE = "glide"
+    FOCUS_DRIFT = "focus-drift"
 
 
 EXIT_MESSAGE = "See you. Bye!"
