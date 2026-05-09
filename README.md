@@ -130,6 +130,7 @@ with open("output.txt", "w") as file:
 | `TypeMode.ECHO` | Emit text with occasional repetition of characters faintly, like a glitchy terminal echo |
 | `TypeMode.DRUNK` | Emit text with erratic timing and occasional character duplication or skipping |
 | `TypeMode.GLIDE` | Emit text with smooth deceleration then acceleration |
+| `TypeMode.FOCUS_DRIFT` | Emit text with occasional attention drift, causing slowdowns and pauses mid-word |
 
 
 
