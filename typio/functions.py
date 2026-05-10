@@ -503,14 +503,12 @@ class _TypioPrinter:
         for c in text:
             self._emit(c)
             self._sleep()
-            if c.isalpha() and random.random() < 0.06:
-                factor1 = random.uniform(2, 4)
-                self._sleep(self._delay * factor1)
+            if c.isalpha() and random.random() < 0.05:
+                self._sleep()
                 drift_length = random.randint(1, 4)
                 for _ in range(drift_length):
-                    if random.random() < 0.5:
-                        factor2 = random.uniform(1.5, 3)
-                        self._sleep(self._delay * factor2)
+                    factor = random.uniform(1.5, 4)
+                    self._sleep(self._delay * factor)
 
 
 class TypioContext:
