@@ -504,11 +504,9 @@ class _TypioPrinter:
             self._emit(c)
             self._sleep()
             if c.isalpha() and random.random() < 0.05:
-                self._sleep()
                 drift_length = random.randint(1, 4)
-                for _ in range(drift_length):
-                    factor = random.uniform(1.5, 4)
-                    self._sleep(self._delay * factor)
+                factor = drift_length * random.uniform(1.5, 4)
+                self._sleep(self._delay * factor)
 
 
 class TypioContext:
