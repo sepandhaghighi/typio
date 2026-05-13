@@ -245,8 +245,6 @@ class _TypioPrinter:
                 wrong_char = random.choice(KEY_NEIGHBORS[char])
                 self._emit(wrong_char)
                 self._sleep(delay=self._delay * 1.25)
-
-                # Type another wrong character with decaying probability
                 extra_chars = []
                 decay_rate = 0.6
                 current_j = i + 1
