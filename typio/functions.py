@@ -494,6 +494,20 @@ class _TypioPrinter:
             factor = 2 ** t
             self._sleep(self._delay * factor)
 
+    def _mode_focus_drift(self, text: str) -> None:
+        """
+        Emit text with occasional attention drift, causing slowdowns and pauses mid-word.
+
+        :param text: text to emit
+        """
+        for c in text:
+            self._emit(c)
+            self._sleep()
+            if c.isalpha() and random.random() < 0.05:
+                drift_length = random.randint(1, 4)
+                factor = drift_length * random.uniform(1.5, 4)
+                self._sleep(self._delay * factor)
+
 
 class TypioContext:
     """Read-only typing context passed to custom typing modes."""
