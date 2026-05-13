@@ -160,7 +160,7 @@ class _TypioPrinter:
             self._emit(c)
             self._sleep()
             if c in ".!?":
-                self._sleep(self._delay * 4)
+                self._sleep(delay=self._delay * 4)
 
     def _mode_typewriter(self, text: str) -> None:
         """
@@ -172,7 +172,7 @@ class _TypioPrinter:
             self._emit(c)
             self._sleep()
             if c == "\n":
-                self._sleep(self._delay * 5)
+                self._sleep(delay=self._delay * 5)
 
     def _mode_adaptive(self, text: str) -> None:
         """
