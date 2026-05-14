@@ -13,7 +13,7 @@ from .params import TypeMode, KEY_NEIGHBORS, GLITCH_CHARS
 from .params import INVALID_TEXT_ERROR, INVALID_BYTE_ERROR, INVALID_DELAY_ERROR
 from .params import INVALID_JITTER_ERROR, INVALID_MODE_ERROR, INVALID_FILE_ERROR
 from .params import INVALID_END_ERROR
-from .errors import TypioError
+from .errors import TypioValidationError
 
 
 def _validate(
@@ -35,28 +35,28 @@ def _validate(
     :param file: output stream supporting a write() method
     """
     if not isinstance(text, (str, bytes)):
-        raise TypioError(INVALID_TEXT_ERROR)
+        raise TypioValidationError(INVALID_TEXT_ERROR)
 
     if isinstance(text, bytes):
         try:
             text = text.decode()
         except Exception:
-            raise TypioError(INVALID_BYTE_ERROR)
+            raise TypioValidationError(INVALID_BYTE_ERROR)
 
     if not isinstance(delay, (int, float)) or delay < 0:
-        raise TypioError(INVALID_DELAY_ERROR)
+        raise TypioValidationError(INVALID_DELAY_ERROR)
 
     if not isinstance(jitter, (int, float)) or jitter < 0:
-        raise TypioError(INVALID_JITTER_ERROR)
+        raise TypioValidationError(INVALID_JITTER_ERROR)
 
     if not isinstance(mode, TypeMode) and not callable(mode):
-        raise TypioError(INVALID_MODE_ERROR)
+        raise TypioValidationError(INVALID_MODE_ERROR)
 
     if not isinstance(end, str):
-        raise TypioError(INVALID_END_ERROR)
+        raise TypioValidationError(INVALID_END_ERROR)
 
     if file is not None and not hasattr(file, "write"):
-        raise TypioError(INVALID_FILE_ERROR)
+        raise TypioValidationError(INVALID_FILE_ERROR)
     text = f"{text}{end}"
     return text
 
@@ -539,11 +539,11 @@ class TypioContext:
         """
         if delay is not None:
             if not isinstance(delay, (int, float)) or delay < 0:
-                raise TypioError(INVALID_DELAY_ERROR)
+                raise TypioValidationError(INVALID_DELAY_ERROR)
 
         if jitter is not None:
             if not isinstance(jitter, (int, float)) or jitter < 0:
-                raise TypioError(INVALID_JITTER_ERROR)
+                raise TypioValidationError(INVALID_JITTER_ERROR)
 
         self._printer._sleep(delay=delay, jitter=jitter)
 
