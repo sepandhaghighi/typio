@@ -5,4 +5,4 @@ from .errors import TypioError, TypioValidationError
 from .functions import type_print, typestyle, TypioContext
 
 __version__ = TYPIO_VERSION
-__all__ = ["TypeMode", "TypioError", "type_print", "typestyle", "TypioContext"]
+__all__ = ["TypeMode", "TypioError", "TypioValidationError", "type_print", "typestyle", "TypioContext"]
