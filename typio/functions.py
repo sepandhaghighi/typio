@@ -160,7 +160,7 @@ class _TypioPrinter:
             self._emit(c)
             self._sleep()
             if c in ".!?":
-                self._sleep(self._delay * 4)
+                self._sleep(delay=self._delay * 4)
 
     def _mode_typewriter(self, text: str) -> None:
         """
@@ -172,7 +172,7 @@ class _TypioPrinter:
             self._emit(c)
             self._sleep()
             if c == "\n":
-                self._sleep(self._delay * 5)
+                self._sleep(delay=self._delay * 5)
 
     def _mode_adaptive(self, text: str) -> None:
         """
@@ -245,8 +245,6 @@ class _TypioPrinter:
                 wrong_char = random.choice(KEY_NEIGHBORS[char])
                 self._emit(wrong_char)
                 self._sleep(delay=self._delay * 1.25)
-
-                # Type another wrong character with decaying probability
                 extra_chars = []
                 decay_rate = 0.6
                 current_j = i + 1
@@ -278,7 +276,7 @@ class _TypioPrinter:
         """
         for token in re.findall(r"\S+|\s+", text):
             if token.strip() and len(token.strip()) > 6:
-                self._sleep(delay=self._delay * 3)  # longer pause before longer words
+                self._sleep(delay=self._delay * 3)
             for c in token:
                 self._emit(c)
                 self._sleep()
@@ -293,9 +291,9 @@ class _TypioPrinter:
         for c in text:
             self._emit(c)
             if toggle:
-                self._sleep(self._delay * 0.5)
+                self._sleep(delay=self._delay * 0.5)
             else:
-                self._sleep(self._delay * 1.8)
+                self._sleep(delay=self._delay * 1.8)
             toggle = not toggle
 
     def _mode_rewind(self, text: str) -> None:
@@ -310,10 +308,10 @@ class _TypioPrinter:
                 self._emit(c)
                 self._sleep()
             if word.strip() and random.random() < 0.1:
-                self._sleep(self._delay * 3)
+                self._sleep(delay=self._delay * 3)
                 for _ in word:
                     self._emit("\b \b")
-                    self._sleep(self._delay * 0.5)
+                    self._sleep(delay=self._delay * 0.5)
                 self._sleep()
                 for c in word:
                     self._emit(c)
@@ -331,7 +329,7 @@ class _TypioPrinter:
             if random.random() < 0.05:
                 glitch = random.choice(GLITCH_CHARS)
                 self._emit(glitch)
-                self._sleep(self._delay * 2)
+                self._sleep(delay=self._delay * 2)
                 self._emit("\b \b")
                 self._sleep()
 
@@ -357,7 +355,7 @@ class _TypioPrinter:
         for i, c in enumerate(text):
             factor = wave_bias + wave_len * (1 + math.sin(i * wave_2pif))
             self._emit(c)
-            self._sleep(self._delay * factor)
+            self._sleep(delay=self._delay * factor)
 
     def _mode_stutter(self, text: str) -> None:
         """
@@ -372,7 +370,7 @@ class _TypioPrinter:
                     repeat = random.randint(1, 2)
                     for _ in range(repeat):
                         self._emit(c + "-")
-                        self._sleep(self._delay * 1.2)
+                        self._sleep(delay=self._delay * 1.2)
                 self._emit(c)
                 self._sleep()
 
@@ -385,7 +383,7 @@ class _TypioPrinter:
         for c in text:
             self._emit(c)
             factor = 2 ** random.uniform(-2, 2)
-            self._sleep(self._delay * factor)
+            self._sleep(delay=self._delay * factor)
 
     def _mode_hesitation(self, text: str) -> None:
         """
@@ -399,7 +397,7 @@ class _TypioPrinter:
                 self._emit(c)
                 if c.isalpha() and random.random() < 0.08:
                     factor = random.uniform(2, 5)
-                    self._sleep(self._delay * factor)
+                    self._sleep(delay=self._delay * factor)
                 else:
                     self._sleep()
 
@@ -421,9 +419,9 @@ class _TypioPrinter:
                     delete_count = random.randint(1, i // 2)
                     for _ in range(delete_count):
                         self._emit("\b \b")
-                        self._sleep(self._delay * 0.6)
+                        self._sleep(delay=self._delay * 0.6)
                     i -= delete_count
-                    self._sleep(self._delay * 2)
+                    self._sleep(delay=self._delay * 2)
                 i += 1
 
     def _mode_confident(self, text: str) -> None:
@@ -435,9 +433,9 @@ class _TypioPrinter:
         for c in text:
             self._emit(c)
             if c in ".!?":
-                self._sleep(self._delay * 5)
+                self._sleep(delay=self._delay * 5)
             elif c in ",;:":
-                self._sleep(self._delay * 2)
+                self._sleep(delay=self._delay * 2)
             else:
                 self._sleep()
 
@@ -452,7 +450,7 @@ class _TypioPrinter:
             self._sleep()
             if random.random() < 0.1 and c.strip():
                 self._emit(c)
-                self._sleep(self._delay * 0.1)
+                self._sleep(delay=self._delay * 0.1)
 
     def _mode_drunk(self, text: str) -> None:
         """
@@ -472,10 +470,10 @@ class _TypioPrinter:
 
             if c.isalpha() and random.random() < 0.08:
                 self._emit(c)
-                self._sleep(self._delay * 0.5)
+                self._sleep(delay=self._delay * 0.5)
 
             factor = random.uniform(0.3, 2.5)
-            self._sleep(self._delay * factor)
+            self._sleep(delay=self._delay * factor)
 
             i += 1
 
@@ -492,7 +490,7 @@ class _TypioPrinter:
             x = i / max(1, total - 1)
             t = 2 * (4 * x * (1 - x)) - 1
             factor = 2 ** t
-            self._sleep(self._delay * factor)
+            self._sleep(delay=self._delay * factor)
 
     def _mode_focus_drift(self, text: str) -> None:
         """
@@ -506,7 +504,7 @@ class _TypioPrinter:
             if c.isalpha() and random.random() < 0.05:
                 drift_length = random.randint(1, 4)
                 factor = drift_length * random.uniform(1.5, 4)
-                self._sleep(self._delay * factor)
+                self._sleep(delay=self._delay * factor)
 
 
 class TypioContext:
