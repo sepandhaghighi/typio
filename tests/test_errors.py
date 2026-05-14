@@ -4,9 +4,11 @@ import pytest
 from typio import type_print, typestyle
 from typio import TypioError, TypioValidationError
 
+
 def test_base_error():
     with pytest.raises(TypioError, match=r"`text` must be str or bytes."):
         type_print(123, delay=0)
+
 
 def test_invalid_text_type():
     with pytest.raises(TypioValidationError, match=r"`text` must be str or bytes."):
