@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `DRUNK` mode
 - `GLIDE` mode
 - `FOCUS_DRIFT` mode
+- `TypioValidationError` class
 ### Changed
 - Test system modified
 - `README.md` updated
