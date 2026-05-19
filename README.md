@@ -131,6 +131,7 @@ with open("output.txt", "w") as file:
 | `TypeMode.DRUNK` | Emit text with erratic timing and occasional character duplication or skipping |
 | `TypeMode.GLIDE` | Emit text with smooth deceleration then acceleration |
 | `TypeMode.FOCUS_DRIFT` | Emit text with occasional attention drift, causing slowdowns and pauses mid-word |
+| `TypeMode.RUBBER_DUCK` | Emit text while occasionally repeating fragments as if explaining thoughts aloud to a rubber duck |
 
 
 
