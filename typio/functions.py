@@ -505,6 +505,58 @@ class _TypioPrinter:
                 drift_length = random.randint(1, 4)
                 factor = drift_length * random.uniform(1.5, 4)
                 self._sleep(delay=self._delay * factor)
+    
+
+    def _mode_rubber_duck(self, text: str) -> None:
+        """
+        Emit text while occasionally repeating fragments as if
+        explaining thoughts aloud to a rubber duck.
+
+        :param text: text to emit
+        """
+        words = re.findall(r"\S+|\s+", text)
+
+        for word in words:
+            for c in word:
+                self._emit(c)
+                self._sleep()
+            stripped = word.strip()
+            if (stripped and len(stripped) > 3 and random.random() < 0.12):
+                self._sleep(self._delay * 2)
+                style = random.choice([
+                    "full",
+                    "partial",
+                    "thinking",
+                ])
+                if style == "full":
+                    repeat = f"... {stripped}..."
+                    self._emit(repeat)
+                    factor = len(repeat) * 0.5
+                    self._sleep(self._delay * factor)
+                elif style == "partial":
+                    cut = random.randint(
+                        2,
+                        max(2, len(stripped) - 1)
+                    )
+                    fragment = stripped[:cut]
+                    repeat = f"... {fragment}... {stripped}"
+                    self._emit(repeat)
+                    factor = len(repeat) * 0.45
+                    self._sleep(self._delay * factor)
+
+                else:
+                    thinking = random.choice([
+                        "... wait ...",
+                        "... hmm ...",
+                        "... actually ...",
+                        "... okay ...",
+                    ])
+                    self._emit(thinking)
+                    factor1 = len(thinking) * 0.6
+                    self._sleep(self._delay * factor1)
+                    self._emit(f" {stripped}")
+                    factor2 = len(stripped) * 0.5
+                    self._sleep(self._delay * factor2)
 
 
 class TypioContext:
