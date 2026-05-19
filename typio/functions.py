@@ -505,7 +505,6 @@ class _TypioPrinter:
                 drift_length = random.randint(1, 4)
                 factor = drift_length * random.uniform(1.5, 4)
                 self._sleep(delay=self._delay * factor)
-    
 
     def _mode_rubber_duck(self, text: str) -> None:
         """
