@@ -530,9 +530,9 @@ class _TypioPrinter:
                 ])
                 if style == "full":
                     repeat = f"... {stripped}..."
-                    self._emit(repeat)
-                    factor = len(repeat) * 0.5
-                    self._sleep(self._delay * factor)
+                    for c in repeat:
+                        self._emit(c)
+                        self._sleep(self._delay)
                 elif style == "partial":
                     cut = random.randint(
                         2,
@@ -540,9 +540,9 @@ class _TypioPrinter:
                     )
                     fragment = stripped[:cut]
                     repeat = f"... {fragment}... {stripped}"
-                    self._emit(repeat)
-                    factor = len(repeat) * 0.45
-                    self._sleep(self._delay * factor)
+                    for c in repeat:
+                        self._emit(c)
+                        self._sleep(self._delay)
 
                 else:
                     thinking = random.choice([
@@ -551,12 +551,12 @@ class _TypioPrinter:
                         "... actually ...",
                         "... okay ...",
                     ])
-                    self._emit(thinking)
-                    factor1 = len(thinking) * 0.6
-                    self._sleep(self._delay * factor1)
-                    self._emit(f" {stripped}")
-                    factor2 = len(stripped) * 0.5
-                    self._sleep(self._delay * factor2)
+                    for c in thinking:
+                        self._emit(c)
+                        self._sleep(self._delay)
+                    for c in f" {stripped}":
+                        self._emit(c)
+                        self._sleep(self._delay)
 
 
 class TypioContext:
