@@ -520,7 +520,7 @@ class _TypioPrinter:
                 self._sleep()
             stripped = word.strip()
             if (stripped and len(stripped) > 3 and random.random() < 0.12):
-                self._sleep(self._delay * 2)
+                self._sleep(delay=self._delay * 2)
                 style = random.choice([
                     "full",
                     "partial",
@@ -530,7 +530,7 @@ class _TypioPrinter:
                     repeat = f"... {stripped}..."
                     for c in repeat:
                         self._emit(c)
-                        self._sleep(self._delay)
+                        self._sleep()
                 elif style == "partial":
                     cut = random.randint(
                         2,
@@ -540,7 +540,7 @@ class _TypioPrinter:
                     repeat = f"... {fragment}... {stripped}"
                     for c in repeat:
                         self._emit(c)
-                        self._sleep(self._delay)
+                        self._sleep()
 
                 else:
                     thinking = random.choice([
@@ -551,10 +551,10 @@ class _TypioPrinter:
                     ])
                     for c in thinking:
                         self._emit(c)
-                        self._sleep(self._delay)
+                        self._sleep()
                     for c in f" {stripped}":
                         self._emit(c)
-                        self._sleep(self._delay)
+                        self._sleep()
 
 
 class TypioContext:
