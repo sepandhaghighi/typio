@@ -508,8 +508,7 @@ class _TypioPrinter:
 
     def _mode_rubber_duck(self, text: str) -> None:
         """
-        Emit text while occasionally repeating fragments as if
-        explaining thoughts aloud to a rubber duck.
+        Emit text while occasionally repeating fragments as if explaining thoughts aloud to a rubber duck.
 
         :param text: text to emit
         """
