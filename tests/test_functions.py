@@ -216,7 +216,7 @@ def test_rubber_duck_mode():
     buffer = io.StringIO()
     text = "Hello, world!" * 30
     type_print(text, file=buffer, delay=0.01, mode=TypeMode.RUBBER_DUCK)
-    assert buffer.getvalue() == "Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello,... world!Hello,... world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello,... wo... world!Hello, world!Hello,... wait ... world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello,... world!Hello,... world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!\n"
+    assert buffer.getvalue() == "Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello,... world!Hello,... world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello,... wait ... world!Hello,... world!Hello,... world!Hello,... world!Hello, world!Hello, world!Hello, world!Hello, world!Hello,... world!Hello,... world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!\n"
 
 
 def test_default_stdout_capture(capsys):
