@@ -523,7 +523,6 @@ class _TypioPrinter:
                 self._sleep(delay=self._delay * 2)
                 style = random.choice([
                     "full",
-                    "partial",
                     "thinking",
                 ])
                 if style == "full":
@@ -531,17 +530,6 @@ class _TypioPrinter:
                     for c in repeat:
                         self._emit(c)
                         self._sleep()
-                elif style == "partial":
-                    cut = random.randint(
-                        2,
-                        max(2, len(stripped) - 1)
-                    )
-                    fragment = stripped[:cut]
-                    repeat = f"... {fragment}... {stripped}"
-                    for c in repeat:
-                        self._emit(c)
-                        self._sleep()
-
                 else:
                     thinking = random.choice([
                         "... wait ...",
