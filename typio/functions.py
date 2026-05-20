@@ -540,7 +540,7 @@ class _TypioPrinter:
                     for c in thinking:
                         self._emit(c)
                         self._sleep()
-                    for c in f" {stripped}":
+                    for c in f" {stripped}...":
                         self._emit(c)
                         self._sleep()
 
