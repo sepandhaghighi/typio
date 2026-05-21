@@ -41,6 +41,7 @@ class TypeMode(Enum):
     GLIDE = "glide"
     FOCUS_DRIFT = "focus-drift"
     RUBBER_DUCK = "rubber-duck"
+    PANIC = "panic"
 
 
 EXIT_MESSAGE = "See you. Bye!"
