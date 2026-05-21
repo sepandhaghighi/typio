@@ -544,6 +544,29 @@ class _TypioPrinter:
                         self._emit(c)
                         self._sleep()
 
+    def _mode_panic(self, text: str) -> None:
+        """
+        Emits text with an increasing rate of typos and slower typing speed to simulate panicking.
+
+        :param text: text to emit
+        """
+        total = max(1, len(text))
+
+        for i, c in enumerate(text):
+            stress = i / total
+            if c.isalpha() and random.random() < (0.02 + stress * 0.25):
+                wrong = random.choice(KEY_NEIGHBORS.get(c.lower(), [c]))
+                self._emit(wrong)
+                self._sleep(self._delay * (1 + stress * 3))
+                self._emit("\b \b")
+                self._sleep(self._delay * (1 + stress * 3))
+            self._emit(c)
+            if c in ".!?" and random.random() < stress * 0.4:
+                self._emit(random.choice(["!", "?", "!!"]))
+
+            factor = random.uniform(0.5, 1.5 + stress * 2)
+            self._sleep(self._delay * factor)
+
 
 class TypioContext:
     """Read-only typing context passed to custom typing modes."""
