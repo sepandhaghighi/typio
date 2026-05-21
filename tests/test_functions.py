@@ -222,9 +222,9 @@ def test_rubber_duck_mode():
 def test_panic_mode():
     random.seed(1)
     buffer = io.StringIO()
-    text = "Hello, world!"
+    text = "Hello, world!!!!!!!!?"
     type_print(text, file=buffer, delay=0.01, mode=TypeMode.PANIC)
-    assert buffer.getvalue() == "Hello, worlc\x08 \x08d!\n"
+    assert buffer.getvalue() == "Hello, worlc\x08 \x08d!!!!!!!!?!!\n"
 
 
 def test_default_stdout_capture(capsys):
