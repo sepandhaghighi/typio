@@ -546,7 +546,7 @@ class _TypioPrinter:
 
     def _mode_panic(self, text: str) -> None:
         """
-        Emits text with an increasing rate of typos and slower typing speed to simulate panicking.
+        Emit text with an increasing rate of typos and slower typing speed to simulate panicking.
 
         :param text: text to emit
         """
