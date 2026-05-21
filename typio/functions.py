@@ -506,6 +506,44 @@ class _TypioPrinter:
                 factor = drift_length * random.uniform(1.5, 4)
                 self._sleep(delay=self._delay * factor)
 
+    def _mode_rubber_duck(self, text: str) -> None:
+        """
+        Emit text while occasionally repeating fragments as if explaining thoughts aloud to a rubber duck.
+
+        :param text: text to emit
+        """
+        words = re.findall(r"\S+|\s+", text)
+
+        for word in words:
+            for c in word:
+                self._emit(c)
+                self._sleep()
+            stripped = word.strip()
+            if (stripped and len(stripped) > 3 and random.random() < 0.12):
+                self._sleep(delay=self._delay * 2)
+                style = random.choice([
+                    "full",
+                    "thinking",
+                ])
+                if style == "full":
+                    repeat = f"... {stripped}..."
+                    for c in repeat:
+                        self._emit(c)
+                        self._sleep()
+                else:
+                    thinking = random.choice([
+                        "... wait ...",
+                        "... hmm ...",
+                        "... actually ...",
+                        "... okay ...",
+                    ])
+                    for c in thinking:
+                        self._emit(c)
+                        self._sleep()
+                    for c in f" {stripped}...":
+                        self._emit(c)
+                        self._sleep()
+
 
 class TypioContext:
     """Read-only typing context passed to custom typing modes."""
