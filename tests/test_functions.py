@@ -219,6 +219,14 @@ def test_rubber_duck_mode():
     assert buffer.getvalue() == "Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello,... world!Hello,... world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello,... wait ... world!Hello,... world!Hello,... world!Hello,... world!Hello, world!Hello, world!Hello, world!Hello, world!Hello,... world!Hello,... world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!\n"
 
 
+def test_panic_mode():
+    random.seed(1)
+    buffer = io.StringIO()
+    text = "Hello, world!!!!!!!!?"
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.PANIC)
+    assert buffer.getvalue() == "Hello, worlc\x08 \x08d!!!!!!!!?!!\n"
+
+
 def test_default_stdout_capture(capsys):
     type_print("hello", delay=0)
     captured = capsys.readouterr()
