@@ -557,15 +557,15 @@ class _TypioPrinter:
             if c.isalpha() and random.random() < (0.02 + stress * 0.25):
                 wrong = random.choice(KEY_NEIGHBORS.get(c.lower(), [c]))
                 self._emit(wrong)
-                self._sleep(self._delay * (1 + stress * 3))
+                self._sleep(delay=self._delay * (1 + stress * 3))
                 self._emit("\b \b")
-                self._sleep(self._delay * (1 + stress * 3))
+                self._sleep(delay=self._delay * (1 + stress * 3))
             self._emit(c)
             if c in ".!?" and random.random() < stress * 0.4:
                 self._emit(random.choice(["!", "?", "!!"]))
 
             factor = random.uniform(0.5, 1.5 + stress * 2)
-            self._sleep(self._delay * factor)
+            self._sleep(delay=self._delay * factor)
 
 
 class TypioContext:
