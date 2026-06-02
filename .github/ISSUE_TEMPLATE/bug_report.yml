@@ -84,6 +84,7 @@ body:
       label: Typio version
       description: Which version of Typio are you using?
       options:
+        - Typio 1.1
         - Typio 1.0
         - Typio 0.9
         - Typio 0.8
