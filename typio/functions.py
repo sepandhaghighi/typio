@@ -102,8 +102,8 @@ class _TypioPrinter:
         :param delay: base delay (in seconds) between emitted units
         :param jitter: random jitter added/subtracted from delay
         """
-        delay_ = delay or self._delay
-        jitter_ = jitter or self._jitter
+        delay_ = self._delay if delay is None else delay
+        jitter_ = self._jitter if jitter is None else jitter
         if delay_ <= 0:
             return
         if jitter_:
