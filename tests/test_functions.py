@@ -320,3 +320,18 @@ def test_typiocontext_with_typestyle(capsys):
     demo()
     captured = capsys.readouterr()
     assert captured.out == "HELLO\nWORLD\n"
+
+
+def test_explicit_zero_delay_does_not_fallback_to_default():
+    output = io.StringIO()
+    with patch("time.sleep") as mock_sleep:
+        type_print(
+            "abc",
+            delay=0,
+            jitter=0,
+            mode=TypeMode.CHAR,
+            end="",
+            file=output,
+        )
+    mock_sleep.assert_not_called()
+    assert output.getvalue() == "abc"
