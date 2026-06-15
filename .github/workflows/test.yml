@@ -39,6 +39,8 @@ jobs:
       - name: Smoke test
         run: |
           python -c "from typio import *"
+          python -m typio --version
+          python -m typio
           typio --version
           typio
       - name: Test requirements installation
@@ -78,3 +80,7 @@ jobs:
           mkdir wheel_test
           cd wheel_test
           python -c "from typio import *"
+          python -m typio --version
+          python -m typio
+          typio --version
+          typio
