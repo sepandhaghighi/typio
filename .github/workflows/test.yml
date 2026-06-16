@@ -43,10 +43,9 @@ jobs:
           python -m typio
           typio --version
           typio
-      - name: Test requirements installation
+      - name: Dev requirements installation
         run: |
-          python otherfiles/requirements-splitter.py
-          pip install --upgrade --upgrade-strategy=only-if-needed -r test-requirements.txt
+          pip install --upgrade --upgrade-strategy=only-if-needed -r requirements-dev.txt
       - name: Test with pytest 
         run: |
           python -m pytest . --cov=typio --cov-report=term
