@@ -1,17 +1,6 @@
 # -*- coding: utf-8 -*-
 """Setup module."""
-from typing import List
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
-
-
-def get_requires() -> List[str]:
-    """Read requirements.txt."""
-    requirements = open("requirements.txt", "r").read()
-    return list(filter(lambda x: x != "", requirements.split()))
-
+from setuptools import setup
 
 def read_description() -> str:
     """Read README.md and CHANGELOG.md."""
@@ -43,11 +32,11 @@ setup(
     author_email='me@sepand.tech',
     url='https://github.com/sepandhaghighi/typio',
     download_url='https://github.com/sepandhaghighi/typio/tarball/v1.1',
-    keywords="terminal cli typing typewriter typing-effect console stdout ux",
+    keywords='terminal cli typing typewriter typing-effect console stdout ux',
     project_urls={
         'Source': 'https://github.com/sepandhaghighi/typio'
     },
-    install_requires=get_requires(),
+    install_requires=[],
     python_requires='>=3.8',
     classifiers=[
         'Development Status :: 5 - Production/Stable',

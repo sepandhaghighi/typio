@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Delay zero value bug fixed
 - Jitter zero value bug fixed
 - Test system modified
+- Dependencies structure modified
 ## [1.1] - 2026-06-03
 ### Added
 - `RUBBER_DUCK` mode
