@@ -90,6 +90,7 @@ class _TypioPrinter:
         else:
             handler = getattr(self, "_mode_{mode}".format(mode=self._mode.value.replace('-', '_')))
             handler(text)
+        return len(text)
 
     def flush(self) -> None:
         """Flush the underlying output stream."""
