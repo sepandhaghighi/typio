@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Changed
+- `_TypioPrinter.write` return bug fixed
 - Delay zero value bug fixed
 - Jitter zero value bug fixed
 - Test system modified
