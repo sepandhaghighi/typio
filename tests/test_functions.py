@@ -314,7 +314,7 @@ def test_typestyle_stdout_written_return_value():
         result = sys.stdout.write("Hello")
         return result
 
-    assert func() == 5
+    assert func() == len("Hello")
 
 
 def test_typiocontext_with_typestyle(capsys):
