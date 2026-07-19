@@ -308,6 +308,15 @@ def test_typestyle_return_value():
     assert func() == 42
 
 
+def test_typestyle_stdout_written_return_value():
+    @typestyle()
+    def func():
+        result = sys.stdout.write("Hello")
+        return result
+
+    assert func() == len("Hello")
+
+
 def test_typiocontext_with_typestyle(capsys):
     def custom(ctx, text):
         ctx.emit(text.upper())

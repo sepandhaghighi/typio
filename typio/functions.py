@@ -78,7 +78,7 @@ class _TypioPrinter:
         self._mode = mode
         self._out = out
 
-    def write(self, text: str) -> None:
+    def write(self, text: str) -> int:
         """
         Write text using the configured typing mode.
 
@@ -90,6 +90,7 @@ class _TypioPrinter:
         else:
             handler = getattr(self, "_mode_{mode}".format(mode=self._mode.value.replace('-', '_')))
             handler(text)
+        return len(text)
 
     def flush(self) -> None:
         """Flush the underlying output stream."""
