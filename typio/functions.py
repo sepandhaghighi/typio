@@ -23,7 +23,7 @@ def _validate(
     mode: Any,
     end: Any,
     file: Any,
-    seed: Any = None,
+    seed: Any,
 ) -> str:
     """
     Validate and normalize inputs for typing operations.
@@ -69,7 +69,7 @@ def _validate(
 class _TypioPrinter:
     """File-like object that emits text with typing effects."""
 
-    def __init__(self, *, delay: float, jitter: float, mode: Union[TypeMode, Callable], out: TextIOBase) -> None:
+    def __init__(self, *, delay: float, jitter: float, mode: Union[TypeMode, Callable], out: TextIOBase, seed: Optional[int] = None) -> None:
         """
         Initialize the typing printer.
 
@@ -77,11 +77,14 @@ class _TypioPrinter:
         :param jitter: random jitter added/subtracted from delay
         :param mode: typing mode controlling emission granularity
         :param out: underlying output stream
+        :param seed: random seed for reproducibility
         """
         self._delay = delay
         self._jitter = jitter
         self._mode = mode
         self._out = out
+        if seed is not None:
+            random.seed(seed)
 
     def write(self, text: str) -> int:
         """
@@ -632,6 +635,7 @@ def type_print(
         jitter: float = 0,
         end: str = "\n",
         mode: Union[TypeMode, Callable] = TypeMode.CHAR,
+        seed: Optional[int] = None,
         file: Optional[TextIOBase] = None) -> None:
     """
     Print text with typing effects.
@@ -641,9 +645,10 @@ def type_print(
     :param jitter: random jitter added/subtracted from delay
     :param end: ending character(s)
     :param mode: typing mode controlling emission granularity
+    :param seed: random seed for reproducibility
     :param file: output stream supporting a write() method
     """
-    text = _validate(text, delay, jitter, mode, end, file)
+    text = _validate(text, delay, jitter, mode, end, file, seed)
     out = file or sys.stdout
 
     printer = _TypioPrinter(
@@ -651,6 +656,7 @@ def type_print(
         jitter=jitter,
         mode=mode,
         out=out,
+        seed=seed,
     )
     printer.write(text)
     printer.flush()
@@ -660,15 +666,17 @@ def typestyle(
         *,
         delay: float = 0.04,
         jitter: float = 0,
+        seed: Optional[int] = None,
         mode: Union[TypeMode, Callable] = TypeMode.CHAR) -> Callable:
     """
     Apply typing effects to all print() calls inside the decorated function.
 
     :param delay: base delay (in seconds) between emitted units
     :param jitter: random jitter added/subtracted from delay
+    :param seed: random seed for reproducibility
     :param mode: typing mode controlling emission granularity
     """
-    _validate("", delay, jitter, mode, "", sys.stdout)
+    _validate("", delay, jitter, mode, "", sys.stdout, seed)
 
     def decorator(func: Callable) -> Callable:
         @wraps(func)
@@ -680,6 +688,7 @@ def typestyle(
                     jitter=jitter,
                     mode=mode,
                     out=old_stdout,
+                    seed=seed,
                 )
                 return func(*args, **kwargs)
             finally:
