@@ -3,7 +3,7 @@ import pytest
 from unittest.mock import patch
 from typio import TypeMode
 from typio.cli import main
-from typio.params import TYPIO_VERSION, TYPIO_OVERVIEW
+from typio.params import INVALID_SEED_ERROR, TYPIO_VERSION, TYPIO_OVERVIEW
 from typio.params import INVALID_NON_NEGATIVE_NUMBER_ERROR, EXIT_MESSAGE
 
 
@@ -24,6 +24,7 @@ def test_default_execution():
                 jitter=0.0,
                 end="\n",
                 mode=TypeMode.CHAR,
+                seed=None,
             )
 
 
@@ -37,6 +38,7 @@ def test_custom_arguments():
             "--jitter", "0.2",
             "--end", "!",
             "--mode", "word",
+            "--seed", "123",
         ],
     ):
         with patch("typio.cli.type_print") as mock_type_print:
@@ -47,6 +49,7 @@ def test_custom_arguments():
                 jitter=0.2,
                 end="!",
                 mode=TypeMode.WORD,
+                seed=123,
             )
 
 
@@ -84,6 +87,15 @@ def test_wrong_jitter(capsys):
 
     _, err = capsys.readouterr()
     assert INVALID_NON_NEGATIVE_NUMBER_ERROR.format(value="abc") in err
+
+
+def test_wrong_seed(capsys):
+    with patch("sys.argv", ["typio", "--seed", "abc"]):
+        with pytest.raises(SystemExit):
+            main()
+
+    _, err = capsys.readouterr()
+    assert INVALID_SEED_ERROR in err.lower()
 
 
 def test_invalid_mode(capsys):
