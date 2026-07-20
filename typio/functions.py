@@ -69,7 +69,14 @@ def _validate(
 class _TypioPrinter:
     """File-like object that emits text with typing effects."""
 
-    def __init__(self, *, delay: float, jitter: float, mode: Union[TypeMode, Callable], out: TextIOBase, seed: Optional[int] = None) -> None:
+    def __init__(
+            self,
+            *,
+            delay: float,
+            jitter: float,
+            mode: Union[TypeMode, Callable],
+            out: TextIOBase,
+            seed: Optional[int] = None) -> None:
         """
         Initialize the typing printer.
 
