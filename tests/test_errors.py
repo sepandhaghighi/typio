@@ -55,6 +55,11 @@ def test_invalid_file():
         type_print("test", file=123)
 
 
+def test_invalid_seed():
+    with pytest.raises(TypioValidationError, match=r"`seed` must be None or an int."):
+        type_print("test", seed="abc")
+
+
 def test_typestyle_invalid_mode():
     with pytest.raises(TypioValidationError, match=r"`mode` must be a TypeMode enum value or a callable custom mode."):
         typestyle(mode="char")
