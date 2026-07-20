@@ -95,7 +95,7 @@ def test_wrong_seed(capsys):
             main()
 
     _, err = capsys.readouterr()
-    assert INVALID_SEED_ERROR in err
+    assert "invalid int value" in err.lower()
 
 
 def test_invalid_mode(capsys):
