@@ -60,7 +60,7 @@ def _validate(
     if file is not None and not hasattr(file, "write"):
         raise TypioValidationError(INVALID_FILE_ERROR)
 
-    if seed is not None and (not isinstance(seed, int)):
+    if seed is not None and not isinstance(seed, int):
         raise TypioValidationError(INVALID_SEED_ERROR)
     text = f"{text}{end}"
     return text
