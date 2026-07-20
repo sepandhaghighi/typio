@@ -3,7 +3,7 @@ import pytest
 from unittest.mock import patch
 from typio import TypeMode
 from typio.cli import main
-from typio.params import INVALID_SEED_ERROR, TYPIO_VERSION, TYPIO_OVERVIEW
+from typio.params import TYPIO_VERSION, TYPIO_OVERVIEW
 from typio.params import INVALID_NON_NEGATIVE_NUMBER_ERROR, EXIT_MESSAGE
 
 
