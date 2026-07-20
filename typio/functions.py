@@ -12,7 +12,7 @@ from typing import Any, Callable, Optional, Union
 from .params import TypeMode, KEY_NEIGHBORS, GLITCH_CHARS
 from .params import INVALID_TEXT_ERROR, INVALID_BYTE_ERROR, INVALID_DELAY_ERROR
 from .params import INVALID_JITTER_ERROR, INVALID_MODE_ERROR, INVALID_FILE_ERROR
-from .params import INVALID_END_ERROR
+from .params import INVALID_END_ERROR, INVALID_SEED_ERROR
 from .errors import TypioValidationError
 
 
@@ -23,6 +23,7 @@ def _validate(
     mode: Any,
     end: Any,
     file: Any,
+    seed: Any = None,
 ) -> str:
     """
     Validate and normalize inputs for typing operations.
@@ -33,6 +34,7 @@ def _validate(
     :param mode: typing mode controlling emission granularity
     :param end: ending character(s)
     :param file: output stream supporting a write() method
+    :param seed: random seed for reproducibility
     """
     if not isinstance(text, (str, bytes)):
         raise TypioValidationError(INVALID_TEXT_ERROR)
@@ -57,6 +59,9 @@ def _validate(
 
     if file is not None and not hasattr(file, "write"):
         raise TypioValidationError(INVALID_FILE_ERROR)
+
+    if seed is not None and (not isinstance(seed, int)):
+        raise TypioValidationError(INVALID_SEED_ERROR)
     text = f"{text}{end}"
     return text
 
