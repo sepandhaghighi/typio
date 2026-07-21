@@ -6,8 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- `seed` parameter for `type_print`, `typestyle`
-- `--seed` CLI option
+- `seed` parameter
+- `--seed` CLI argument
 ### Changed
 - `_TypioPrinter.write` return bug fixed
 - Delay zero value bug fixed
