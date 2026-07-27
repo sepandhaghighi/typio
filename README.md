@@ -99,6 +99,7 @@ with open("output.txt", "w") as file:
 | `jitter` | `float` | Random delay variation (seconds) | `0` |
 | `end` | `str` | Ending character(s) | `\n` |
 | `mode` | `TypeMode \| Callable` | Typing mode (built-in or custom) | `TypeMode.CHAR` |
+| `seed` | `int` | Random seed for reproducible output | `None` |
 | `file` | `TextIOBase` | Output stream | `sys.stdout` |
 
 
@@ -160,6 +161,7 @@ intro()
 |------|------|-------------|---------|
 | `delay` | `float` | Base delay (seconds) between emitted units | `0.04` |
 | `jitter` | `float` | Random delay variation (seconds) | `0` |
+| `seed` | `int` | Random seed for reproducible output | `None` |
 | `mode` | `TypeMode \| Callable` | Typing mode (built-in or custom) | `TypeMode.CHAR` |
 
 ### Custom Mode
@@ -225,6 +227,12 @@ Typio provides a simple command line interface for printing text with typing eff
 
 ```console
 > typio --text="Hello world!" --mode=typewriter --delay=0.03
+```
+
+Pass `--seed` to make randomized modes reproducible:
+
+```console
+> typio --text="Hello world!" --mode=glitch --seed=42
 ```
 
 ## Screen Record

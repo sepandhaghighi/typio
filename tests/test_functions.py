@@ -227,6 +227,34 @@ def test_panic_mode():
     assert buffer.getvalue() == "Hello, worlc\x08 \x08d!!!!!!!!?!!\n"
 
 
+def test_seed_reproducible():
+    def run(seed):
+        buffer = io.StringIO()
+        type_print(
+            "Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello,... world!",
+            file=buffer,
+            delay=0,
+            mode=TypeMode.FAT_FINGER,
+            seed=seed,
+        )
+        return buffer.getvalue()
+
+    assert run(42) == run(42)
+    assert run(42) != run(43)
+
+
+def test_typestyle_seed_reproducible(capsys):
+    @typestyle(delay=0, mode=TypeMode.FAT_FINGER, seed=42)
+    def demo():
+        print("Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello,... world!")
+
+    demo()
+    first = capsys.readouterr().out
+    demo()
+    second = capsys.readouterr().out
+    assert first == second
+
+
 def test_default_stdout_capture(capsys):
     type_print("hello", delay=0)
     captured = capsys.readouterr()

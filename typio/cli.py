@@ -74,6 +74,13 @@ def _parse_args() -> argparse.Namespace:
         help="Typing mode",
     )
 
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=None,
+        help="Random seed for reproducibility",
+    )
+
     args = parser.parse_args()
     return args
 
@@ -94,6 +101,7 @@ def _run(args: argparse.Namespace) -> None:
         jitter=args.jitter,
         end=args.end,
         mode=TypeMode(args.mode),
+        seed=args.seed,
     )
 
 
