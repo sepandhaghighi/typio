@@ -8,7 +8,7 @@ import re
 import math
 from functools import wraps
 from io import TextIOBase
-from typing import Any, Callable, Optional, Union
+from typing import Any, Callable, Optional, Union, List
 from .params import TypeMode, KEY_NEIGHBORS, GLITCH_CHARS
 from .params import INVALID_TEXT_ERROR, INVALID_BYTE_ERROR, INVALID_DELAY_ERROR
 from .params import INVALID_JITTER_ERROR, INVALID_MODE_ERROR, INVALID_FILE_ERROR
