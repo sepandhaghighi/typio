@@ -110,6 +110,15 @@ class _TypioPrinter:
     def flush(self) -> None:
         """Flush the underlying output stream."""
         self._out.flush()
+    
+    @staticmethod
+    def _split_tokens(text: str) -> List[str]:
+        """
+        Split text into tokens.
+
+        :param text: text to be split into tokens
+        """
+        return re.findall(r"\S+|\s+", text)
 
     def _sleep(self, delay: Optional[float] = None, jitter: Optional[float] = None) -> None:
         """
