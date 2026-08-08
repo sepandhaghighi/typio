@@ -161,7 +161,7 @@ class _TypioPrinter:
 
         :param text: text to emit
         """
-        for w in re.findall(r"\S+|\s+", text):
+        for w in self._split_tokens(text):
             self._emit(w)
             self._sleep()
 
@@ -299,7 +299,7 @@ class _TypioPrinter:
 
         :param text: text to emit
         """
-        for token in re.findall(r"\S+|\s+", text):
+        for token in self._split_tokens(text):
             if token.strip() and len(token.strip()) > 6:
                 self._sleep(delay=self._delay * 3)
             for c in token:
@@ -327,7 +327,7 @@ class _TypioPrinter:
 
         :param text: text to emit
         """
-        words = re.findall(r"\S+|\s+", text)
+        words = self._split_tokens(text)
         for word in words:
             for c in word:
                 self._emit(c)
@@ -388,7 +388,7 @@ class _TypioPrinter:
 
         :param text: text to emit
         """
-        words = re.findall(r"\S+|\s+", text)
+        words = self._split_tokens(text)
         for word in words:
             for i, c in enumerate(word):
                 if c.isalpha() and i == 0 and random.random() < 0.1:
@@ -416,7 +416,7 @@ class _TypioPrinter:
 
         :param text: text to emit
         """
-        words = re.findall(r"\S+|\s+", text)
+        words = self._split_tokens(text)
         for word in words:
             for c in word:
                 self._emit(c)
@@ -432,7 +432,7 @@ class _TypioPrinter:
 
         :param text: text to emit
         """
-        words = re.findall(r"\S+|\s+", text)
+        words = self._split_tokens(text)
         for word in words:
             i = 0
             while i < len(word):
@@ -537,7 +537,7 @@ class _TypioPrinter:
 
         :param text: text to emit
         """
-        words = re.findall(r"\S+|\s+", text)
+        words = self._split_tokens(text)
 
         for word in words:
             for c in word:
