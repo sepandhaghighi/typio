@@ -110,7 +110,7 @@ class _TypioPrinter:
     def flush(self) -> None:
         """Flush the underlying output stream."""
         self._out.flush()
-    
+
     @staticmethod
     def _split_tokens(text: str) -> List[str]:
         """
