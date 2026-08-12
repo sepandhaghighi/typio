@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - `seed` parameter
 - `--seed` CLI argument
+- `_TypioPrinter._split_tokens` method
 ### Changed
 - `_TypioPrinter.write` return bug fixed
 - Delay zero value bug fixed
