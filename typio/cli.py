@@ -33,6 +33,13 @@ def _parse_args() -> argparse.Namespace:
     )
 
     parser.add_argument(
+        "input_text",
+        type=str,
+        nargs="?",
+        help="Text to be printed",
+    )
+
+    parser.add_argument(
         "--version",
         action="store_true",
         help="Version",
@@ -41,7 +48,6 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--text",
         type=str,
-        default=TYPIO_OVERVIEW,
         help="Text to be printed",
     )
 
@@ -95,8 +101,13 @@ def _run(args: argparse.Namespace) -> None:
         print(TYPIO_VERSION)
         return
 
+    text = args.input_text
+    if args.text is not None:
+        text = args.text
+    if text is None:
+        text = TYPIO_OVERVIEW
     type_print(
-        text=args.text,
+        text=text,
         delay=args.delay,
         jitter=args.jitter,
         end=args.end,
