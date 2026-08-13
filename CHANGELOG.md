@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- `input_text` CLI argument
+- `text` CLI argument
 - `seed` parameter
 - `--seed` CLI argument
 - `_TypioPrinter._split_tokens` method
