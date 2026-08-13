@@ -33,7 +33,7 @@ def test_custom_arguments():
         "sys.argv",
         [
             "typio",
-            "--text", "Hello",
+            "Hello",
             "--delay", "0.1",
             "--jitter", "0.2",
             "--end", "!",
@@ -45,6 +45,32 @@ def test_custom_arguments():
             main()
             mock_type_print.assert_called_once_with(
                 text="Hello",
+                delay=0.1,
+                jitter=0.2,
+                end="!",
+                mode=TypeMode.WORD,
+                seed=123,
+            )
+
+
+def test_custom_arguments_text_replacement():
+    with patch(
+        "sys.argv",
+        [
+            "typio",
+            "Hello",
+            "--text", "HelloWorld",
+            "--delay", "0.1",
+            "--jitter", "0.2",
+            "--end", "!",
+            "--mode", "word",
+            "--seed", "123",
+        ],
+    ):
+        with patch("typio.cli.type_print") as mock_type_print:
+            main()
+            mock_type_print.assert_called_once_with(
+                text="HelloWorld",
                 delay=0.1,
                 jitter=0.2,
                 end="!",

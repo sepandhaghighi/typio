@@ -226,13 +226,13 @@ Typio provides a simple command line interface for printing text with typing eff
 #### Example
 
 ```console
-> typio --text="Hello world!" --mode=typewriter --delay=0.03
+> typio "Hello world!" --mode=typewriter --delay=0.03
 ```
 
 Pass `--seed` to make randomized modes reproducible:
 
 ```console
-> typio --text="Hello world!" --mode=glitch --seed=42
+> typio "Hello world!" --mode=glitch --seed=42
 ```
 
 ## Screen Record
