@@ -75,7 +75,7 @@ def _parse_args() -> argparse.Namespace:
 
     parser.add_argument(
         "--mode",
-        type=str,
+        type=str.lower,
         choices=[m.value for m in TypeMode],
         default=TypeMode.CHAR.value,
         help="Typing mode",

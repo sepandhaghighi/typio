@@ -79,6 +79,40 @@ def test_custom_arguments_text_replacement():
             )
 
 
+def test_mode_case_insensitive():
+    with patch(
+        "sys.argv",
+        ["typio", "Hello", "--mode", "WORD"],
+    ):
+        with patch("typio.cli.type_print") as mock_type_print:
+            main()
+            mock_type_print.assert_called_once_with(
+                text="Hello",
+                delay=0.04,
+                jitter=0.0,
+                end="\n",
+                mode=TypeMode.WORD,
+                seed=None,
+            )
+
+
+def test_mode_mixed_case():
+    with patch(
+        "sys.argv",
+        ["typio", "Hello", "--mode", "FaT-FiNgEr"],
+    ):
+        with patch("typio.cli.type_print") as mock_type_print:
+            main()
+            mock_type_print.assert_called_once_with(
+                text="Hello",
+                delay=0.04,
+                jitter=0.0,
+                end="\n",
+                mode=TypeMode.FAT_FINGER,
+                seed=None,
+            )
+
+
 def test_negative_delay(capsys):
     with patch("sys.argv", ["typio", "--delay", "-1"]):
         with pytest.raises(SystemExit):
