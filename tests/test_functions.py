@@ -296,6 +296,25 @@ def test_typiocontext_delay_and_jitter_access():
     assert buffer.getvalue() == "hello\n"
 
 
+def test_typiocontext_random_access():
+    def custom_mode(ctx, text):
+        for char in text:
+            ctx.emit(char)
+            if ctx.random.random() < 0.5:
+                ctx.emit("!")
+
+    output_1 = StringIO()
+    output_2 = StringIO()
+    output_3 = StringIO()
+
+    type_print("Hello", delay=0.02, end="", mode=custom_mode, seed=42, file=output_1)
+    type_print("Hello", delay=0.02, end="", mode=custom_mode, seed=42, file=output_2)
+    type_print("Hello", delay=0.02, end="", mode=custom_mode, seed=43, file=output_3)
+
+    assert output_1.getvalue() == output_2.getvalue()
+    assert output_3.getvalue() != output_1.getvalue()
+
+
 def test_typiocontext_flush():
     buffer = io.StringIO()
 
