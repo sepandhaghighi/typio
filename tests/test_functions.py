@@ -255,6 +255,15 @@ def test_typestyle_seed_reproducible(capsys):
     assert first == second
 
 
+def test_seed_does_not_modify_global_random_state():
+    random.seed(123)
+    expected = random.random()
+    random.seed(123)
+    type_print("Hello", delay=0.05, mode=TypeMode.GLITCH, seed=999)
+    actual = random.random()
+    assert actual == expected
+
+
 def test_default_stdout_capture(capsys):
     type_print("hello", delay=0)
     captured = capsys.readouterr()
