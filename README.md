@@ -181,7 +181,7 @@ def dramatic(ctx: TypioContext, text: str):
     for ch in text:
         ctx.emit(ch)
         if ch in ".!?":
-            ctx.sleep(delay=ctx.delay * 6)
+            ctx.sleep(delay=ctx.delay * ctx.random.uniform(3, 7))
 ```
 
 Usage with `type_print` function:
@@ -217,6 +217,7 @@ This table describes the `TypioContext` API, which is the interface exposed to c
 | `flush()` | `method` | Flush the underlying output stream |
 | `delay` | `property` | Base delay in seconds |
 | `jitter` | `property` | Jitter value in seconds |
+| `random` | `property` | Random generator controlled by Typio's `seed` parameter |
 
 
 ### CLI
