@@ -646,7 +646,7 @@ class TypioContext:
     def jitter(self) -> float:
         """Jitter property."""
         return self._printer._jitter
-    
+
     @property
     def random(self) -> random.Random:
         """Random number generator for the current typing operation."""
