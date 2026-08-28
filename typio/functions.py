@@ -90,8 +90,7 @@ class _TypioPrinter:
         self._jitter = jitter
         self._mode = mode
         self._out = out
-        if seed is not None:
-            random.seed(seed)
+        self._random = random.Random(seed)
 
     def write(self, text: str) -> int:
         """
