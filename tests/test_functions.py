@@ -90,10 +90,9 @@ def test_burst_mode2():
 
 
 def test_fat_finger_mode():
-    random.seed(1)
     buffer = io.StringIO()
     text = "Hello, world!"
-    type_print(text, file=buffer, delay=0.01, mode=TypeMode.FAT_FINGER)
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.FAT_FINGER, seed=1)
     assert buffer.getvalue() == 'Hello, wo4l\x08 \x08\x08 \x084l\x08 \x08\x08 \x08rld~\n\x08 \x08\x08 \x08!\n'
 
 
@@ -112,26 +111,23 @@ def test_heartbeat_mode():
 
 
 def test_rewind_mode():
-    random.seed(1)
     buffer = io.StringIO()
     text = "Hello, world!" * 8
-    type_print(text, file=buffer, delay=0.01, mode=TypeMode.REWIND)
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.REWIND, seed=1)
     assert buffer.getvalue() == 'Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!\x08 \x08\x08 \x08\x08 \x08\x08 \x08\x08 \x08\x08 \x08world!\n'
 
 
 def test_glitch_mode():
-    random.seed(1)
     buffer = io.StringIO()
     text = "Hello, world!" * 2
-    type_print(text, file=buffer, delay=0.01, mode=TypeMode.GLITCH)
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.GLITCH, seed=1)
     assert buffer.getvalue() == 'Hello, wor&\x08 \x08ld!&\x08 \x08Hello,#\x08 \x08 worl@\x08 \x08d!\n'
 
 
 def test_random_case_mode():
-    random.seed(1)
     buffer = io.StringIO()
     text = "Hello, world!"
-    type_print(text, file=buffer, delay=0.01, mode=TypeMode.RANDOM_CASE)
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.RANDOM_CASE, seed=1)
     assert buffer.getvalue() == 'HelLO, WorLD!\n'
 
 
@@ -143,10 +139,9 @@ def test_wave_mode():
 
 
 def test_stutter_mode():
-    random.seed(1)
     buffer = io.StringIO()
     text = "Hello, world!" * 8
-    type_print(text, file=buffer, delay=0.01, mode=TypeMode.STUTTER)
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.STUTTER, seed=1)
     assert buffer.getvalue() == 'Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, w-world!\n'
 
 
@@ -158,18 +153,16 @@ def test_nervous_mode():
 
 
 def test_hesitation_mode():
-    random.seed(1)
     buffer = io.StringIO()
     text = "Hello, world!" * 8
-    type_print(text, file=buffer, delay=0.01, mode=TypeMode.HESITATION)
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.HESITATION, seed=1)
     assert buffer.getvalue() == text + "\n"
 
 
 def test_overthink_mode():
-    random.seed(2)
     buffer = io.StringIO()
     text = "Hello, world!"
-    type_print(text, file=buffer, delay=0.01, mode=TypeMode.OVERTHINK)
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.OVERTHINK, seed=2)
     assert buffer.getvalue() == 'Hello,\x08 \x08, world!\n'
 
 
@@ -181,18 +174,16 @@ def test_confident_mode():
 
 
 def test_echo_mode():
-    random.seed(1)
     buffer = io.StringIO()
     text = "Hello, world!"
-    type_print(text, file=buffer, delay=0.01, mode=TypeMode.ECHO)
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.ECHO, seed=1)
     assert buffer.getvalue() == "Hello, woorrld!\n"
 
 
 def test_drunk_mode():
-    random.seed(1)
     buffer = io.StringIO()
     text = "Hello, world!" * 3
-    type_print(text, file=buffer, delay=0.01, mode=TypeMode.DRUNK)
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.DRUNK, seed=1)
     assert buffer.getvalue() == "Helloo, wworrld!Hello, wworld!Hello, orld!\n"
 
 
@@ -204,26 +195,23 @@ def test_glide_mode():
 
 
 def test_focus_drift_mode():
-    random.seed(1)
     buffer = io.StringIO()
     text = "Hello, world!"
-    type_print(text, file=buffer, delay=0.01, mode=TypeMode.FOCUS_DRIFT)
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.FOCUS_DRIFT, seed=1)
     assert buffer.getvalue() == text + "\n"
 
 
 def test_rubber_duck_mode():
-    random.seed(1)
     buffer = io.StringIO()
     text = "Hello, world!" * 30
-    type_print(text, file=buffer, delay=0.01, mode=TypeMode.RUBBER_DUCK)
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.RUBBER_DUCK, seed=1)
     assert buffer.getvalue() == "Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello,... world!Hello,... world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello,... wait ... world!Hello,... world!Hello,... world!Hello,... world!Hello, world!Hello, world!Hello, world!Hello, world!Hello,... world!Hello,... world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!Hello, world!\n"
 
 
 def test_panic_mode():
-    random.seed(1)
     buffer = io.StringIO()
     text = "Hello, world!!!!!!!!?"
-    type_print(text, file=buffer, delay=0.01, mode=TypeMode.PANIC)
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.PANIC, seed=1)
     assert buffer.getvalue() == "Hello, worlc\x08 \x08d!!!!!!!!?!!\n"
 
 
@@ -253,6 +241,15 @@ def test_typestyle_seed_reproducible(capsys):
     demo()
     second = capsys.readouterr().out
     assert first == second
+
+
+def test_seed_does_not_modify_global_random_state():
+    random.seed(123)
+    expected = random.random()
+    random.seed(123)
+    type_print("Hello", delay=0.05, mode=TypeMode.GLITCH, seed=999)
+    actual = random.random()
+    assert actual == expected
 
 
 def test_default_stdout_capture(capsys):
@@ -285,6 +282,25 @@ def test_typiocontext_delay_and_jitter_access():
         mode=custom,
     )
     assert buffer.getvalue() == "hello\n"
+
+
+def test_typiocontext_random_access():
+    def custom_mode(ctx, text):
+        for char in text:
+            ctx.emit(char)
+            if ctx.random.random() < 0.5:
+                ctx.emit("!")
+
+    output_1 = io.StringIO()
+    output_2 = io.StringIO()
+    output_3 = io.StringIO()
+
+    type_print("Hello", delay=0.02, end="", mode=custom_mode, seed=42, file=output_1)
+    type_print("Hello", delay=0.02, end="", mode=custom_mode, seed=42, file=output_2)
+    type_print("Hello", delay=0.02, end="", mode=custom_mode, seed=43, file=output_3)
+
+    assert output_1.getvalue() == output_2.getvalue()
+    assert output_3.getvalue() != output_1.getvalue()
 
 
 def test_typiocontext_flush():

@@ -90,8 +90,7 @@ class _TypioPrinter:
         self._jitter = jitter
         self._mode = mode
         self._out = out
-        if seed is not None:
-            random.seed(seed)
+        self._random = random.Random(seed)
 
     def write(self, text: str) -> int:
         """
@@ -132,7 +131,7 @@ class _TypioPrinter:
         if delay_ <= 0:
             return
         if jitter_:
-            delay_ += random.uniform(-jitter_, jitter_)
+            delay_ += self._random.uniform(-jitter_, jitter_)
             delay_ = max(0, delay_)
         time.sleep(delay_)
 
@@ -245,14 +244,14 @@ class _TypioPrinter:
         :param text: text to emit
         """
         buffer = []
-        burst_size = random.randint(3, 8)
+        burst_size = self._random.randint(3, 8)
         for c in text:
             buffer.append(c)
             if len(buffer) >= burst_size:
                 self._emit("".join(buffer))
                 buffer.clear()
                 self._sleep()
-                burst_size = random.randint(3, 8)
+                burst_size = self._random.randint(3, 8)
         if buffer:
             self._emit("".join(buffer))
             self._sleep()
@@ -266,14 +265,14 @@ class _TypioPrinter:
         i = 0
         while i < len(text):
             char = text[i]
-            if char in KEY_NEIGHBORS and random.random() < 0.03:
-                wrong_char = random.choice(KEY_NEIGHBORS[char])
+            if char in KEY_NEIGHBORS and self._random.random() < 0.03:
+                wrong_char = self._random.choice(KEY_NEIGHBORS[char])
                 self._emit(wrong_char)
                 self._sleep(delay=self._delay * 1.25)
                 extra_chars = []
                 decay_rate = 0.6
                 current_j = i + 1
-                while current_j < len(text) and random.random() < (decay_rate ** (len(extra_chars) + 1)):
+                while current_j < len(text) and self._random.random() < (decay_rate ** (len(extra_chars) + 1)):
                     next_char = text[current_j]
                     self._emit(next_char)
                     extra_chars.append(next_char)
@@ -332,7 +331,7 @@ class _TypioPrinter:
             for c in word:
                 self._emit(c)
                 self._sleep()
-            if word.strip() and random.random() < 0.1:
+            if word.strip() and self._random.random() < 0.1:
                 self._sleep(delay=self._delay * 3)
                 for _ in word:
                     self._emit("\b \b")
@@ -351,8 +350,8 @@ class _TypioPrinter:
         for c in text:
             self._emit(c)
             self._sleep()
-            if random.random() < 0.05:
-                glitch = random.choice(GLITCH_CHARS)
+            if self._random.random() < 0.05:
+                glitch = self._random.choice(GLITCH_CHARS)
                 self._emit(glitch)
                 self._sleep(delay=self._delay * 2)
                 self._emit("\b \b")
@@ -366,7 +365,7 @@ class _TypioPrinter:
         """
         for c in text:
             if c.isalpha():
-                c = c.upper() if random.random() < 0.5 else c.lower()
+                c = c.upper() if self._random.random() < 0.5 else c.lower()
             self._emit(c)
             self._sleep()
 
@@ -391,8 +390,8 @@ class _TypioPrinter:
         words = self._split_tokens(text)
         for word in words:
             for i, c in enumerate(word):
-                if c.isalpha() and i == 0 and random.random() < 0.1:
-                    repeat = random.randint(1, 2)
+                if c.isalpha() and i == 0 and self._random.random() < 0.1:
+                    repeat = self._random.randint(1, 2)
                     for _ in range(repeat):
                         self._emit(c + "-")
                         self._sleep(delay=self._delay * 1.2)
@@ -407,7 +406,7 @@ class _TypioPrinter:
         """
         for c in text:
             self._emit(c)
-            factor = 2 ** random.uniform(-2, 2)
+            factor = 2 ** self._random.uniform(-2, 2)
             self._sleep(delay=self._delay * factor)
 
     def _mode_hesitation(self, text: str) -> None:
@@ -420,8 +419,8 @@ class _TypioPrinter:
         for word in words:
             for c in word:
                 self._emit(c)
-                if c.isalpha() and random.random() < 0.08:
-                    factor = random.uniform(2, 5)
+                if c.isalpha() and self._random.random() < 0.08:
+                    factor = self._random.uniform(2, 5)
                     self._sleep(delay=self._delay * factor)
                 else:
                     self._sleep()
@@ -440,8 +439,8 @@ class _TypioPrinter:
                 self._emit(c)
                 self._sleep()
 
-                if i > 2 and random.random() < 0.15:
-                    delete_count = random.randint(1, i // 2)
+                if i > 2 and self._random.random() < 0.15:
+                    delete_count = self._random.randint(1, i // 2)
                     for _ in range(delete_count):
                         self._emit("\b \b")
                         self._sleep(delay=self._delay * 0.6)
@@ -473,7 +472,7 @@ class _TypioPrinter:
         for c in text:
             self._emit(c)
             self._sleep()
-            if random.random() < 0.1 and c.strip():
+            if self._random.random() < 0.1 and c.strip():
                 self._emit(c)
                 self._sleep(delay=self._delay * 0.1)
 
@@ -487,17 +486,17 @@ class _TypioPrinter:
         while i < len(text):
             c = text[i]
 
-            if random.random() < 0.02:
+            if self._random.random() < 0.02:
                 i += 1
                 continue
 
             self._emit(c)
 
-            if c.isalpha() and random.random() < 0.08:
+            if c.isalpha() and self._random.random() < 0.08:
                 self._emit(c)
                 self._sleep(delay=self._delay * 0.5)
 
-            factor = random.uniform(0.3, 2.5)
+            factor = self._random.uniform(0.3, 2.5)
             self._sleep(delay=self._delay * factor)
 
             i += 1
@@ -526,9 +525,9 @@ class _TypioPrinter:
         for c in text:
             self._emit(c)
             self._sleep()
-            if c.isalpha() and random.random() < 0.05:
-                drift_length = random.randint(1, 4)
-                factor = drift_length * random.uniform(1.5, 4)
+            if c.isalpha() and self._random.random() < 0.05:
+                drift_length = self._random.randint(1, 4)
+                factor = drift_length * self._random.uniform(1.5, 4)
                 self._sleep(delay=self._delay * factor)
 
     def _mode_rubber_duck(self, text: str) -> None:
@@ -544,9 +543,9 @@ class _TypioPrinter:
                 self._emit(c)
                 self._sleep()
             stripped = word.strip()
-            if (stripped and len(stripped) > 3 and random.random() < 0.12):
+            if (stripped and len(stripped) > 3 and self._random.random() < 0.12):
                 self._sleep(delay=self._delay * 2)
-                style = random.choice([
+                style = self._random.choice([
                     "full",
                     "thinking",
                 ])
@@ -556,7 +555,7 @@ class _TypioPrinter:
                         self._emit(c)
                         self._sleep()
                 else:
-                    thinking = random.choice([
+                    thinking = self._random.choice([
                         "... wait ...",
                         "... hmm ...",
                         "... actually ...",
@@ -579,17 +578,17 @@ class _TypioPrinter:
 
         for i, c in enumerate(text):
             stress = i / total
-            if c.isalpha() and random.random() < (0.02 + stress * 0.25):
-                wrong = random.choice(KEY_NEIGHBORS.get(c.lower(), [c]))
+            if c.isalpha() and self._random.random() < (0.02 + stress * 0.25):
+                wrong = self._random.choice(KEY_NEIGHBORS.get(c.lower(), [c]))
                 self._emit(wrong)
                 self._sleep(delay=self._delay * (1 + stress * 3))
                 self._emit("\b \b")
                 self._sleep(delay=self._delay * (1 + stress * 3))
             self._emit(c)
-            if c in ".!?" and random.random() < stress * 0.4:
-                self._emit(random.choice(["!", "?", "!!"]))
+            if c in ".!?" and self._random.random() < stress * 0.4:
+                self._emit(self._random.choice(["!", "?", "!!"]))
 
-            factor = random.uniform(0.5, 1.5 + stress * 2)
+            factor = self._random.uniform(0.5, 1.5 + stress * 2)
             self._sleep(delay=self._delay * factor)
 
 
@@ -642,6 +641,11 @@ class TypioContext:
     def jitter(self) -> float:
         """Jitter property."""
         return self._printer._jitter
+
+    @property
+    def random(self) -> random.Random:
+        """Random number generator for the current typing operation."""
+        return self._printer._random
 
 
 def type_print(
