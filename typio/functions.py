@@ -593,12 +593,7 @@ class _TypioPrinter:
 
 
 class TypioContext:
-    """
-    Read-only typing context passed to custom typing modes.
-
-    Use ``random`` for reproducible random behavior controlled by
-    Typio's ``seed`` parameter.
-    """
+    """Read-only typing context passed to custom typing modes."""
 
     def __init__(self, printer: "_TypioPrinter") -> None:
         """
