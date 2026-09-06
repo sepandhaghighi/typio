@@ -30,6 +30,11 @@ def test_invalid_delay_type():
         type_print("test", delay="fast")
 
 
+def test_bool_delay():
+    with pytest.raises(TypioValidationError, match=r"`delay` must be a non-negative number."):
+        type_print("test", delay=True)
+
+
 def test_negative_jitter():
     with pytest.raises(TypioValidationError, match=r"`jitter` must be a non-negative number."):
         type_print("test", jitter=-0.1)
@@ -38,6 +43,11 @@ def test_negative_jitter():
 def test_invalid_jitter_type():
     with pytest.raises(TypioValidationError, match=r"`jitter` must be a non-negative number."):
         type_print("test", jitter="nope")
+
+
+def test_bool_jitter():
+    with pytest.raises(TypioValidationError, match=r"`jitter` must be a non-negative number."):
+        type_print("test", jitter=False)
 
 
 def test_invalid_mode():
@@ -58,6 +68,11 @@ def test_invalid_file():
 def test_invalid_seed():
     with pytest.raises(TypioValidationError, match=r"`seed` must be None or an int."):
         type_print("test", seed="abc")
+
+
+def test_bool_seed():
+    with pytest.raises(TypioValidationError, match=r"`seed` must be None or an int."):
+        type_print("test", seed=True)
 
 
 def test_typestyle_invalid_mode():
