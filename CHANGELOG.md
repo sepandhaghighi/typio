@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Test system modified
 - `README.md` updated
 - `--mode` CLI argument modified
+- Validation system modified
 ## [1.2] - 2026-08-17
 ### Added
 - `text` CLI argument

@@ -45,10 +45,10 @@ def _validate(
         except Exception:
             raise TypioValidationError(INVALID_BYTE_ERROR)
 
-    if not isinstance(delay, (int, float)) or delay < 0:
+    if isinstance(delay, bool) or not isinstance(delay, (int, float)) or delay < 0:
         raise TypioValidationError(INVALID_DELAY_ERROR)
 
-    if not isinstance(jitter, (int, float)) or jitter < 0:
+    if isinstance(jitter, bool) or not isinstance(jitter, (int, float)) or jitter < 0:
         raise TypioValidationError(INVALID_JITTER_ERROR)
 
     if not isinstance(mode, TypeMode) and not callable(mode):
@@ -60,7 +60,7 @@ def _validate(
     if file is not None and not hasattr(file, "write"):
         raise TypioValidationError(INVALID_FILE_ERROR)
 
-    if seed is not None and not isinstance(seed, int):
+    if isinstance(seed, bool) or seed is not None and not isinstance(seed, int):
         raise TypioValidationError(INVALID_SEED_ERROR)
     text = f"{text}{end}"
     return text
