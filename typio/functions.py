@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""typio functions."""
+"""typio core."""
 
 import sys
 import time
