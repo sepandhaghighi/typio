@@ -6,7 +6,7 @@ import argparse
 from typing import Any
 from .params import TypeMode, TYPIO_OVERVIEW, TYPIO_VERSION
 from .params import INVALID_NON_NEGATIVE_NUMBER_ERROR, EXIT_MESSAGE
-from .functions import type_print
+from .core import type_print
 
 
 def _validate_non_negative_number(value: Any) -> float:
