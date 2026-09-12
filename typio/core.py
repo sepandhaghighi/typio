@@ -76,7 +76,8 @@ class _TypioPrinter:
             jitter: float,
             mode: Union[TypeMode, Callable],
             out: TextIOBase,
-            seed: Optional[int] = None) -> None:
+            seed: Optional[int] = None,
+            flush: bool = True) -> None:
         """
         Initialize the typing printer.
 
@@ -85,11 +86,13 @@ class _TypioPrinter:
         :param mode: typing mode controlling emission granularity
         :param out: underlying output stream
         :param seed: random seed for reproducibility
+        :param flush: whether to flush output after every emitted fragment
         """
         self._delay = delay
         self._jitter = jitter
         self._mode = mode
         self._out = out
+        self._flush = flush
         self._random = random.Random(seed)
 
     def write(self, text: str) -> int:
@@ -142,7 +145,8 @@ class _TypioPrinter:
         :param text: text fragment to write
         """
         self._out.write(text)
-        self._out.flush()
+        if self._flush:
+            self._out.flush()
 
     def _mode_char(self, text: str) -> None:
         """
