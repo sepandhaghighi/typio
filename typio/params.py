@@ -53,6 +53,7 @@ INVALID_MODE_ERROR = "`mode` must be a TypeMode enum value or a callable custom 
 INVALID_END_ERROR = "`end` must be a str."
 INVALID_FILE_ERROR = "`file` must be a file-like object."
 INVALID_SEED_ERROR = "`seed` must be None or an int."
+INVALID_FLUSH_ERROR = "`flush` must be a bool."
 INVALID_NON_NEGATIVE_NUMBER_ERROR = "invalid non-negative number: '{value}'"
 
 KEY_NEIGHBORS = {

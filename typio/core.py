@@ -12,7 +12,7 @@ from typing import Any, Callable, Optional, Union, List
 from .params import TypeMode, KEY_NEIGHBORS, GLITCH_CHARS
 from .params import INVALID_TEXT_ERROR, INVALID_BYTE_ERROR, INVALID_DELAY_ERROR
 from .params import INVALID_JITTER_ERROR, INVALID_MODE_ERROR, INVALID_FILE_ERROR
-from .params import INVALID_END_ERROR, INVALID_SEED_ERROR
+from .params import INVALID_END_ERROR, INVALID_SEED_ERROR, INVALID_FLUSH_ERROR
 from .errors import TypioValidationError
 
 
@@ -24,6 +24,7 @@ def _validate(
     end: Any,
     file: Any,
     seed: Any,
+    flush: Any,
 ) -> str:
     """
     Validate and normalize inputs for typing operations.
@@ -35,6 +36,7 @@ def _validate(
     :param end: ending character(s)
     :param file: output stream supporting a write() method
     :param seed: random seed for reproducibility
+    :param flush: whether to flush output after every emitted fragment
     """
     if not isinstance(text, (str, bytes)):
         raise TypioValidationError(INVALID_TEXT_ERROR)
@@ -62,6 +64,10 @@ def _validate(
 
     if isinstance(seed, bool) or seed is not None and not isinstance(seed, int):
         raise TypioValidationError(INVALID_SEED_ERROR)
+    
+    if not isinstance(flush, bool):
+        raise TypioValidationError(INVALID_FLUSH_ERROR)
+    
     text = f"{text}{end}"
     return text
 
@@ -674,7 +680,7 @@ def type_print(
     :param file: output stream supporting a write() method
     :param flush: whether to flush output after every emitted fragment
     """
-    text = _validate(text, delay, jitter, mode, end, file, seed)
+    text = _validate(text, delay, jitter, mode, end, file, seed, flush)
     out = file or sys.stdout
 
     printer = _TypioPrinter(
@@ -705,7 +711,7 @@ def typestyle(
     :param mode: typing mode controlling emission granularity
     :param flush: whether to flush output after every emitted fragment
     """
-    _validate("", delay, jitter, mode, "", sys.stdout, seed)
+    _validate("", delay, jitter, mode, "", sys.stdout, seed, flush)
 
     def decorator(func: Callable) -> Callable:
         @wraps(func)
