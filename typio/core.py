@@ -660,7 +660,8 @@ def type_print(
         end: str = "\n",
         mode: Union[TypeMode, Callable] = TypeMode.CHAR,
         seed: Optional[int] = None,
-        file: Optional[TextIOBase] = None) -> None:
+        file: Optional[TextIOBase] = None,
+        flush: bool = True) -> None:
     """
     Print text with typing effects.
 
@@ -671,6 +672,7 @@ def type_print(
     :param mode: typing mode controlling emission granularity
     :param seed: random seed for reproducibility
     :param file: output stream supporting a write() method
+    :param flush: whether to flush output after every emitted fragment
     """
     text = _validate(text, delay, jitter, mode, end, file, seed)
     out = file or sys.stdout
@@ -681,6 +683,7 @@ def type_print(
         mode=mode,
         out=out,
         seed=seed,
+        flush=flush,
     )
     printer.write(text)
     printer.flush()
