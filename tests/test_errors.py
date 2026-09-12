@@ -75,6 +75,11 @@ def test_bool_seed():
         type_print("test", seed=True)
 
 
+def test_invalid_flush():
+    with pytest.raises(TypioValidationError, match=r"`flush` must be a bool."):
+        type_print("test", flush="True")
+
+
 def test_typestyle_invalid_mode():
     with pytest.raises(TypioValidationError, match=r"`mode` must be a TypeMode enum value or a callable custom mode."):
         typestyle(mode="char")
@@ -88,6 +93,11 @@ def test_typestyle_invalid_delay():
 def test_typestyle_invalid_jitter():
     with pytest.raises(TypioValidationError, match=r"`jitter` must be a non-negative number."):
         typestyle(jitter=-0.5)
+
+
+def test_typestyle_invalid_flush():
+    with pytest.raises(TypioValidationError, match=r"`flush` must be a bool."):
+        typestyle(flush="True")
 
 
 def test_typiocontext_sleep_invalid_delay():
