@@ -64,10 +64,10 @@ def _validate(
 
     if isinstance(seed, bool) or seed is not None and not isinstance(seed, int):
         raise TypioValidationError(INVALID_SEED_ERROR)
-    
+
     if not isinstance(flush, bool):
         raise TypioValidationError(INVALID_FLUSH_ERROR)
-    
+
     text = f"{text}{end}"
     return text
 

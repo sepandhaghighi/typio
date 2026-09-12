@@ -427,6 +427,7 @@ def test_type_print_flush_false():
 
 def test_typio_context_flush():
     output = FlushTrackingStream()
+
     def custom_mode(ctx, text):
         ctx.emit(text)
         ctx.flush()
