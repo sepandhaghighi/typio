@@ -694,7 +694,8 @@ def typestyle(
         delay: float = 0.04,
         jitter: float = 0,
         seed: Optional[int] = None,
-        mode: Union[TypeMode, Callable] = TypeMode.CHAR) -> Callable:
+        mode: Union[TypeMode, Callable] = TypeMode.CHAR,
+        flush: bool = True) -> Callable:
     """
     Apply typing effects to all print() calls inside the decorated function.
 
@@ -702,6 +703,7 @@ def typestyle(
     :param jitter: random jitter added/subtracted from delay
     :param seed: random seed for reproducibility
     :param mode: typing mode controlling emission granularity
+    :param flush: whether to flush output after every emitted fragment
     """
     _validate("", delay, jitter, mode, "", sys.stdout, seed)
 
@@ -716,9 +718,11 @@ def typestyle(
                     mode=mode,
                     out=old_stdout,
                     seed=seed,
+                    flush=flush,
                 )
                 return func(*args, **kwargs)
             finally:
+                sys.stdout.flush()
                 sys.stdout = old_stdout
 
         return wrapper
