@@ -64,7 +64,7 @@ Typio is a lightweight Python library that prints text to the terminal as if it 
 
 ### Function
 
-Use `type_print` function to print text with human-like typing effects. You can control the typing speed, randomness, mode, and output stream.
+Use `type_print` function to print text with human-like typing effects. You can control the typing speed, randomness, mode, output stream, and output flushing behavior.
 
 #### Example
 
@@ -80,6 +80,7 @@ type_print(
     jitter=0.02,
 	end="\n",
     mode=TypeMode.ADAPTIVE,
+    flush=False,
 )
 ```
 
@@ -101,6 +102,7 @@ with open("output.txt", "w") as file:
 | `mode` | `TypeMode \| Callable` | Typing mode (built-in or custom) | `TypeMode.CHAR` |
 | `seed` | `int` | Random seed for reproducible output | `None` |
 | `file` | `TextIOBase` | Output stream | `sys.stdout` |
+| `flush` | `bool` | Automatically flush output after each emitted unit | `True` |
 
 
 #### Built-in Modes
@@ -139,7 +141,7 @@ with open("output.txt", "w") as file:
 
 ### Decorator
 
-Use the `@typestyle` decorator to apply typing effects to all `print` calls inside a function, without changing the function's implementation.
+Use the `@typestyle` decorator to apply typing effects to all `print` calls inside a function, without changing the function's implementation. You can also control how frequently the output stream is flushed.
 
 #### Example
 
@@ -147,7 +149,7 @@ Use the `@typestyle` decorator to apply typing effects to all `print` calls insi
 from typio import typestyle
 from typio import TypeMode
 
-@typestyle(delay=0.05, mode=TypeMode.TYPEWRITER)
+@typestyle(delay=0.05, mode=TypeMode.TYPEWRITER, flush=False)
 def intro():
     print("Welcome to Typio.")
     print("Every print is typed.")
@@ -163,6 +165,7 @@ intro()
 | `jitter` | `float` | Random delay variation (seconds) | `0` |
 | `seed` | `int` | Random seed for reproducible output | `None` |
 | `mode` | `TypeMode \| Callable` | Typing mode (built-in or custom) | `TypeMode.CHAR` |
+| `flush` | `bool` | Automatically flush output after each emitted unit | `True` |
 
 ### Custom Mode
 
