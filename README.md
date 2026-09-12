@@ -141,7 +141,7 @@ with open("output.txt", "w") as file:
 
 ### Decorator
 
-Use the `@typestyle` decorator to apply typing effects to all `print` calls inside a function, without changing the function's implementation. You can also control how frequently the output stream is flushed.
+Use the `@typestyle` decorator to apply typing effects to all `print` calls inside a function, without changing the function's implementation.
 
 #### Example
 
@@ -149,7 +149,7 @@ Use the `@typestyle` decorator to apply typing effects to all `print` calls insi
 from typio import typestyle
 from typio import TypeMode
 
-@typestyle(delay=0.05, mode=TypeMode.TYPEWRITER, flush=False)
+@typestyle(delay=0.05, mode=TypeMode.TYPEWRITER, flush=True)
 def intro():
     print("Welcome to Typio.")
     print("Every print is typed.")
@@ -195,13 +195,14 @@ type_print(
     mode=dramatic,
     delay=0.05,
     jitter=0.02,
+    flush=True
 )
 ```
 
 Usage with `@typestyle` decorator:
 
 ```python
-@typestyle(delay=0.06, mode=dramatic)
+@typestyle(delay=0.06, mode=dramatic, flush=True)
 def demo():
     print("This is serious.")
     print("Very serious!")
