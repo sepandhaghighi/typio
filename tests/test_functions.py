@@ -464,7 +464,7 @@ def test_typestyle_flush_true():
     finally:
         sys.stdout = original_stdout
     assert output.text == "abc"
-    assert output.flush_count > 1
+    assert output.flush_count == 4
 
 
 def test_typestyle_flushes_when_function_raises():
