@@ -388,3 +388,99 @@ def test_explicit_zero_delay_does_not_fallback_to_default():
         )
     mock_sleep.assert_not_called()
     assert output.getvalue() == "abc"
+
+
+class FlushTrackingStream:
+    """Output stream that tracks flush calls."""
+
+    def __init__(self):
+        self.text = ""
+        self.flush_count = 0
+
+    def write(self, text):
+        self.text += text
+
+    def flush(self):
+        self.flush_count += 1
+
+
+def test_type_print_flush_defaults_to_true():
+    output = FlushTrackingStream()
+    type_print("abc", delay=0.02, file=output)
+    assert output.text == "abc\n"
+    assert output.flush_count == 5
+
+
+def test_type_print_flush_true():
+    output = FlushTrackingStream()
+    type_print("abc", delay=0.02, file=output, flush=True)
+    assert output.text == "abc\n"
+    assert output.flush_count == 5
+
+
+def test_type_print_flush_false():
+    output = FlushTrackingStream()
+    type_print("abc", delay=0.02, file=output, flush=False)
+    assert output.text == "abc\n"
+    assert output.flush_count == 1
+
+
+def test_typio_context_flush():
+    output = FlushTrackingStream()
+
+    def custom_mode(ctx, text):
+        ctx.emit(text)
+        ctx.flush()
+
+    type_print("abc", delay=0.02, file=output, mode=custom_mode, flush=False)
+    assert output.text == "abc\n"
+    assert output.flush_count == 2
+
+
+def test_typestyle_flush_false():
+    output = FlushTrackingStream()
+    original_stdout = sys.stdout
+    sys.stdout = output
+    try:
+        @typestyle(flush=False)
+        def write_text():
+            print("abc", end="")
+        write_text()
+    finally:
+        sys.stdout = original_stdout
+    assert output.text == "abc"
+    assert output.flush_count == 1
+
+
+def test_typestyle_flush_true():
+    output = FlushTrackingStream()
+    original_stdout = sys.stdout
+    sys.stdout = output
+    try:
+        @typestyle(flush=True)
+        def write_text():
+            print("abc", end="")
+        write_text()
+    finally:
+        sys.stdout = original_stdout
+    assert output.text == "abc"
+    assert output.flush_count == 4
+
+
+def test_typestyle_flushes_when_function_raises():
+    output = FlushTrackingStream()
+    original_stdout = sys.stdout
+    sys.stdout = output
+    try:
+        @typestyle(flush=False)
+        def write_and_fail():
+            print("abc", end="")
+            raise RuntimeError("failure")
+        try:
+            write_and_fail()
+        except RuntimeError:
+            pass
+    finally:
+        sys.stdout = original_stdout
+    assert output.text == "abc"
+    assert output.flush_count == 1

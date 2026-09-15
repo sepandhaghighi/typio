@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- `flush` parameter
 - `TypioContext.random` property
 ### Changed
 - Global random state pollution bug fixed
