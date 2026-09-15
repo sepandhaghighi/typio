@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `--mode` CLI argument modified
 - Validation system modified
 - `functions.py` renamed to `core.py`
+- `TypioContext.sleep` method modified
 ## [1.2] - 2026-08-17
 ### Added
 - `text` CLI argument
