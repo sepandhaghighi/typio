@@ -76,8 +76,7 @@ def test_decelerate_mode():
 def test_burst_mode1():
     buffer = io.StringIO()
     text = "Hello, world!" * 100
-    with patch("random.randint", return_value=5):
-        type_print(text, file=buffer, delay=0.01, mode=TypeMode.BURST)
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.BURST, seed=5)
     assert buffer.getvalue() == text + "\n"
 
 
