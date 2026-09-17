@@ -633,11 +633,11 @@ class TypioContext:
         :param jitter: random jitter added/subtracted from delay
         """
         if delay is not None:
-            if not isinstance(delay, (int, float)) or delay < 0:
+            if isinstance(delay, bool) or not isinstance(delay, (int, float)) or delay < 0:
                 raise TypioValidationError(INVALID_DELAY_ERROR)
 
         if jitter is not None:
-            if not isinstance(jitter, (int, float)) or jitter < 0:
+            if isinstance(jitter, bool) or not isinstance(jitter, (int, float)) or jitter < 0:
                 raise TypioValidationError(INVALID_JITTER_ERROR)
 
         self._printer._sleep(delay=delay, jitter=jitter)
