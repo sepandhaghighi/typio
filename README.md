@@ -109,6 +109,7 @@ with open("output.txt", "w") as file:
 
 | Mode | Description |
 |------|-------------|
+| `TypeMode.RANDOM` | Select one built-in mode randomly |
 | `TypeMode.CHAR` | Emit text **character by character** |
 | `TypeMode.WORD` | Emit text **word by word**, preserving whitespace |
 | `TypeMode.LINE` | Emit text **line by line** |
@@ -238,6 +239,12 @@ Pass `--seed` to make randomized modes reproducible:
 
 ```console
 > typio "Hello world!" --mode=glitch --seed=42
+```
+
+Use `random` to select one built-in mode:
+
+```console
+> typio "Hello world!" --mode=random --seed=42
 ```
 
 ## Screen Record
