@@ -15,6 +15,8 @@ GitHub Repo: https://github.com/sepandhaghighi/typio'''
 class TypeMode(Enum):
     """Type mode enum."""
 
+    RANDOM = "random"
+
     CHAR = "char"
     WORD = "word"
     LINE = "line"
