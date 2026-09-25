@@ -154,6 +154,17 @@ class _TypioPrinter:
         if self._flush:
             self._out.flush()
 
+    def _mode_random(self, text: str) -> None:
+        """
+        Emit text using a randomly selected typing mode.
+
+        :param text: text to emit
+        """
+        modes = [mode for mode in TypeMode if mode != TypeMode.RANDOM]
+        mode = self._random.choice(modes)
+        handler = getattr(self, "_mode_{mode}".format(mode=mode.value.replace('-', '_')))
+        handler(text)
+
     def _mode_char(self, text: str) -> None:
         """
         Emit text character by character.

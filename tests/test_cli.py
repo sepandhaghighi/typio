@@ -113,6 +113,23 @@ def test_mode_mixed_case():
             )
 
 
+def test_random_mode():
+    with patch(
+        "sys.argv",
+        ["typio", "Hello", "--mode", "random", "--seed", "42"],
+    ):
+        with patch("typio.cli.type_print") as mock_type_print:
+            main()
+            mock_type_print.assert_called_once_with(
+                text="Hello",
+                delay=0.04,
+                jitter=0.0,
+                end="\n",
+                mode=TypeMode.RANDOM,
+                seed=42,
+            )
+
+
 def test_negative_delay(capsys):
     with patch("sys.argv", ["typio", "--delay", "-1"]):
         with pytest.raises(SystemExit):
