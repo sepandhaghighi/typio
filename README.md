@@ -107,36 +107,42 @@ with open("output.txt", "w") as file:
 
 #### Built-in Modes
 
-| Mode | Description |
-|------|-------------|
-| `TypeMode.RANDOM` | Select one built-in mode randomly |
-| `TypeMode.CHAR` | Emit text **character by character** |
-| `TypeMode.WORD` | Emit text **word by word**, preserving whitespace |
-| `TypeMode.LINE` | Emit text **line by line** |
-| `TypeMode.SENTENCE` | Emit text character by character with **longer pauses after `.`, `!`, `?`** |
-| `TypeMode.TYPEWRITER` | Emit text character by character with **longer pauses after newlines** |
-| `TypeMode.ADAPTIVE` | Emit text with **adaptive delays** based on character type (spaces, punctuation, alphanumeric) |
-| `TypeMode.ACCELERATE` | Emit text character by character with **progressively decreasing delay** (gradually speeds up over time) |
-| `TypeMode.DECELERATE` | Emit text character by character with **progressively increasing delay** (gradually slows down over time) |
-| `TypeMode.BURST` | Emit text in bursts of characters followed by short pauses |
-| `TypeMode.FAT_FINGER` | Emit text mimicking human typos and corrections |
-| `TypeMode.THOUGHTFUL` | Emit text while pause slightly before long words to simulate thinking |
-| `TypeMode.HEARTBEAT` | Emit text with alternating short and long pauses to simulate a heartbeat-like rhythm |
-| `TypeMode.REWIND` | Emit text while occasionally deleting and retyping words to simulate reconsideration |
-| `TypeMode.GLITCH` | Emit text with occasional random glitches that are quickly corrected |
-| `TypeMode.RANDOM_CASE` | Emit text with randomly varying character casing |
-| `TypeMode.WAVE` | Emit text with sinusoidal delay variation |
-| `TypeMode.STUTTER` | Emit text with stuttering effect on some words |
-| `TypeMode.NERVOUS` | Emit text erratically typing with inconsistent pauses |
-| `TypeMode.HESITATION` | Emit text with occasional pauses within words to simulate human hesitation |
-| `TypeMode.OVERTHINK` | Emit text while occasionally deleting and retyping a chunk of text to simulate overthinking |
-| `TypeMode.CONFIDENT` | Emit text quickly with brief pauses, adding longer delays after punctuation to simulate confident typing |
-| `TypeMode.ECHO` | Emit text with occasional repetition of characters faintly, like a glitchy terminal echo |
-| `TypeMode.DRUNK` | Emit text with erratic timing and occasional character duplication or skipping |
-| `TypeMode.GLIDE` | Emit text with smooth deceleration then acceleration |
-| `TypeMode.FOCUS_DRIFT` | Emit text with occasional attention drift, causing slowdowns and pauses mid-word |
-| `TypeMode.RUBBER_DUCK` | Emit text while occasionally repeating fragments as if explaining thoughts aloud to a rubber duck |
-| `TypeMode.PANIC` | Emits text with an increasing rate of typos and slower typing speed to simulate panicking |
+| Mode | Description | Note |
+|------|-------------|------|
+| `TypeMode.RANDOM` | Select one built-in mode randomly |⚠|
+| `TypeMode.CHAR` | Emit text **character by character** |--|
+| `TypeMode.WORD` | Emit text **word by word**, preserving whitespace |--|
+| `TypeMode.LINE` | Emit text **line by line** |--|
+| `TypeMode.SENTENCE` | Emit text character by character with **longer pauses after `.`, `!`, `?`** |--|
+| `TypeMode.TYPEWRITER` | Emit text character by character with **longer pauses after newlines** |--|
+| `TypeMode.ADAPTIVE` | Emit text with **adaptive delays** based on character type (spaces, punctuation, alphanumeric) |--|
+| `TypeMode.ACCELERATE` | Emit text character by character with **progressively decreasing delay** (gradually speeds up over time) |--|
+| `TypeMode.DECELERATE` | Emit text character by character with **progressively increasing delay** (gradually slows down over time) |--|
+| `TypeMode.BURST` | Emit text in bursts of characters followed by short pauses |--|
+| `TypeMode.FAT_FINGER` | Emit text mimicking human typos and corrections |⚠ EN|
+| `TypeMode.THOUGHTFUL` | Emit text while pause slightly before long words to simulate thinking |--|
+| `TypeMode.HEARTBEAT` | Emit text with alternating short and long pauses to simulate a heartbeat-like rhythm |--|
+| `TypeMode.REWIND` | Emit text while occasionally deleting and retyping words to simulate reconsideration |⚠|
+| `TypeMode.GLITCH` | Emit text with occasional random glitches that are quickly corrected |⚠|
+| `TypeMode.RANDOM_CASE` | Emit text with randomly varying character casing |--|
+| `TypeMode.WAVE` | Emit text with sinusoidal delay variation |--|
+| `TypeMode.STUTTER` | Emit text with stuttering effect on some words |--|
+| `TypeMode.NERVOUS` | Emit text erratically typing with inconsistent pauses |--|
+| `TypeMode.HESITATION` | Emit text with occasional pauses within words to simulate human hesitation |--|
+| `TypeMode.OVERTHINK` | Emit text while occasionally deleting and retyping a chunk of text to simulate overthinking |⚠|
+| `TypeMode.CONFIDENT` | Emit text quickly with brief pauses, adding longer delays after punctuation to simulate confident typing |--|
+| `TypeMode.ECHO` | Emit text with occasional repetition of characters faintly, like a glitchy terminal echo |--|
+| `TypeMode.DRUNK` | Emit text with erratic timing and occasional character duplication or skipping |--|
+| `TypeMode.GLIDE` | Emit text with smooth deceleration then acceleration |--|
+| `TypeMode.FOCUS_DRIFT` | Emit text with occasional attention drift, causing slowdowns and pauses mid-word |--|
+| `TypeMode.RUBBER_DUCK` | Emit text while occasionally repeating fragments as if explaining thoughts aloud to a rubber duck |EN|
+| `TypeMode.PANIC` | Emits text with an increasing rate of typos and slower typing speed to simulate panicking |⚠ EN|
+
+
+⚠ : May have terminal/environment limitations
+
+EN : English-oriented
+
 
 
 
