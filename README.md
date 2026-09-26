@@ -140,6 +140,7 @@ with open("output.txt", "w") as file:
 
 
 ⚠ : May have terminal/environment limitations
+
 EN : English-oriented
 
 
