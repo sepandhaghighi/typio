@@ -139,6 +139,11 @@ with open("output.txt", "w") as file:
 | `TypeMode.PANIC` | Emits text with an increasing rate of typos and slower typing speed to simulate panicking |⚠ EN|
 
 
+⚠ : May have terminal/environment limitations
+EN : English-oriented
+
+
+
 
 ### Decorator
 
