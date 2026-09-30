@@ -140,8 +140,7 @@ with open("output.txt", "w") as file:
 
 
 > [!TIP]
-> <sup>1</sup>: May have terminal/environment limitations
-
+> <sup>1</sup>: May have terminal/environment limitations    
 > <sup>2</sup>: May have issues with non-English text
 
 
