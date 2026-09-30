@@ -139,11 +139,9 @@ with open("output.txt", "w") as file:
 | `TypeMode.PANIC`<sup>1,2</sup> | Emits text with an increasing rate of typos and slower typing speed to simulate panicking |
 
 
-<sup>1</sup>: May have terminal/environment limitations
-
-<sup>2</sup>: May have issues with non-English text
-
-
+> [!TIP]
+> <sup>1</sup>: May have terminal/environment limitations
+> <sup>2</sup>: May have issues with non-English text
 
 
 ### Decorator
