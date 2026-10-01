@@ -140,8 +140,8 @@ with open("output.txt", "w") as file:
 
 
 > [!NOTE]
-> <sup>1</sup>: May have terminal/environment limitations    
-> <sup>2</sup>: May have issues with non-English text
+> <sup>1</sup> May have terminal/environment limitations    
+> <sup>2</sup> May have issues with non-English text
 
 
 ### Decorator
