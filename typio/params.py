@@ -46,6 +46,7 @@ class TypeMode(Enum):
     RUBBER_DUCK = "rubber-duck"
     PANIC = "panic"
 
+
 SAFE_MODES = (
     TypeMode.CHAR,
     TypeMode.WORD,
