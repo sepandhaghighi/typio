@@ -8,7 +8,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - `RANDOM` mode
 - `RANDOM_SAFE` mode
-- `SAFE_MODES` parameter
 ### Changed
 - `README.md` updated
 - Test system modified
