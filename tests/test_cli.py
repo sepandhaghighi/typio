@@ -217,3 +217,18 @@ def test_eof_error(capsys):
 
     out, _ = capsys.readouterr()
     assert EXIT_MESSAGE in out
+
+
+def test_list_modes(capsys, monkeypatch):
+    monkeypatch.setattr(
+        "sys.argv",
+        ["typio", "--list-modes"],
+    )
+
+    args = _parse_args()
+    _run(args)
+
+    output = capsys.readouterr().out
+
+    for mode in TypeMode:
+        assert mode.value in output
