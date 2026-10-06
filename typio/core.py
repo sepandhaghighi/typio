@@ -13,6 +13,7 @@ from .params import TypeMode, KEY_NEIGHBORS, GLITCH_CHARS
 from .params import INVALID_TEXT_ERROR, INVALID_BYTE_ERROR, INVALID_DELAY_ERROR
 from .params import INVALID_JITTER_ERROR, INVALID_MODE_ERROR, INVALID_FILE_ERROR
 from .params import INVALID_END_ERROR, INVALID_SEED_ERROR, INVALID_FLUSH_ERROR
+from .params import SAFE_MODES
 from .errors import TypioValidationError
 
 
@@ -160,8 +161,18 @@ class _TypioPrinter:
 
         :param text: text to emit
         """
-        modes = [mode for mode in TypeMode if mode != TypeMode.RANDOM]
+        modes = [mode for mode in TypeMode if mode not in [TypeMode.RANDOM, TypeMode.RANDOM_SAFE]]
         mode = self._random.choice(modes)
+        handler = getattr(self, "_mode_{mode}".format(mode=mode.value.replace('-', '_')))
+        handler(text)
+
+    def _mode_random_safe(self, text: str) -> None:
+        """
+        Emit text using a randomly selected environment-safe typing mode.
+
+        :param text: text to emit
+        """
+        mode = self._random.choice(SAFE_MODES)
         handler = getattr(self, "_mode_{mode}".format(mode=mode.value.replace('-', '_')))
         handler(text)
 

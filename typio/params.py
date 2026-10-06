@@ -16,6 +16,7 @@ class TypeMode(Enum):
     """Type mode enum."""
 
     RANDOM = "random"
+    RANDOM_SAFE = "random-safe"
 
     CHAR = "char"
     WORD = "word"
@@ -45,6 +46,30 @@ class TypeMode(Enum):
     RUBBER_DUCK = "rubber-duck"
     PANIC = "panic"
 
+
+SAFE_MODES = (
+    TypeMode.CHAR,
+    TypeMode.WORD,
+    TypeMode.LINE,
+    TypeMode.SENTENCE,
+    TypeMode.TYPEWRITER,
+    TypeMode.ADAPTIVE,
+    TypeMode.ACCELERATE,
+    TypeMode.DECELERATE,
+    TypeMode.BURST,
+    TypeMode.THOUGHTFUL,
+    TypeMode.HEARTBEAT,
+    TypeMode.RANDOM_CASE,
+    TypeMode.WAVE,
+    TypeMode.STUTTER,
+    TypeMode.NERVOUS,
+    TypeMode.HESITATION,
+    TypeMode.CONFIDENT,
+    TypeMode.ECHO,
+    TypeMode.DRUNK,
+    TypeMode.GLIDE,
+    TypeMode.FOCUS_DRIFT,
+)
 
 EXIT_MESSAGE = "See you. Bye!"
 INVALID_TEXT_ERROR = "`text` must be str or bytes."

@@ -32,6 +32,13 @@ def test_random_mode():
     assert buffer.getvalue() == "hELlO, WoRld!\n"
 
 
+def test_random_safe_mode():
+    buffer = io.StringIO()
+    text = "Hello, world!"
+    type_print(text, file=buffer, delay=0.01, mode=TypeMode.RANDOM_SAFE, seed=9)
+    assert buffer.getvalue() == "Hello, world!\n"
+
+
 def test_word_mode():
     buffer = io.StringIO()
     type_print("hello world", file=buffer, delay=0, mode=TypeMode.WORD)

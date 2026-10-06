@@ -110,6 +110,7 @@ with open("output.txt", "w") as file:
 | Mode | Description |
 |------|-------------|
 | `TypeMode.RANDOM`<sup>1,2</sup> | Select one built-in mode randomly |
+| `TypeMode.RANDOM_SAFE` | Select one environment-safe built-in mode randomly |
 | `TypeMode.CHAR` | Emit text **character by character** |
 | `TypeMode.WORD` | Emit text **word by word**, preserving whitespace |
 | `TypeMode.LINE` | Emit text **line by line** |
