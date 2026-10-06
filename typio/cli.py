@@ -53,6 +53,12 @@ def _parse_args() -> argparse.Namespace:
     )
 
     parser.add_argument(
+        "--list-modes",
+        action="store_true",
+        help="List all available typing modes",
+    )
+
+    parser.add_argument(
         "--text",
         type=str,
         help="Text to be printed",
@@ -107,6 +113,10 @@ def _run(args: argparse.Namespace) -> None:
     """
     if args.version:
         print(TYPIO_VERSION)
+        return
+    
+    if args.list_modes:
+        _list_modes()
         return
 
     text = args.text
