@@ -114,7 +114,7 @@ def _run(args: argparse.Namespace) -> None:
     if args.version:
         print(TYPIO_VERSION)
         return
-    
+
     if args.list_modes:
         _list_modes()
         return

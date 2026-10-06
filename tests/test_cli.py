@@ -222,7 +222,7 @@ def test_eof_error(capsys):
 def test_list_modes(capsys, monkeypatch):
     with patch("sys.argv", ["typio", "--list-modes"]):
         main()
-    
+
     out, _ = capsys.readouterr()
 
     for mode in TypeMode:
