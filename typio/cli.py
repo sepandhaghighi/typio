@@ -25,6 +25,13 @@ def _validate_non_negative_number(value: Any) -> float:
     return number
 
 
+def _list_modes() -> None:
+    """Display all available typing modes."""
+    print("Available Typio modes:\n")
+    for mode in TypeMode:
+        print(f"- {mode.value}")
+
+
 def _parse_args() -> argparse.Namespace:
     """Parse arguments."""
     parser = argparse.ArgumentParser(
