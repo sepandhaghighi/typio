@@ -220,15 +220,10 @@ def test_eof_error(capsys):
 
 
 def test_list_modes(capsys, monkeypatch):
-    monkeypatch.setattr(
-        "sys.argv",
-        ["typio", "--list-modes"],
-    )
-
-    args = _parse_args()
-    _run(args)
-
-    output = capsys.readouterr().out
+    with patch("sys.argv", ["typio", "--list-modes"]):
+        main()
+    
+    out, _ = capsys.readouterr()
 
     for mode in TypeMode:
-        assert mode.value in output
+        assert mode.value in out
