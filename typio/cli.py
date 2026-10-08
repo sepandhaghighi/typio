@@ -25,6 +25,13 @@ def _validate_non_negative_number(value: Any) -> float:
     return number
 
 
+def _list_modes() -> None:
+    """Display all available typing modes."""
+    type_print("Available modes:\n\n", mode=TypeMode.CHAR, delay=0.03)
+    for mode in TypeMode:
+        type_print(f"- {mode.value}", mode=TypeMode.CHAR, delay=0.03)
+
+
 def _parse_args() -> argparse.Namespace:
     """Parse arguments."""
     parser = argparse.ArgumentParser(
@@ -43,6 +50,12 @@ def _parse_args() -> argparse.Namespace:
         "--version",
         action="store_true",
         help="Version",
+    )
+
+    parser.add_argument(
+        "--list-modes",
+        action="store_true",
+        help="List all available typing modes",
     )
 
     parser.add_argument(
@@ -100,6 +113,10 @@ def _run(args: argparse.Namespace) -> None:
     """
     if args.version:
         print(TYPIO_VERSION)
+        return
+
+    if args.list_modes:
+        _list_modes()
         return
 
     text = args.text

@@ -252,6 +252,12 @@ Use `random` to select one built-in mode:
 > typio "Hello world!" --mode=random --seed=42
 ```
 
+List all available typing modes:
+
+```console
+> typio --list-modes
+```
+
 ## Screen Record
 
 <div align="center">
