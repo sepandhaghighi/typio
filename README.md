@@ -260,7 +260,6 @@ List all available typing modes:
 
 #### Options
 
-
 | Option         | Type    | Description                                | Default |
 | -------------- | ------- | ------------------------------------------ | ------- |
 | `text`         | `str`   | Text to be printed (positional argument)   | `None`  |
@@ -271,8 +270,7 @@ List all available typing modes:
 | `--jitter`     | `float` | Random delay variation (seconds)           | `0.0`   |
 | `--end`        | `str`   | Ending character(s)                        | `\n`    |
 | `--mode`       | `str`   | Typing mode                                | `char`  |
-| `--seed`       | `int`   | Random seed for reproducibility            | `None`  |
-
+| `--seed`       | `int`   | Random seed for reproducible output        | `None`  |
 
 > [!NOTE]
 > If no text is provided, Typio prints its default overview. If both positional `text` and `--text` are specified, `--text` takes precedence.
