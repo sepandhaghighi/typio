@@ -260,6 +260,7 @@ List all available typing modes:
 
 #### Options
 
+
 | Option         | Type    | Description                                | Default |
 | -------------- | ------- | ------------------------------------------ | ------- |
 | `text`         | `str`   | Text to be printed (positional argument)   | `None`  |
@@ -272,8 +273,10 @@ List all available typing modes:
 | `--mode`       | `str`   | Typing mode                                | `char`  |
 | `--seed`       | `int`   | Random seed for reproducibility            | `None`  |
 
-**Note:** If no text is provided, Typio prints its default overview. If both positional `text` and `--text` are specified, `--text` takes precedence.
 
+> [!NOTE]
+> If no text is provided, Typio prints its default overview. If both positional `text` and `--text` are specified, `--text` takes precedence.
+ 
 
 ## Screen Record
 
