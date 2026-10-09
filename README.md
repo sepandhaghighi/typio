@@ -258,6 +258,24 @@ List all available typing modes:
 > typio --list-modes
 ```
 
+#### Options
+
+| Option         | Type    | Description                                | Default |
+| -------------- | ------- | ------------------------------------------ | ------- |
+| `text`         | `str`   | Text to be printed (positional argument)   | `None`  |
+| `--text`       | `str`   | Text to be printed (optional argument)     | `None`  |
+| `--version`    | `bool`  | Display Typio version                      | `False` |
+| `--list-modes` | `bool`  | List all available typing modes            | `False` |
+| `--delay`      | `float` | Base delay (seconds) between emitted units | `0.04`  |
+| `--jitter`     | `float` | Random delay variation (seconds)           | `0.0`   |
+| `--end`        | `str`   | Ending character(s)                        | `\n`    |
+| `--mode`       | `str`   | Typing mode                                | `char`  |
+| `--seed`       | `int`   | Random seed for reproducible output        | `None`  |
+
+> [!NOTE]
+> If no text is provided, Typio prints its default overview. If both positional `text` and `--text` are specified, `--text` takes precedence.
+ 
+
 ## Screen Record
 
 <div align="center">
