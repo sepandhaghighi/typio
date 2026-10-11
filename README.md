@@ -273,7 +273,7 @@ List all available typing modes:
 | `--seed`       | `int`   | Random seed for reproducible output        | `None`  |
 
 > [!NOTE]
-> If no text is provided, Typio prints its default overview. If both positional `text` and `--text` are specified, `--text` takes precedence.
+> If no text is provided, Typio prints its default overview. `--text` replaces `text` if both are provided.
  
 
 ## Screen Record
