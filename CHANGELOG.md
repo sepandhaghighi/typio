@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `RANDOM_SAFE` mode
 - `--list-modes` CLI argument
 ### Changed
+- `Python 3.15` added to `test.yml`
 - `README.md` updated
 - Test system modified
 ## [1.3] - 2026-09-21
