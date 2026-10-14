@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `Python 3.15` added to `test.yml`
 - `README.md` updated
 - Test system modified
+- Build system modified
 ## [1.3] - 2026-09-21
 ### Added
 - `flush` parameter
