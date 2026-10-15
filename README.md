@@ -107,6 +107,8 @@ with open("output.txt", "w") as file:
 
 #### Built-in Modes
 
+Typio provides the following built-in typing modes:
+
 | Mode | Description |
 |------|-------------|
 | `TypeMode.RANDOM`<sup>1,2</sup> | Select one built-in mode randomly |
