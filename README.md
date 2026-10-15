@@ -64,7 +64,7 @@ Typio is a lightweight Python library that prints text to the terminal as if it 
 
 ### Function
 
-Use `type_print` function to print text with human-like typing effects. You can control the typing speed, randomness, mode, output stream, and output flushing behavior.
+Use the `type_print` function to print text with human-like typing effects. You can configure the typing speed, randomness, typing mode, output stream, and flushing behavior.
 
 #### Examples
 
