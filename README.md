@@ -179,7 +179,7 @@ intro()
 
 Typio also allows defining custom typing modes.
 
-A custom mode is a callable that receives a typing context and the text being printed.
+A custom mode is a callable that receives a `TypioContext` instance and the text to be printed.
 
 #### Examples
 
