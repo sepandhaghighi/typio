@@ -183,7 +183,7 @@ A custom mode is a callable that receives a `TypioContext` instance and the text
 
 #### Examples
 
-This custom mode, named `dramatic`, adds exaggerated pauses after punctuation to create a dramatic typing effect.
+The following custom mode, `dramatic`, adds longer pauses after punctuation to create a dramatic typing effect.
 
 ```python
 from typio import TypioContext
