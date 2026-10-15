@@ -66,7 +66,7 @@ Typio is a lightweight Python library that prints text to the terminal as if it 
 
 Use `type_print` function to print text with human-like typing effects. You can control the typing speed, randomness, mode, output stream, and output flushing behavior.
 
-#### Example
+#### Examples
 
 ```python
 from typio import type_print
@@ -149,7 +149,7 @@ with open("output.txt", "w") as file:
 
 Use the `@typestyle` decorator to apply typing effects to all `print` calls inside a function, without changing the function's implementation.
 
-#### Example
+#### Examples
 
 ```python
 from typio import typestyle
@@ -179,7 +179,7 @@ Typio also allows defining custom typing modes.
 
 A custom mode is a callable that receives a typing context and the text being printed.
 
-#### Example
+#### Examples
 
 This custom mode, named `dramatic`, adds exaggerated pauses after punctuation to create a dramatic typing effect.
 
@@ -234,7 +234,7 @@ This table describes the `TypioContext` API, which is the interface exposed to c
 
 Typio provides a simple command line interface for printing text with typing effects.
 
-#### Example
+#### Examples
 
 ```console
 > typio "Hello world!" --mode=typewriter --delay=0.03
