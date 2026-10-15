@@ -139,7 +139,7 @@ Typio provides the following built-in typing modes:
 | `TypeMode.GLIDE` | Emit text with smooth deceleration then acceleration |
 | `TypeMode.FOCUS_DRIFT` | Emit text with occasional attention drift, causing slowdowns and pauses mid-word |
 | `TypeMode.RUBBER_DUCK`<sup>2</sup> | Emit text while occasionally repeating fragments as if explaining thoughts aloud to a rubber duck |
-| `TypeMode.PANIC`<sup>1,2</sup> | Emits text with an increasing rate of typos and slower typing speed to simulate panicking |
+| `TypeMode.PANIC`<sup>1,2</sup> | Emit text with an increasing rate of typos and progressively slower typing to simulate panic |
 
 
 > [!NOTE]
@@ -149,7 +149,7 @@ Typio provides the following built-in typing modes:
 
 ### Decorator
 
-Use the `@typestyle` decorator to apply typing effects to all `print` calls inside a function, without changing the function's implementation.
+Use the `@typestyle` decorator to apply typing effects to all `print` calls within a function without modifying the function's implementation.
 
 #### Examples
 
