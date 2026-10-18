@@ -107,7 +107,7 @@ with open("output.txt", "w") as file:
 
 #### Built-in Modes
 
-Typio provides the following built-in typing modes:
+Typio supports the following modes:
 
 | Mode | Description |
 |------|-------------|
