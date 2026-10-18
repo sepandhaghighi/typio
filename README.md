@@ -64,9 +64,9 @@ Typio is a lightweight Python library that prints text to the terminal as if it 
 
 ### Function
 
-Use `type_print` function to print text with human-like typing effects. You can control the typing speed, randomness, mode, output stream, and output flushing behavior.
+Use the `type_print` function to print text with human-like typing effects. You can configure the typing speed, randomness, typing mode, output stream, and flushing behavior.
 
-#### Example
+#### Examples
 
 ```python
 from typio import type_print
@@ -107,6 +107,8 @@ with open("output.txt", "w") as file:
 
 #### Built-in Modes
 
+Typio supports the following modes:
+
 | Mode | Description |
 |------|-------------|
 | `TypeMode.RANDOM`<sup>1,2</sup> | Select one built-in mode randomly |
@@ -137,7 +139,7 @@ with open("output.txt", "w") as file:
 | `TypeMode.GLIDE` | Emit text with smooth deceleration then acceleration |
 | `TypeMode.FOCUS_DRIFT` | Emit text with occasional attention drift, causing slowdowns and pauses mid-word |
 | `TypeMode.RUBBER_DUCK`<sup>2</sup> | Emit text while occasionally repeating fragments as if explaining thoughts aloud to a rubber duck |
-| `TypeMode.PANIC`<sup>1,2</sup> | Emits text with an increasing rate of typos and slower typing speed to simulate panicking |
+| `TypeMode.PANIC`<sup>1,2</sup> | Emit text with an increasing rate of typos and progressively slower typing to simulate panic |
 
 
 > [!NOTE]
@@ -147,9 +149,9 @@ with open("output.txt", "w") as file:
 
 ### Decorator
 
-Use the `@typestyle` decorator to apply typing effects to all `print` calls inside a function, without changing the function's implementation.
+Use the `@typestyle` decorator to apply typing effects to all `print` calls within a function without modifying the function's implementation.
 
-#### Example
+#### Examples
 
 ```python
 from typio import typestyle
@@ -177,11 +179,11 @@ intro()
 
 Typio also allows defining custom typing modes.
 
-A custom mode is a callable that receives a typing context and the text being printed.
+A custom mode is a callable that receives a `TypioContext` instance and the text to be printed.
 
-#### Example
+#### Examples
 
-This custom mode, named `dramatic`, adds exaggerated pauses after punctuation to create a dramatic typing effect.
+The following custom mode, `dramatic`, adds longer pauses after punctuation to create a dramatic typing effect.
 
 ```python
 from typio import TypioContext
@@ -234,7 +236,7 @@ This table describes the `TypioContext` API, which is the interface exposed to c
 
 Typio provides a simple command line interface for printing text with typing effects.
 
-#### Example
+#### Examples
 
 ```console
 > typio "Hello world!" --mode=typewriter --delay=0.03
