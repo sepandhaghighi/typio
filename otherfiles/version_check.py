@@ -21,6 +21,7 @@ CHANGELOG_ITEMS = [
     "[{0}]:"]
 
 PARAMS_ITEMS = ['TYPIO_VERSION = "{0}"']
+META_ITEMS = ['% set version = "{0}" %']
 ISSUE_TEMPLATE_ITEMS = ["- Typio {0}"]
 SECURITY_ITEMS = ["| {0}           | :white_check_mark: |", "| < {0}         | :x:                |"]
 
@@ -32,6 +33,7 @@ FILES = {
     os.path.join(
         "typio",
         "params.py"): PARAMS_ITEMS,
+    os.path.join("otherfiles", "meta.yaml"): META_ITEMS,
     os.path.join(
         ".github",
         "ISSUE_TEMPLATE",
