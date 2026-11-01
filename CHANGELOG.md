@@ -5,8 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Anaconda publish workflow
 ### Changed
 - Test system modified
+- `README.md` updated
 ## [1.4] - 2026-10-22
 ### Added
 - `RANDOM` mode

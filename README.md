@@ -5,6 +5,7 @@
 <a href="https://www.python.org/"><img src="https://img.shields.io/badge/built%20with-Python3-green.svg" alt="built with Python3"></a>
 <a href="https://github.com/sepandhaghighi/typio"><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/sepandhaghighi/typio"></a>
 <a href="https://badge.fury.io/py/typio"><img src="https://badge.fury.io/py/typio.svg" alt="PyPI version"></a>
+<a href="https://anaconda.org/sepandhaghighi/typio"><img src="https://anaconda.org/sepandhaghighi/typio/badges/version.svg"></a>
 <a href="https://codecov.io/gh/sepandhaghighi/typio"><img src="https://codecov.io/gh/sepandhaghighi/typio/graph/badge.svg?token=UPhwanwQVw"></a>
 </div>			
 				
@@ -57,7 +58,13 @@ Typio is a lightweight Python library that prints text to the terminal as if it 
 ### PyPI
 
 - Check [Python Packaging User Guide](https://packaging.python.org/installing/)     
-- `pip install typio==1.4`						
+- `pip install typio==1.4`
+
+### Conda
+
+- Check [Conda Managing Package](https://conda.io/)
+- Update Conda using `conda update conda`
+- Run `conda install sepandhaghighi::typio`
 
 
 ## Usage
