@@ -154,11 +154,9 @@ Typio supports the following modes:
 > <sup>2</sup> May have issues with non-English text
 
 
-### Decorator
+### Decorator/Context Manager
 
 Use the `@typestyle` decorator to apply typing effects to all `print` calls within a function without modifying the function's implementation.
-
-#### Examples
 
 ```python
 from typio import typestyle
@@ -170,6 +168,24 @@ def intro():
     print("Every print is typed.")
 
 intro()
+```
+
+Use `typestyle` with a `with` statement to apply typing effects to every `print()` call inside a specific block.
+
+```python
+from typio import typestyle, TypeMode
+
+with typestyle(
+    delay=0.05,
+    jitter=0.01,
+    seed=42,
+    mode=TypeMode.TYPEWRITER,
+    flush=True,
+):
+    print("This line is typed.")
+    print("So is this one.")
+
+print("This line uses the normal output stream.")
 ```
 
 #### Parameters
