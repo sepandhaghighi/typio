@@ -82,6 +82,7 @@ INVALID_FILE_ERROR = "`file` must be a file-like object."
 INVALID_SEED_ERROR = "`seed` must be None or an int."
 INVALID_FLUSH_ERROR = "`flush` must be a bool."
 INVALID_NON_NEGATIVE_NUMBER_ERROR = "invalid non-negative number: '{value}'"
+STYLE_CONTEXT_NOT_ACTIVE_ERROR = "typestyle context is not active; enter it before exiting."
 
 KEY_NEIGHBORS = {
     'q': 'wa12', 'w': 'qes23', 'e': 'wrd34', 'r': 'etf45', 't': 'ryg56', 'y': 'tuh67',
