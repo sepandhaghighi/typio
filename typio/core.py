@@ -13,7 +13,7 @@ from .params import TypeMode, KEY_NEIGHBORS, GLITCH_CHARS
 from .params import INVALID_TEXT_ERROR, INVALID_BYTE_ERROR, INVALID_DELAY_ERROR
 from .params import INVALID_JITTER_ERROR, INVALID_MODE_ERROR, INVALID_FILE_ERROR
 from .params import INVALID_END_ERROR, INVALID_SEED_ERROR, INVALID_FLUSH_ERROR
-from .params import STYLE_CONTEXT_NOT_ACTIVE_ERROR
+from .params import STYLE_CONTEXT_NOT_ACTIVE_ERROR, STYLE_STDOUT_REDIRECT_ERROR
 from .params import SAFE_MODES
 from .errors import TypioValidationError, TypioRuntimeError
 
@@ -764,7 +764,7 @@ class _TypioStyle:
             sys.stdout = printer
         except BaseException:
             self._stdout_stack.pop()
-            raise
+            raise TypioRuntimeError(STYLE_STDOUT_REDIRECT_ERROR) from exc
 
         return self
 
