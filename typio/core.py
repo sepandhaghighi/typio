@@ -762,7 +762,7 @@ class _TypioStyle:
 
         try:
             sys.stdout = printer
-        except BaseException:
+        except BaseException as exc:
             self._stdout_stack.pop()
             raise TypioRuntimeError(STYLE_STDOUT_REDIRECT_ERROR) from exc
 

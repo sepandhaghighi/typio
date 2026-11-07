@@ -2,6 +2,7 @@
 import io
 import sys
 from unittest.mock import patch
+import pytest
 from typio import type_print, typestyle
 from typio import TypeMode
 import random
