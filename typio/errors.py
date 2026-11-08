@@ -16,4 +16,5 @@ class TypioValidationError(TypioError, ValueError):
 
 class TypioRuntimeError(TypioError, RuntimeError):
     """Exception raised when a Typio operation cannot be completed at runtime."""
+    
     pass

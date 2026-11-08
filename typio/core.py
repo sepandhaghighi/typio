@@ -770,9 +770,9 @@ class _TypioStyle:
 
     def __exit__(
             self,
-            exc_type: Any,
-            exc_value: Any,
-            traceback: Any) -> bool:
+            exc_type: Any, # vulture: ignore
+            exc_value: Any, # vulture: ignore
+            traceback: Any) -> bool: # vulture: ignore
         """
         Flush output and restore the previous stdout stream.
 
