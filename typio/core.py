@@ -770,15 +770,15 @@ class _TypioStyle:
 
     def __exit__(
             self,
-            exc_type: Any, # vulture: ignore
-            exc_value: Any, # vulture: ignore
-            traceback: Any) -> bool: # vulture: ignore
+            _exc_type: Any,
+            _exc_value: Any,
+            _traceback: Any) -> bool:
         """
         Flush output and restore the previous stdout stream.
 
-        :param exc_type: exception type raised in the managed block, if any
-        :param exc_value: exception instance raised in the managed block, if any
-        :param traceback: traceback associated with the managed-block exception
+        :param _exc_type: exception type raised in the managed block, if any
+        :param _exc_value: exception instance raised in the managed block, if any
+        :param _traceback: traceback associated with the managed-block exception
         """
         if not self._stdout_stack:
             raise TypioRuntimeError(STYLE_CONTEXT_NOT_ACTIVE_ERROR)
