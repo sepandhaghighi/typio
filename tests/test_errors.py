@@ -130,7 +130,7 @@ def test_typiocontext_sleep_invalid_jitter2():
 
 def test_typestyle_exit_without_enter():
     style = typestyle(delay=0)
-    with pytest.raises(TypioRuntimeError):
+    with pytest.raises(TypioRuntimeError, match=r"typestyle context is not active; enter it before exiting."):
         style.__exit__(None, None, None)
 
 
@@ -150,7 +150,7 @@ def test_typestyle_stdout_redirect_failure(monkeypatch):
 
     style = typestyle(delay=0)
 
-    with pytest.raises(TypioRuntimeError) as exc_info:
+    with pytest.raises(TypioRuntimeError, match=r"failed to redirect sys.stdout while entering typestyle context.") as exc_info:
         style.__enter__()
 
     assert isinstance(exc_info.value.__cause__, OSError)
