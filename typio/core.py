@@ -733,8 +733,8 @@ class _TypioStyle:
         Initialize a reusable Typio style configuration.
 
         :param delay: base delay (in seconds) between emitted units
-        :param jitter: random jitter added to or subtracted from the delay
-        :param seed: random seed for reproducible output
+        :param jitter: random jitter added/subtracted from delay
+        :param seed: random seed for reproducibility
         :param mode: typing mode controlling emission granularity
         :param flush: whether to flush output after every emitted fragment
         """
@@ -816,12 +816,9 @@ def typestyle(
     """
     Apply typing effects to print() calls using a decorator or context manager.
 
-    The returned style object can be used either as ``@typestyle(...)`` or
-    ``with typestyle(...):``. Nested uses restore the previous stdout stream.
-
     :param delay: base delay (in seconds) between emitted units
-    :param jitter: random jitter added to or subtracted from the delay
-    :param seed: random seed for reproducible output
+    :param jitter: random jitter added/subtracted from delay
+    :param seed: random seed for reproducibility
     :param mode: typing mode controlling emission granularity
     :param flush: whether to flush output after every emitted fragment
     """
