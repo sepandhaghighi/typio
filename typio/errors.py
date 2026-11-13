@@ -12,3 +12,9 @@ class TypioValidationError(TypioError, ValueError):
     """Base class for validation errors in Typio."""
 
     pass
+
+
+class TypioRuntimeError(TypioError, RuntimeError):
+    """Exception raised when a Typio operation cannot be completed at runtime."""
+    
+    pass

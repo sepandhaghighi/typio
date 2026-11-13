@@ -13,8 +13,9 @@ from .params import TypeMode, KEY_NEIGHBORS, GLITCH_CHARS
 from .params import INVALID_TEXT_ERROR, INVALID_BYTE_ERROR, INVALID_DELAY_ERROR
 from .params import INVALID_JITTER_ERROR, INVALID_MODE_ERROR, INVALID_FILE_ERROR
 from .params import INVALID_END_ERROR, INVALID_SEED_ERROR, INVALID_FLUSH_ERROR
+from .params import STYLE_CONTEXT_NOT_ACTIVE_ERROR, STYLE_STDOUT_REDIRECT_ERROR
 from .params import SAFE_MODES
-from .errors import TypioValidationError
+from .errors import TypioValidationError, TypioRuntimeError
 
 
 def _validate(
@@ -717,15 +718,103 @@ def type_print(
     printer.flush()
 
 
+class _TypioStyle:
+    """Apply typing effects to stdout as a context manager or decorator."""
+
+    def __init__(
+            self,
+            *,
+            delay: float,
+            jitter: float,
+            seed: Optional[int],
+            mode: Union[TypeMode, Callable],
+            flush: bool) -> None:
+        """
+        Initialize a reusable Typio style configuration.
+
+        :param delay: base delay (in seconds) between emitted units
+        :param jitter: random jitter added/subtracted from delay
+        :param seed: random seed for reproducibility
+        :param mode: typing mode controlling emission granularity
+        :param flush: whether to flush output after every emitted fragment
+        """
+        self._delay = delay
+        self._jitter = jitter
+        self._seed = seed
+        self._mode = mode
+        self._flush = flush
+        self._stdout_stack = []
+
+    def __enter__(self) -> "_TypioStyle":
+        """Redirect stdout to a typing printer for the current block."""
+        old_stdout = sys.stdout
+
+        printer = _TypioPrinter(
+            delay=self._delay,
+            jitter=self._jitter,
+            mode=self._mode,
+            out=old_stdout,
+            seed=self._seed,
+            flush=self._flush,
+        )
+
+        self._stdout_stack.append((old_stdout, printer))
+
+        try:
+            sys.stdout = printer
+        except BaseException as exc:
+            self._stdout_stack.pop()
+            raise TypioRuntimeError(STYLE_STDOUT_REDIRECT_ERROR) from exc
+
+        return self
+
+    def __exit__(
+            self,
+            _exc_type: Any,
+            _exc_value: Any,
+            _traceback: Any) -> bool:
+        """
+        Flush output and restore the previous stdout stream.
+
+        :param _exc_type: exception type raised in the managed block, if any
+        :param _exc_value: exception instance raised in the managed block, if any
+        :param _traceback: traceback associated with the managed-block exception
+        """
+        if not self._stdout_stack:
+            raise TypioRuntimeError(STYLE_CONTEXT_NOT_ACTIVE_ERROR)
+
+        old_stdout, printer = self._stdout_stack.pop()
+
+        try:
+            printer.flush()
+        finally:
+            sys.stdout = old_stdout
+
+        return False
+
+    def __call__(self, func: Callable) -> Callable:
+        """
+        Apply this style to every print call made by a function.
+
+        :param func: function whose standard output should use this style
+        """
+        @wraps(func)
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
+            with self:
+                return func(*args, **kwargs)
+
+        return wrapper
+
+
 def typestyle(
         *,
         delay: float = 0.04,
         jitter: float = 0,
         seed: Optional[int] = None,
         mode: Union[TypeMode, Callable] = TypeMode.CHAR,
-        flush: bool = True) -> Callable:
+        flush: bool = True) -> _TypioStyle:
     """
-    Apply typing effects to all print() calls inside the decorated function.
+    Apply typing effects to print() calls using a decorator or context manager.
 
     :param delay: base delay (in seconds) between emitted units
     :param jitter: random jitter added/subtracted from delay
@@ -735,24 +824,10 @@ def typestyle(
     """
     _validate("", delay, jitter, mode, "", sys.stdout, seed, flush)
 
-    def decorator(func: Callable) -> Callable:
-        @wraps(func)
-        def wrapper(*args: list, **kwargs: dict) -> Any:
-            old_stdout = sys.stdout
-            try:
-                sys.stdout = _TypioPrinter(
-                    delay=delay,
-                    jitter=jitter,
-                    mode=mode,
-                    out=old_stdout,
-                    seed=seed,
-                    flush=flush,
-                )
-                return func(*args, **kwargs)
-            finally:
-                sys.stdout.flush()
-                sys.stdout = old_stdout
-
-        return wrapper
-
-    return decorator
+    return _TypioStyle(
+        delay=delay,
+        jitter=jitter,
+        seed=seed,
+        mode=mode,
+        flush=flush,
+    )

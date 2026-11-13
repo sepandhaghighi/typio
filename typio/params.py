@@ -6,7 +6,7 @@ TYPIO_VERSION = "1.4"
 
 TYPIO_OVERVIEW = '''Typio is a lightweight Python library that prints text to the terminal as if it were being typed by a human.
 It supports multiple typing modes (character, word, line, sentence, typewriter, and adaptive), configurable delays
-and jitter for natural variation, and seamless integration with existing code via a simple function or a decorator.
+and jitter for natural variation, and seamless integration with existing code via a simple function, decorator, or context manager.
 Typio is designed to be minimal, extensible, and safe, making it ideal for demos, CLIs, tutorials, and storytelling in the terminal.
 
 GitHub Repo: https://github.com/sepandhaghighi/typio'''
@@ -82,6 +82,8 @@ INVALID_FILE_ERROR = "`file` must be a file-like object."
 INVALID_SEED_ERROR = "`seed` must be None or an int."
 INVALID_FLUSH_ERROR = "`flush` must be a bool."
 INVALID_NON_NEGATIVE_NUMBER_ERROR = "invalid non-negative number: '{value}'"
+STYLE_CONTEXT_NOT_ACTIVE_ERROR = "typestyle context is not active; enter it before exiting."
+STYLE_STDOUT_REDIRECT_ERROR = "failed to redirect sys.stdout while entering typestyle context."
 
 KEY_NEIGHBORS = {
     'q': 'wa12', 'w': 'qes23', 'e': 'wrd34', 'r': 'etf45', 't': 'ryg56', 'y': 'tuh67',

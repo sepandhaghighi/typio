@@ -2,7 +2,7 @@
 import pytest
 
 from typio import type_print, typestyle
-from typio import TypioError, TypioValidationError
+from typio import TypioError, TypioValidationError, TypioRuntimeError
 
 
 def test_base_error():
@@ -126,3 +126,33 @@ def test_typiocontext_sleep_invalid_jitter2():
         ctx.sleep(jitter=True)
     with pytest.raises(TypioValidationError, match=r"`jitter` must be a non-negative number."):
         type_print("x", mode=custom)
+
+
+def test_typestyle_exit_without_enter():
+    style = typestyle(delay=0)
+    with pytest.raises(TypioRuntimeError, match=r"typestyle context is not active; enter it before exiting."):
+        style.__exit__(None, None, None)
+
+
+def test_typestyle_stdout_redirect_failure(monkeypatch):
+    import typio.core as core
+
+    class FailingStdout:
+        @property
+        def stdout(self):
+            return None
+
+        @stdout.setter
+        def stdout(self, value):
+            raise OSError("redirect failed")
+
+    monkeypatch.setattr(core, "sys", FailingStdout())
+
+    style = typestyle(delay=0)
+
+    with pytest.raises(TypioRuntimeError, match=r"failed to redirect sys.stdout while entering typestyle context.") as exc_info:
+        style.__enter__()
+
+    assert isinstance(exc_info.value.__cause__, OSError)
+    assert str(exc_info.value.__cause__) == "redirect failed"
+    assert style._stdout_stack == []
