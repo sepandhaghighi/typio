@@ -175,13 +175,7 @@ Use `typestyle` with a `with` statement to apply typing effects to every `print(
 ```python
 from typio import typestyle, TypeMode
 
-with typestyle(
-    delay=0.05,
-    jitter=0.01,
-    seed=42,
-    mode=TypeMode.TYPEWRITER,
-    flush=True,
-):
+with typestyle(delay=0.05, mode=TypeMode.TYPEWRITER, flush=True):
     print("This line is typed.")
     print("So is this one.")
 
