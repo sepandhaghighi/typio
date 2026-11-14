@@ -12,7 +12,7 @@
 ## Overview	
 
 <p align="justify">
-Typio is a lightweight Python library that prints text to the terminal as if it were being typed by a human. It supports multiple typing modes (character, word, line, sentence, typewriter, and adaptive), configurable delays and jitter for natural variation, and seamless integration with existing code via a simple function or a decorator. Typio is designed to be minimal, extensible, and safe, making it ideal for demos, CLIs, tutorials, and storytelling in the terminal.
+Typio is a lightweight Python library that prints text to the terminal as if it were being typed by a human. It supports multiple typing modes (character, word, line, sentence, typewriter, and adaptive), configurable delays and jitter for natural variation, and seamless integration with existing code via a simple function, decorator, or context manager. Typio is designed to be minimal, extensible, and safe, making it ideal for demos, CLIs, tutorials, and storytelling in the terminal.
 </p>
 
 <table>
@@ -154,11 +154,9 @@ Typio supports the following modes:
 > <sup>2</sup> May have issues with non-English text
 
 
-### Decorator
+### Decorator/Context Manager
 
 Use the `@typestyle` decorator to apply typing effects to all `print` calls within a function without modifying the function's implementation.
-
-#### Examples
 
 ```python
 from typio import typestyle
@@ -170,6 +168,18 @@ def intro():
     print("Every print is typed.")
 
 intro()
+```
+
+Use `typestyle` with a `with` statement to apply typing effects to every `print()` call inside a specific block.
+
+```python
+from typio import typestyle, TypeMode
+
+with typestyle(delay=0.05, mode=TypeMode.TYPEWRITER, flush=True):
+    print("This line is typed.")
+    print("So is this one.")
+
+print("This line uses the normal output stream.")
 ```
 
 #### Parameters

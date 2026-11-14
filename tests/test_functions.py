@@ -2,6 +2,7 @@
 import io
 import sys
 from unittest.mock import patch
+import pytest
 from typio import type_print, typestyle
 from typio import TypeMode
 import random
@@ -499,3 +500,48 @@ def test_typestyle_flushes_when_function_raises():
         sys.stdout = original_stdout
     assert output.text == "abc"
     assert output.flush_count == 1
+
+
+def test_typestyle_context_manager(capsys):
+    with typestyle(delay=0, mode=TypeMode.CHAR):
+        print("hello")
+        print("world")
+
+    captured = capsys.readouterr()
+    assert captured.out == "hello\nworld\n"
+
+
+def test_typestyle_context_manager_restores_stdout():
+    original_stdout = sys.stdout
+
+    with typestyle(delay=0):
+        assert sys.stdout is not original_stdout
+
+    assert sys.stdout is original_stdout
+
+
+def test_typestyle_context_manager_restores_stdout_on_exception():
+    original_stdout = sys.stdout
+
+    with pytest.raises(ValueError, match="failure"):
+        with typestyle(delay=0):
+            raise ValueError("failure")
+
+    assert sys.stdout is original_stdout
+
+
+def test_typestyle_nested_context_managers(capsys):
+    with typestyle(delay=0, mode=TypeMode.CHAR):
+        outer_stdout = sys.stdout
+
+        print("outer")
+
+        with typestyle(delay=0, mode=TypeMode.WORD):
+            assert sys.stdout is not outer_stdout
+            print("inner")
+
+        assert sys.stdout is outer_stdout
+        print("outer again")
+
+    captured = capsys.readouterr()
+    assert captured.out == "outer\ninner\nouter again\n"
